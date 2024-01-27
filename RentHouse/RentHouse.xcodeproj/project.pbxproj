@@ -16,6 +16,13 @@
 		CE42F6202B64A23400124E92 /* RentHouseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F61F2B64A23400124E92 /* RentHouseTests.swift */; };
 		CE42F62A2B64A23400124E92 /* RentHouseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6292B64A23400124E92 /* RentHouseUITests.swift */; };
 		CE42F62C2B64A23400124E92 /* RentHouseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F62B2B64A23400124E92 /* RentHouseUITestsLaunchTests.swift */; };
+		CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE42F6712B64EA1B00124E92 /* Alamofire */; };
+		CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6732B64F89000124E92 /* NetworkManager.swift */; };
+		CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6772B65103000124E92 /* HouseRouter.swift */; };
+		CE42F67A2B65104C00124E92 /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6792B65104C00124E92 /* UserRouter.swift */; };
+		CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67B2B65106400124E92 /* RequestBuilder.swift */; };
+		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
+		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +56,12 @@
 		CE42F6252B64A23400124E92 /* RentHouseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RentHouseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42F6292B64A23400124E92 /* RentHouseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentHouseUITests.swift; sourceTree = "<group>"; };
 		CE42F62B2B64A23400124E92 /* RentHouseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentHouseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CE42F6732B64F89000124E92 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CE42F6772B65103000124E92 /* HouseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRouter.swift; sourceTree = "<group>"; };
+		CE42F6792B65104C00124E92 /* UserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
+		CE42F67B2B65106400124E92 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoder.swift; sourceTree = "<group>"; };
+		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +116,8 @@
 				CE42F6082B64A23200124E92 /* RentHouseApp.swift */,
 				CE42F60A2B64A23200124E92 /* Persistence.swift */,
 				CE42F60F2B64A23200124E92 /* ContentView.swift */,
+				CE42F66F2B64E1B900124E92 /* Network */,
+				CE42F6812B652C9C00124E92 /* Router */,
 				CE42F6112B64A23400124E92 /* Assets.xcassets */,
 				CE42F6132B64A23400124E92 /* RentHouse.entitlements */,
 				CE42F60C2B64A23200124E92 /* RentHouse.xcdatamodeld */,
@@ -135,6 +151,26 @@
 			path = RentHouseUITests;
 			sourceTree = "<group>";
 		};
+		CE42F66F2B64E1B900124E92 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CE42F6732B64F89000124E92 /* NetworkManager.swift */,
+				CE42F67B2B65106400124E92 /* RequestBuilder.swift */,
+				CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */,
+				CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CE42F6812B652C9C00124E92 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				CE42F6772B65103000124E92 /* HouseRouter.swift */,
+				CE42F6792B65104C00124E92 /* UserRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,6 +187,9 @@
 			dependencies = (
 			);
 			name = RentHouse;
+			packageProductDependencies = (
+				CE42F6712B64EA1B00124E92 /* Alamofire */,
+			);
 			productName = RentHouse;
 			productReference = CE42F6052B64A23200124E92 /* RentHouse.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +262,9 @@
 				Base,
 			);
 			mainGroup = CE42F5FC2B64A23200124E92;
+			packageReferences = (
+				CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = CE42F6062B64A23200124E92 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -267,7 +309,13 @@
 			files = (
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
+				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
+				CE42F67A2B65104C00124E92 /* UserRouter.swift in Sources */,
+				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
+				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
+				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
+				CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +668,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/Alamofire.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE42F6712B64EA1B00124E92 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CE42F60C2B64A23200124E92 /* RentHouse.xcdatamodeld */ = {
