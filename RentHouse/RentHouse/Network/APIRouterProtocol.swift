@@ -19,7 +19,7 @@ protocol APIRouterProtocol: URLRequestConvertible {
 
 extension APIRouterProtocol {
     var baseURL: URL {
-        URL(string: "https://api.example.com")!
+        URL(string: "http://47.116.24.54:3001/api/v1")!
     }
     
     func asURLRequest() throws -> URLRequest {

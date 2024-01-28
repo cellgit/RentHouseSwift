@@ -23,6 +23,7 @@ enum ParameterEncoding {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
         switch self {
         case .json:
+            print("urlRequest: \(urlRequest) === \(parameters)")
             try JSONParameterEncoder().encode(urlRequest: &urlRequest, with: parameters)
         case .url:
             try URLParameterEncoder().encode(urlRequest: &urlRequest, with: parameters)

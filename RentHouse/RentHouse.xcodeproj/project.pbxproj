@@ -19,13 +19,18 @@
 		CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE42F6712B64EA1B00124E92 /* Alamofire */; };
 		CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6732B64F89000124E92 /* NetworkManager.swift */; };
 		CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6772B65103000124E92 /* HouseRouter.swift */; };
-		CE42F67A2B65104C00124E92 /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6792B65104C00124E92 /* UserRouter.swift */; };
+		CE42F67A2B65104C00124E92 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6792B65104C00124E92 /* AuthAPI.swift */; };
 		CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67B2B65106400124E92 /* RequestBuilder.swift */; };
 		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6592B661E69006CE0F1 /* House.swift */; };
 		CEF6B65D2B663127006CE0F1 /* HouseUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */; };
+		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
+		CEF6B6652B664553006CE0F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6642B664553006CE0F1 /* User.swift */; };
+		CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6662B6648F4006CE0F1 /* LoginView.swift */; };
+		CEF6B66E2B667885006CE0F1 /* SubwayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B66D2B667885006CE0F1 /* SubwayViewModel.swift */; };
+		CEF6B6702B667899006CE0F1 /* SubwayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B66F2B667899006CE0F1 /* SubwayModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,13 +66,18 @@
 		CE42F62B2B64A23400124E92 /* RentHouseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentHouseUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CE42F6732B64F89000124E92 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CE42F6772B65103000124E92 /* HouseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseRouter.swift; sourceTree = "<group>"; };
-		CE42F6792B65104C00124E92 /* UserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
+		CE42F6792B65104C00124E92 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		CE42F67B2B65106400124E92 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoder.swift; sourceTree = "<group>"; };
 		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B6592B661E69006CE0F1 /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadView.swift; sourceTree = "<group>"; };
+		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CEF6B6642B664553006CE0F1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CEF6B6662B6648F4006CE0F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CEF6B66D2B667885006CE0F1 /* SubwayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayViewModel.swift; sourceTree = "<group>"; };
+		CEF6B66F2B667899006CE0F1 /* SubwayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +135,9 @@
 				CE42F66F2B64E1B900124E92 /* Network */,
 				CE42F6812B652C9C00124E92 /* Router */,
 				CEF6B6532B661CC7006CE0F1 /* User */,
+				CEF6B6692B6677D2006CE0F1 /* Home */,
 				CEF6B6542B661CD6006CE0F1 /* House */,
+				CEF6B6682B6669F9006CE0F1 /* Location */,
 				CE42F6112B64A23400124E92 /* Assets.xcassets */,
 				CE42F6132B64A23400124E92 /* RentHouse.entitlements */,
 				CE42F60C2B64A23200124E92 /* RentHouse.xcdatamodeld */,
@@ -174,7 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				CE42F6772B65103000124E92 /* HouseRouter.swift */,
-				CE42F6792B65104C00124E92 /* UserRouter.swift */,
+				CE42F6792B65104C00124E92 /* AuthAPI.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -182,6 +194,9 @@
 		CEF6B6532B661CC7006CE0F1 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				CEF6B65E2B663ABF006CE0F1 /* Model */,
+				CEF6B65F2B663ABF006CE0F1 /* View */,
+				CEF6B6602B663ABF006CE0F1 /* ViewModel */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -216,6 +231,70 @@
 			isa = PBXGroup;
 			children = (
 				CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEF6B65E2B663ABF006CE0F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B6642B664553006CE0F1 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEF6B65F2B663ABF006CE0F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B6662B6648F4006CE0F1 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEF6B6602B663ABF006CE0F1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEF6B6682B6669F9006CE0F1 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		CEF6B6692B6677D2006CE0F1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B66A2B6677D2006CE0F1 /* ViewModel */,
+				CEF6B66B2B6677D2006CE0F1 /* Model */,
+				CEF6B66C2B6677D2006CE0F1 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CEF6B66A2B6677D2006CE0F1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B66D2B667885006CE0F1 /* SubwayViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEF6B66B2B6677D2006CE0F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B66F2B667899006CE0F1 /* SubwayModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEF6B66C2B6677D2006CE0F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -361,14 +440,19 @@
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
 				CEF6B65D2B663127006CE0F1 /* HouseUploadView.swift in Sources */,
-				CE42F67A2B65104C00124E92 /* UserRouter.swift in Sources */,
+				CE42F67A2B65104C00124E92 /* AuthAPI.swift in Sources */,
+				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
+				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
+				CEF6B6702B667899006CE0F1 /* SubwayModel.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
 				CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */,
 				CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */,
+				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
+				CEF6B66E2B667885006CE0F1 /* SubwayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

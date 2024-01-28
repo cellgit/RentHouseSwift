@@ -7,15 +7,15 @@
 
 import Foundation
 import Alamofire
-enum UserRouter: APIRouterProtocol {
-    case getPhoneCode(parameters: Parameters)
-    case login(parameters: Parameters)
+enum AuthAPI: APIRouterProtocol {
+    case sendCode(phone: String)
+    case login(phone: String, code: String)
     
     // 定义路径
     private var path: String {
         switch self {
-        case .getPhoneCode:
-            return "/getPhoneCode"
+        case .sendCode:
+            return "/sendCode"
         case .login:
             return "/login"
         }
@@ -23,7 +23,7 @@ enum UserRouter: APIRouterProtocol {
     
     private var method: HTTPMethod {
         switch self {
-        case .getPhoneCode:
+        case .sendCode:
             return .post
         case .login:
             return .post
@@ -32,7 +32,7 @@ enum UserRouter: APIRouterProtocol {
     
     private var encoding: ParameterEncoding {
         switch self {
-        case .getPhoneCode:
+        case .sendCode:
             return .json
         case .login:
             return .json
@@ -50,10 +50,12 @@ enum UserRouter: APIRouterProtocol {
     // 实现 builder 属性
     var builder: RequestBuilder {
         switch self {
-        case .getPhoneCode(let parameters):
-            return makeRequest(parameters: parameters)
-        case .login(let parameters):
-            return makeRequest(parameters: parameters)
+        case .sendCode(let phone):
+            let dict = ["phone": phone]
+            return makeRequest(parameters: dict)
+        case .login(let phone, let code):
+            let dict = ["phone": phone, code: code]
+            return makeRequest(parameters: dict)
         }
     }
     

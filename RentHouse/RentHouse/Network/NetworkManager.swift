@@ -29,6 +29,39 @@ import Combine
  .disposed(by: disposeBag)
  */
 
+struct ApiResponse<T: Decodable>: Decodable {
+    let code: Int?
+    let message: String?
+    let data: T?
+}
+
+
+struct JsonResponse: Decodable {
+    let code: Int?
+    let message: String?
+}
+
+enum NetworkError: Error, LocalizedError {
+    case decodingError(error: Error)
+    case networkError(error: Error)
+    case serverError(message: String)
+    case customError
+    
+    var errorDescription: String? {
+        switch self {
+        case .serverError(let message):
+            return "Server error: \(message)"
+        case .decodingError:
+            return "Decoding error"
+        case .networkError:
+            return "networkError error"
+        case .customError:
+            return "An unknown error occurred"
+        }
+    }
+    
+}
+
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -38,13 +71,23 @@ class NetworkManager {
     // 使用 Combine 处理请求
     func request<T: Decodable>(_ urlConvertible: URLRequestConvertible) -> AnyPublisher<T, Error> {
         return AF.request(urlConvertible)
-            .publishDecodable(type: T.self)
+            .publishDecodable(type: ApiResponse<T>.self)
             .tryMap { result in
                 switch result.result {
-                case .success(let value):
-                    return value
+                case .success(let apiResponse):
+                    // 检查响应码
+                    if apiResponse.code == 200, let data = apiResponse.data {
+                        return data
+                    }
+                    else if apiResponse.code == 200 {
+                        return apiResponse as! T
+                    }
+                    else {
+                        print("code码不是200 ==== \(apiResponse.code): \(apiResponse.message ?? "")")
+                        throw NetworkError.serverError(message: apiResponse.message ?? "")
+                    }
                 case .failure(let error):
-                    throw error
+                    throw NetworkError.decodingError(error: error)
                 }
             }
             .receive(on: DispatchQueue.main)
@@ -158,7 +201,3 @@ struct UploadProgress {
 }
 
 
-enum NetworkError: Error {
-    case decodingFailed(error: Error)
-    case networkError(error: Error)
-}
