@@ -23,6 +23,8 @@
 		CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67B2B65106400124E92 /* RequestBuilder.swift */; };
 		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
+		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
+		CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6592B661E69006CE0F1 /* House.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		CE42F67B2B65106400124E92 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoder.swift; sourceTree = "<group>"; };
 		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
+		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
+		CEF6B6592B661E69006CE0F1 /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 				CE42F60F2B64A23200124E92 /* ContentView.swift */,
 				CE42F66F2B64E1B900124E92 /* Network */,
 				CE42F6812B652C9C00124E92 /* Router */,
+				CEF6B6532B661CC7006CE0F1 /* User */,
+				CEF6B6542B661CD6006CE0F1 /* House */,
 				CE42F6112B64A23400124E92 /* Assets.xcassets */,
 				CE42F6132B64A23400124E92 /* RentHouse.entitlements */,
 				CE42F60C2B64A23200124E92 /* RentHouse.xcdatamodeld */,
@@ -169,6 +175,38 @@
 				CE42F6792B65104C00124E92 /* UserRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		CEF6B6532B661CC7006CE0F1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		CEF6B6542B661CD6006CE0F1 /* House */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B6572B661D28006CE0F1 /* ViewModel */,
+				CEF6B6582B661E60006CE0F1 /* Model */,
+			);
+			path = House;
+			sourceTree = "<group>";
+		};
+		CEF6B6572B661D28006CE0F1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEF6B6582B661E60006CE0F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B6592B661E69006CE0F1 /* House.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */,
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
@@ -316,6 +355,7 @@
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
 				CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */,
+				CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
