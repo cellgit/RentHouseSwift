@@ -25,6 +25,7 @@
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6592B661E69006CE0F1 /* House.swift */; };
+		CEF6B65D2B663127006CE0F1 /* HouseUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B6592B661E69006CE0F1 /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
+		CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 			children = (
 				CEF6B6572B661D28006CE0F1 /* ViewModel */,
 				CEF6B6582B661E60006CE0F1 /* Model */,
+				CEF6B65B2B663111006CE0F1 /* View */,
 			);
 			path = House;
 			sourceTree = "<group>";
@@ -207,6 +210,14 @@
 				CEF6B6592B661E69006CE0F1 /* House.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CEF6B65B2B663111006CE0F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +360,7 @@
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
+				CEF6B65D2B663127006CE0F1 /* HouseUploadView.swift in Sources */,
 				CE42F67A2B65104C00124E92 /* UserRouter.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,

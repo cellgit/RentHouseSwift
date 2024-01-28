@@ -13,7 +13,8 @@ enum HouseRouter: APIRouterProtocol {
     
     case fetchHouses(parameters: Parameters)
     case createHouse(parameters: Parameters)
-    case uploadHouse(info: [String: Any], image: UIImage)
+    case uploadHouse(parameters: [String: Any], image: [UIImage])
+//    case uploadHouse(parameters: Parameters, image: [UIImage])
     
     // 定义路径
     private var path: String {
@@ -66,13 +67,13 @@ enum HouseRouter: APIRouterProtocol {
     }
 
     func configureMultipartFormData(_ formData: MultipartFormData) {
-        guard case let .uploadHouse(info, image) = self else { return }
-
-        if let imageData = image.jpegData(compressionQuality: 0.5) {
-            formData.append(imageData, withName: "image", fileName: "house.jpg", mimeType: "image/jpeg")
+        guard case let .uploadHouse(param, images) = self else { return }
+        images.forEach { image in
+            if let imageData = image.jpegData(compressionQuality: 0.5) {
+                formData.append(imageData, withName: "image", fileName: "house.jpg", mimeType: "image/jpeg")
+            }
         }
-
-        for (key, value) in info {
+        for (key, value) in param {
             if let valueString = value as? String, let data = valueString.data(using: .utf8) {
                 formData.append(data, withName: key)
             }

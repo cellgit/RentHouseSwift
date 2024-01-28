@@ -71,11 +71,9 @@ class NetworkManager {
     
     // 使用 Combine 处理带有进度监听的上传请求
     func uploadWithProgress<T: Decodable>(_ router: APIRouterProtocol, completion: @escaping (Result<T, Error>) -> Void) -> AnyPublisher<UploadProgress, Never> {
+        
         let progressSubject = PassthroughSubject<UploadProgress, Never>()
-        
         var progressTracker = UploadProgressTracker()
-        
-        
         let uploadRequest = AF.upload(multipartFormData: { formData in
             router.configureMultipartFormData(formData)
         }, with: try! router.builder.build())
@@ -164,57 +162,3 @@ enum NetworkError: Error {
     case decodingFailed(error: Error)
     case networkError(error: Error)
 }
-
-
-//class NetworkManager {
-//    static let shared = NetworkManager()
-//
-//    private init() {}
-//
-//    // 使用 Combine 处理请求
-//    func request<T: Decodable>(_ urlRequest: URLRequest) -> AnyPublisher<T, Error> {
-//        URLSession.shared.dataTaskPublisher(for: urlRequest)
-//            .tryMap { result in
-//                guard let httpResponse = result.response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
-//                    throw NetworkError.networkError(error: URLError(.badServerResponse))
-//                }
-//                return result.data
-//            }
-//            .decode(type: T.self, decoder: JSONDecoder())
-//            .receive(on: DispatchQueue.main)
-//            .eraseToAnyPublisher()
-//    }
-//
-//    // 使用 Combine 自定义上传请求
-//    func upload<T: Decodable>(_ urlRequest: URLRequest, data: Data) -> AnyPublisher<T, Error> {
-//        Future<T, Error> { promise in
-//            URLSession.shared.uploadTask(with: urlRequest, from: data) { data, response, error in
-//                if let error = error {
-//                    promise(.failure(NetworkError.networkError(error: error)))
-//                    return
-//                }
-//                guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
-//                    promise(.failure(NetworkError.networkError(error: URLError(.badServerResponse))))
-//                    return
-//                }
-//                guard let data = data else {
-//                    promise(.failure(NetworkError.decodingFailed(error: URLError(.cannotParseResponse))))
-//                    return
-//                }
-//                do {
-//                    let decodedData = try JSONDecoder().decode(T.self, from: data)
-//                    promise(.success(decodedData))
-//                } catch {
-//                    promise(.failure(NetworkError.decodingFailed(error: error)))
-//                }
-//            }.resume()
-//        }
-//        .receive(on: DispatchQueue.main)
-//        .eraseToAnyPublisher()
-//    }
-//
-//    enum NetworkError: Error {
-//        case decodingFailed(error: Error)
-//        case networkError(error: Error)
-//    }
-//}

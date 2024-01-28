@@ -9,4 +9,5 @@ import Foundation
 
 struct House: Decodable {
     // ... 房源模型的属性 ...
+    var name: String?
 }
