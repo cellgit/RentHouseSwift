@@ -23,14 +23,21 @@
 		CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67B2B65106400124E92 /* RequestBuilder.swift */; };
 		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
+		CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */; };
+		CEBA4DB62B8EE387006F078A /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAC2B8EE387006F078A /* House.swift */; };
+		CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */; };
+		CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAF2B8EE387006F078A /* HomeView.swift */; };
+		CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DB12B8EE387006F078A /* MockHomeService.swift */; };
+		CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */; };
+		CEBA4DBB2B8EE387006F078A /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DB32B8EE387006F078A /* HomeService.swift */; };
+		CEBA4DBC2B8EE387006F078A /* HomeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DB42B8EE387006F078A /* HomeApi.swift */; };
+		CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DBD2B8EE429006F078A /* TabBarView.swift */; };
+		CEBA4DC42B8EE4D4006F078A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DC22B8EE4D4006F078A /* ProfileView.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
-		CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6592B661E69006CE0F1 /* House.swift */; };
-		CEF6B65D2B663127006CE0F1 /* HouseUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */; };
+		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
 		CEF6B6652B664553006CE0F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6642B664553006CE0F1 /* User.swift */; };
 		CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6662B6648F4006CE0F1 /* LoginView.swift */; };
-		CEF6B66E2B667885006CE0F1 /* SubwayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B66D2B667885006CE0F1 /* SubwayViewModel.swift */; };
-		CEF6B6702B667899006CE0F1 /* SubwayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B66F2B667899006CE0F1 /* SubwayModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,14 +77,22 @@
 		CE42F67B2B65106400124E92 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoder.swift; sourceTree = "<group>"; };
 		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
+		CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CEBA4DAC2B8EE387006F078A /* House.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
+		CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseDetailView.swift; sourceTree = "<group>"; };
+		CEBA4DAF2B8EE387006F078A /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		CEBA4DB12B8EE387006F078A /* MockHomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHomeService.swift; sourceTree = "<group>"; };
+		CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeServiceProtocol.swift; sourceTree = "<group>"; };
+		CEBA4DB32B8EE387006F078A /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		CEBA4DB42B8EE387006F078A /* HomeApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeApi.swift; sourceTree = "<group>"; };
+		CEBA4DBD2B8EE429006F078A /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		CEBA4DC22B8EE4D4006F078A /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CEBA4DC52B8F0283006F078A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
-		CEF6B6592B661E69006CE0F1 /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
-		CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadView.swift; sourceTree = "<group>"; };
+		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CEF6B6642B664553006CE0F1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEF6B6662B6648F4006CE0F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		CEF6B66D2B667885006CE0F1 /* SubwayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayViewModel.swift; sourceTree = "<group>"; };
-		CEF6B66F2B667899006CE0F1 /* SubwayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,15 +144,17 @@
 		CE42F6072B64A23200124E92 /* RentHouse */ = {
 			isa = PBXGroup;
 			children = (
+				CEBA4DC52B8F0283006F078A /* Info.plist */,
 				CE42F6082B64A23200124E92 /* RentHouseApp.swift */,
 				CE42F60A2B64A23200124E92 /* Persistence.swift */,
 				CE42F60F2B64A23200124E92 /* ContentView.swift */,
+				CEBA4DBD2B8EE429006F078A /* TabBarView.swift */,
 				CE42F66F2B64E1B900124E92 /* Network */,
 				CE42F6812B652C9C00124E92 /* Router */,
 				CEF6B6532B661CC7006CE0F1 /* User */,
-				CEF6B6692B6677D2006CE0F1 /* Home */,
+				CEBA4DA82B8EE387006F078A /* Home */,
 				CEF6B6542B661CD6006CE0F1 /* House */,
-				CEF6B6682B6669F9006CE0F1 /* Location */,
+				CEBA4DBF2B8EE4D4006F078A /* Mine */,
 				CE42F6112B64A23400124E92 /* Assets.xcassets */,
 				CE42F6132B64A23400124E92 /* RentHouse.entitlements */,
 				CE42F60C2B64A23200124E92 /* RentHouse.xcdatamodeld */,
@@ -191,6 +208,84 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		CEBA4DA82B8EE387006F078A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA4DAD2B8EE387006F078A /* View */,
+				CEBA4DA92B8EE387006F078A /* ViewModel */,
+				CEBA4DAB2B8EE387006F078A /* Model */,
+				CEBA4DB02B8EE387006F078A /* Api */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CEBA4DA92B8EE387006F078A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEBA4DAB2B8EE387006F078A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEBA4DAD2B8EE387006F078A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA4DAF2B8EE387006F078A /* HomeView.swift */,
+				CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEBA4DB02B8EE387006F078A /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA4DB42B8EE387006F078A /* HomeApi.swift */,
+				CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */,
+				CEBA4DB32B8EE387006F078A /* HomeService.swift */,
+				CEBA4DB12B8EE387006F078A /* MockHomeService.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		CEBA4DBF2B8EE4D4006F078A /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA4DC02B8EE4D4006F078A /* ViewModel */,
+				CEBA4DC12B8EE4D4006F078A /* View */,
+				CEBA4DC32B8EE4D4006F078A /* Api */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		CEBA4DC02B8EE4D4006F078A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEBA4DC12B8EE4D4006F078A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA4DC22B8EE4D4006F078A /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEBA4DC32B8EE4D4006F078A /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		CEF6B6532B661CC7006CE0F1 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +317,7 @@
 		CEF6B6582B661E60006CE0F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CEF6B6592B661E69006CE0F1 /* House.swift */,
+				CEBA4DAC2B8EE387006F078A /* House.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,7 +325,7 @@
 		CEF6B65B2B663111006CE0F1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEF6B65C2B663127006CE0F1 /* HouseUploadView.swift */,
+				CEF6B65C2B663127006CE0F1 /* UploadView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,46 +352,6 @@
 				CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		CEF6B6682B6669F9006CE0F1 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		CEF6B6692B6677D2006CE0F1 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				CEF6B66A2B6677D2006CE0F1 /* ViewModel */,
-				CEF6B66B2B6677D2006CE0F1 /* Model */,
-				CEF6B66C2B6677D2006CE0F1 /* View */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		CEF6B66A2B6677D2006CE0F1 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CEF6B66D2B667885006CE0F1 /* SubwayViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		CEF6B66B2B6677D2006CE0F1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CEF6B66F2B667899006CE0F1 /* SubwayModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		CEF6B66C2B6677D2006CE0F1 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,24 +490,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */,
 				CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */,
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
+				CEBA4DB62B8EE387006F078A /* House.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
-				CEF6B65D2B663127006CE0F1 /* HouseUploadView.swift in Sources */,
+				CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */,
+				CEBA4DC42B8EE4D4006F078A /* ProfileView.swift in Sources */,
 				CE42F67A2B65104C00124E92 /* AuthAPI.swift in Sources */,
 				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
+				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,
+				CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */,
+				CEBA4DBC2B8EE387006F078A /* HomeApi.swift in Sources */,
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
-				CEF6B6702B667899006CE0F1 /* SubwayModel.swift in Sources */,
+				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
+				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
 				CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */,
-				CEF6B65A2B661E69006CE0F1 /* House.swift in Sources */,
+				CEBA4DBB2B8EE387006F078A /* HomeService.swift in Sources */,
+				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
-				CEF6B66E2B667885006CE0F1 /* SubwayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +673,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RentHouse/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -649,6 +712,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RentHouse/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

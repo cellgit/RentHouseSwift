@@ -73,6 +73,7 @@ class NetworkManager {
         return AF.request(urlConvertible)
             .publishDecodable(type: ApiResponse<T>.self)
             .tryMap { result in
+                print("result ===== \(result)")
                 switch result.result {
                 case .success(let apiResponse):
                     // 检查响应码
@@ -95,7 +96,7 @@ class NetworkManager {
     }
     
     // 使用 Combine 处理上传请求(不监听上传进度)
-    func upload<T: Decodable>(_ router: APIRouterProtocol) -> AnyPublisher<T, Error> {
+    func upload<T: Decodable>(_ router: ApiRouter) -> AnyPublisher<T, Error> {
         return AF.upload(multipartFormData: { formData in
             router.configureMultipartFormData(formData)
         }, with: try! router.builder.build())
@@ -113,7 +114,7 @@ class NetworkManager {
     }
     
     // 使用 Combine 处理带有进度监听的上传请求
-    func uploadWithProgress<T: Decodable>(_ router: APIRouterProtocol, completion: @escaping (Result<T, Error>) -> Void) -> AnyPublisher<UploadProgress, Never> {
+    func uploadWithProgress<T: Decodable>(_ router: ApiRouter, completion: @escaping (Result<T, Error>) -> Void) -> AnyPublisher<UploadProgress, Never> {
         
         let progressSubject = PassthroughSubject<UploadProgress, Never>()
         var progressTracker = UploadProgressTracker()

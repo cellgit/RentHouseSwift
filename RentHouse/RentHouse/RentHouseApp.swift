@@ -13,7 +13,7 @@ struct RentHouseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            TabBarView()
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

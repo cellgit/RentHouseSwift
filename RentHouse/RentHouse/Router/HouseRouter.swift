@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import UIKit
 
-enum HouseRouter: APIRouterProtocol {
+enum HouseRouter: ApiRouter {
     
     case fetchHouses(parameters: Parameters)
     case createHouse(parameters: Parameters)

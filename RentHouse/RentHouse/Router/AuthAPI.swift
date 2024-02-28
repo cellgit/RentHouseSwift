@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-enum AuthAPI: APIRouterProtocol {
+enum AuthAPI: ApiRouter {
     case sendCode(phone: String)
     case login(phone: String, code: String)
     

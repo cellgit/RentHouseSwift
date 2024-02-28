@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 
-protocol APIRouterProtocol: URLRequestConvertible {
+protocol ApiRouter: URLRequestConvertible {
     var baseURL: URL { get }
     
     var builder: RequestBuilder { get }
@@ -17,7 +17,7 @@ protocol APIRouterProtocol: URLRequestConvertible {
     func configureMultipartFormData(_ formData: MultipartFormData)
 }
 
-extension APIRouterProtocol {
+extension ApiRouter {
     var baseURL: URL {
         URL(string: "http://47.116.24.54:3001/api/v1")!
     }

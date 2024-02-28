@@ -17,7 +17,7 @@ class HouseUploadViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     // 调用上传方法
-    func uploadData(router: APIRouterProtocol) {
+    func uploadData(router: ApiRouter) {
         NetworkManager.shared.uploadWithProgress(router) { [weak self] (result: Result<House, Error>) in
             DispatchQueue.main.async {
                 switch result {

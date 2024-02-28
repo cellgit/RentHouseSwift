@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct MyUploadView: View {
+struct UploadView: View {
     @StateObject var viewModel = HouseUploadViewModel()
 
     var body: some View {
@@ -17,7 +17,7 @@ struct MyUploadView: View {
                 .progressViewStyle(LinearProgressViewStyle())
 
             if let result = viewModel.uploadResult {
-                let name = result.name
+                let name = result.community
                 Text("上传成功：\(name ?? "")")
                 
             }
