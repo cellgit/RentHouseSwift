@@ -7,9 +7,16 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 struct UploadView: View {
     @StateObject var viewModel = HouseUploadViewModel()
+    
+    @State private var community = "多蓝水岸-"
+    @State private var description = ""
+    @State private var image: UIImage?
+    @State private var uploadResult: Bool?
+    @State private var cancellables = Set<AnyCancellable>()
 
     var body: some View {
         VStack {
@@ -30,8 +37,18 @@ struct UploadView: View {
             
 
             Button("上传数据") {
-                let dict = ["name": "三室一厅"]
-                let router = HouseRouter.uploadHouse(parameters: dict, image: [])  // 创建并配置您的 APIRouterProtocol 实例
+                let image = UIImage.init(named: "009")!
+                let router = HouseApi.uploadHouse(
+                    images: [image],
+                    price: 1000,
+                    rentalMethod: 1,
+                    lon: 116.306121,
+                    lat: 40.052978,
+                    province: "浙江省",
+                    city: "杭州市",
+                    district: "钱塘区",
+                    citycode: "0571"
+                )
                 
                 viewModel.uploadData(router: router)
             }

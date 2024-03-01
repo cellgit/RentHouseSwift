@@ -9,69 +9,68 @@ import Foundation
 
 // MARK: - House
 struct House: Decodable {
-    let images: [String]
-    let price: Int
-    let rentalMethod: Int
-    let community: String
-    let building: String
-    let province: String
-    let city: String
-    let district: String
-    let citycode: String
-    let unit: String
-    let houseNumber: String
-    let roomNumber: String
-    let status: Int
-    let paymentMethod: Int
-    let center: Center
-    let location: Location
-    let roomType: String
-    let area: Double
-    let floor: Int
-    let totalFloors: Int
-    let decoration: Int
-    let facilities: [String?]
-    let desc: String
-    let landlordId: String
-    let contact: String
-    let orientation: String
-    let reviewStatus: String
-    let tags: [String?]
-    let leaseTerm: String
-    let rating: Double
-    let availableDate: String
-    let petPolicy: Bool
-    let moveInRequirements: String
-    let publishDate: String
-    let reviews: [Review]
-    let additionalFees: [AdditionalFee]
-    let createdAt: String
-    let updatedAt: String
-    let id: String
+    var images: [String]?
+    var price: Int?
+    var rentalMethod: Int?
+    var community: String?
+    var building: String?
+    var province: String?
+    var city: String?
+    var district: String?
+    var citycode: String?
+    var unit: String?
+    var houseNumber: String?
+    var roomNumber: String?
+    var status: Int?
+    var paymentMethod: Int?
+    var center: Center?
+    var location: Location?
+    var roomType: String?
+    var area: Double?
+    var floor: Int?
+    var totalFloors: Int?
+    var decoration: Int?
+    var facilities: [String?]?
+    var desc: String?
+    var landlordId: String?
+    var contact: String?
+    var orientation: String?
+    var reviewStatus: String?
+    var tags: [String?]?
+    var leaseTerm: String?
+    var rating: Double?
+    var availableDate: String?
+    var petPolicy: Bool?
+    var moveInRequirements: String?
+    var publishDate: String?
+    var reviews: [Review]?
+    var additionalFees: [AdditionalFee]?
+    var createdAt: String?
+    var updatedAt: String?
+    var id: String?
 }
 
 // MARK: - Center
-struct Center: Decodable {
-    let type: String
-    let coordinates: [Double]
+struct Location: Decodable {
+    var type: String?
+    var coordinates: [Double]?
 }
 
 // MARK: - Location
-struct Location: Decodable {
-    let lat: Double
-    let lon: Double
+struct Center: Decodable {
+    var lat: Double?
+    var lon: Double?
 }
 
 // MARK: - Review
 struct Review: Decodable {
-    let user: String
-    let rating: Double
-    let comment: String
+    var user: String?
+    var rating: Double?
+    var comment: String?
 }
 
 // MARK: - AdditionalFee
 struct AdditionalFee: Decodable {
-    let name: String
-    let amount: Double
+    var name: String?
+    var amount: Double?
 }
-

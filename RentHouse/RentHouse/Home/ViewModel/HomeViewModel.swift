@@ -25,7 +25,8 @@ class HomeViewModel: ObservableObject {
 
     func fetchHouses() {
         isLoading = true
-        service.fetchHouses(lon: "116.30612", lat: "40.052978", maxDistance: "5000")
+        //120.210792,30.246026
+        service.fetchHouses(lon: "120.210792", lat: "30.246026", maxDistance: "5000000")
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 self?.isLoading = false

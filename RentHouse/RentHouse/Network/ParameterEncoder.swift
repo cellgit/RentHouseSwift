@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 
+let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZGQ5YmRkYzMzMWRhYzc3ZmYwYTE5NyIsImlhdCI6MTcwOTAyMjE3MywiZXhwIjoxNzEyNjIyMTczfQ.bsU8zLnh6EgexlBKrWaUBmlFRGHpNt1H093dzZhUjkI"
+
 enum EncodingError: String, Error {
     case missingURL = "The URL request is missing a URL."
     case encodingFailed = "Parameter encoding failed."
@@ -47,6 +49,8 @@ struct JSONParameterEncoder: ParameterEncoder {
             urlRequest.httpBody = jsonData
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
             }
         } catch {
             throw EncodingError.encodingFailed
@@ -65,6 +69,7 @@ struct URLParameterEncoder: ParameterEncoder {
         
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         }
     }
 }
@@ -74,6 +79,7 @@ struct MultipartFormDataEncoder: ParameterEncoder {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
         let boundary = "Boundary-\(UUID().uuidString)"
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         urlRequest.httpBody = createBody(with: parameters, boundary: boundary)
     }

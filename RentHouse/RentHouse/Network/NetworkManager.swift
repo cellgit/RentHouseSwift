@@ -29,6 +29,53 @@ import Combine
  .disposed(by: disposeBag)
  */
 
+/* 上传(有进度更新)
+ NetworkManager.shared.uploadWithProgress(router)
+     .sink(receiveValue: { (uploadResult: UploadResult<House>) in
+         switch uploadResult {
+         case .progress(let uploadProgress):
+             // 处理上传进度
+             print("Upload progress: \(uploadProgress.progress * 100)%")
+             if let speed = uploadProgress.uploadSpeed {
+                 print("Current speed: \(speed) bytes/sec")
+             }
+             if let timeRemaining = uploadProgress.estimatedTimeRemaining {
+                 print("Estimated time remaining: \(timeRemaining) seconds")
+             }
+             
+         case .completion(let result):
+             // 处理完成后的响应数据
+             switch result {
+             case .success(let responseData):
+                 // 成功解码响应数据
+                 print("Upload successful with response: \(responseData)")
+                 // 这里的responseData是T类型的实例，根据你的需求进行处理
+                 
+             case .failure(let error):
+                 // 上传失败
+                 print("Upload failed with error: \(error.localizedDescription)")
+             }
+         }
+     })
+     .store(in: &cancellables)
+ 
+ */
+
+/* 上传(无进度更新)
+ NetworkManager.shared.upload(router)
+     .sink(receiveCompletion: { completion in
+         switch completion {
+         case .finished:
+             print("上传成功")
+         case .failure(let error):
+             print("上传失败: \(error.localizedDescription)")
+         }
+     }, receiveValue: { (houseData: House) in
+         print("上传的图片ID: \(houseData.id), URL: \(houseData.price)")
+     })
+     .store(in: &cancellables)
+ */
+
 struct ApiResponse<T: Decodable>: Decodable {
     let code: Int?
     let message: String?
@@ -84,7 +131,7 @@ class NetworkManager {
                         return apiResponse as! T
                     }
                     else {
-                        print("code码不是200 ==== \(apiResponse.code): \(apiResponse.message ?? "")")
+                        print("code码不是200 ==== \(String(describing: apiResponse.code)): \(apiResponse.message ?? "")")
                         throw NetworkError.serverError(message: apiResponse.message ?? "")
                     }
                 case .failure(let error):
@@ -100,64 +147,69 @@ class NetworkManager {
         return AF.upload(multipartFormData: { formData in
             router.configureMultipartFormData(formData)
         }, with: try! router.builder.build())
-        .publishDecodable(type: T.self)
+        .publishDecodable(type: ApiResponse<T>.self)
         .tryMap { result in
+            print("result ===== \(result)")
             switch result.result {
-            case .success(let value):
-                return value
+            case .success(let apiResponse):
+                // 检查响应码
+                if apiResponse.code == 200, let data = apiResponse.data {
+                    return data
+                }
+                else if apiResponse.code == 200 {
+                    return apiResponse as! T
+                }
+                else {
+                    print("code码不是200 ==== \(String(describing: apiResponse.code)): \(apiResponse.message ?? "")")
+                    throw NetworkError.serverError(message: apiResponse.message ?? "")
+                }
             case .failure(let error):
-                throw error
+                throw NetworkError.decodingError(error: error)
             }
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
     
-    // 使用 Combine 处理带有进度监听的上传请求
-    func uploadWithProgress<T: Decodable>(_ router: ApiRouter, completion: @escaping (Result<T, Error>) -> Void) -> AnyPublisher<UploadProgress, Never> {
-        
-        let progressSubject = PassthroughSubject<UploadProgress, Never>()
+    func uploadWithProgress<T: Decodable>(_ router: ApiRouter) -> AnyPublisher<UploadResult<T>, Never> {
+        let progressSubject = PassthroughSubject<UploadResult<T>, Never>()
         var progressTracker = UploadProgressTracker()
+
         let uploadRequest = AF.upload(multipartFormData: { formData in
             router.configureMultipartFormData(formData)
         }, with: try! router.builder.build())
-        
+
         uploadRequest.uploadProgress { progress in
             let speed = progressTracker.calculateUploadSpeed(currentlyUploaded: progress.completedUnitCount)
+            debugPrint("speed ===== \(String(describing: speed))")
             if let speed = speed {
                 let uploadProgress = UploadProgress(
                     progress: progress.fractionCompleted,
                     isCompleted: false,
-                    uploadSpeed: speed,  // 每秒上传的字节数
-                    estimatedTimeRemaining: progress.estimatedTimeRemaining,  // 预计剩余时间
-                    bytesUploaded: progress.completedUnitCount,  // 已上传的数据量
-                    totalBytesToUpload: progress.totalUnitCount  // 总的上传数据量
+                    uploadSpeed: speed,
+                    estimatedTimeRemaining: progress.estimatedTimeRemaining,
+                    bytesUploaded: progress.completedUnitCount,
+                    totalBytesToUpload: progress.totalUnitCount
                 )
-                progressSubject.send(uploadProgress)
+                progressSubject.send(.progress(uploadProgress))
             }
         }
-        
-        uploadRequest.responseDecodable(of: T.self) { response in
-            switch response.result {
-            case .success(let value):
-                completion(.success(value))
-            case .failure(let error):
-                completion(.failure(error))
+
+        uploadRequest.publishDecodable(type: ApiResponse<T>.self)
+            .tryMap { response in
+                guard let apiResponse = response.value else {
+                    throw NetworkError.decodingError(error: response.error ?? AFError.explicitlyCancelled)
+                }
+                if apiResponse.code == 200, let data = apiResponse.data {
+                    return .completion(.success(data))
+                } else {
+                    throw NetworkError.serverError(message: apiResponse.message ?? "Unknown error")
+                }
             }
-            
-            // 在完成后发送完成的上传进度
-            let finalProgress = UploadProgress(
-                progress: 1.0,
-                isCompleted: true,
-                uploadSpeed: nil,
-                estimatedTimeRemaining: nil,
-                bytesUploaded: uploadRequest.uploadProgress.completedUnitCount,
-                totalBytesToUpload: uploadRequest.uploadProgress.totalUnitCount
-            )
-            progressSubject.send(finalProgress)
-            progressSubject.send(completion: .finished)
-        }
-        
+            .catch { Just(.completion(.failure($0))) }
+            .subscribe(Subscribers.Sink(receiveCompletion: { _ in },
+                                        receiveValue: { progressSubject.send($0) }))
+
         return progressSubject.eraseToAnyPublisher()
     }
 }
@@ -167,7 +219,7 @@ struct UploadProgressTracker {
     private var lastUploadedBytes: Int64 = 0
     private let minTimeIntervalForSpeedUpdate: TimeInterval
 
-    init(minTimeIntervalForSpeedUpdate: TimeInterval = 1.0) {
+    init(minTimeIntervalForSpeedUpdate: TimeInterval = 0.5) {
         self.minTimeIntervalForSpeedUpdate = minTimeIntervalForSpeedUpdate
     }
 
@@ -186,6 +238,11 @@ struct UploadProgressTracker {
         }
         return nil
     }
+}
+
+enum UploadResult<T> {
+    case progress(UploadProgress)
+    case completion(Result<T, Error>)
 }
 
 

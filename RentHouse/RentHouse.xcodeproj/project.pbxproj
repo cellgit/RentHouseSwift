@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34ED092B917DC000C0789F /* HouseApi.swift */; };
+		CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34ED0B2B917DD800C0789F /* HouseServiceProtocol.swift */; };
+		CE34ED0E2B917DE300C0789F /* HouseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34ED0D2B917DE300C0789F /* HouseService.swift */; };
+		CE34ED102B917DEE00C0789F /* MockHouseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34ED0F2B917DEE00C0789F /* MockHouseService.swift */; };
 		CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F6082B64A23200124E92 /* RentHouseApp.swift */; };
 		CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F60A2B64A23200124E92 /* Persistence.swift */; };
 		CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE42F60C2B64A23200124E92 /* RentHouse.xcdatamodeld */; };
@@ -23,6 +27,7 @@
 		CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67B2B65106400124E92 /* RequestBuilder.swift */; };
 		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
+		CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE8005642B91748D00E1D683 /* Kingfisher */; };
 		CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */; };
 		CEBA4DB62B8EE387006F078A /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAC2B8EE387006F078A /* House.swift */; };
 		CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */; };
@@ -58,6 +63,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE34ED092B917DC000C0789F /* HouseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseApi.swift; sourceTree = "<group>"; };
+		CE34ED0B2B917DD800C0789F /* HouseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseServiceProtocol.swift; sourceTree = "<group>"; };
+		CE34ED0D2B917DE300C0789F /* HouseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseService.swift; sourceTree = "<group>"; };
+		CE34ED0F2B917DEE00C0789F /* MockHouseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHouseService.swift; sourceTree = "<group>"; };
 		CE42F6052B64A23200124E92 /* RentHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RentHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42F6082B64A23200124E92 /* RentHouseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentHouseApp.swift; sourceTree = "<group>"; };
 		CE42F60A2B64A23200124E92 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -100,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */,
 				CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +131,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE34ED082B917DA800C0789F /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				CE34ED092B917DC000C0789F /* HouseApi.swift */,
+				CE34ED0D2B917DE300C0789F /* HouseService.swift */,
+				CE34ED0B2B917DD800C0789F /* HouseServiceProtocol.swift */,
+				CE34ED0F2B917DEE00C0789F /* MockHouseService.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		CE3524532B8F319F0068E9C7 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				CE3524542B8F319F0068E9C7 /* ViewModel */,
+				CE3524552B8F319F0068E9C7 /* Model */,
+				CE3524562B8F319F0068E9C7 /* View */,
+				CE3524572B8F319F0068E9C7 /* Api */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
+		CE3524542B8F319F0068E9C7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CE3524552B8F319F0068E9C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CE3524562B8F319F0068E9C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE3524572B8F319F0068E9C7 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		CE42F5FC2B64A23200124E92 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +213,7 @@
 				CE42F6812B652C9C00124E92 /* Router */,
 				CEF6B6532B661CC7006CE0F1 /* User */,
 				CEBA4DA82B8EE387006F078A /* Home */,
+				CE3524532B8F319F0068E9C7 /* SearchView */,
 				CEF6B6542B661CD6006CE0F1 /* House */,
 				CEBA4DBF2B8EE4D4006F078A /* Mine */,
 				CE42F6112B64A23400124E92 /* Assets.xcassets */,
@@ -247,8 +308,8 @@
 			isa = PBXGroup;
 			children = (
 				CEBA4DB42B8EE387006F078A /* HomeApi.swift */,
-				CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */,
 				CEBA4DB32B8EE387006F078A /* HomeService.swift */,
+				CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */,
 				CEBA4DB12B8EE387006F078A /* MockHomeService.swift */,
 			);
 			path = Api;
@@ -302,6 +363,7 @@
 				CEF6B6572B661D28006CE0F1 /* ViewModel */,
 				CEF6B6582B661E60006CE0F1 /* Model */,
 				CEF6B65B2B663111006CE0F1 /* View */,
+				CE34ED082B917DA800C0789F /* Api */,
 			);
 			path = House;
 			sourceTree = "<group>";
@@ -372,6 +434,7 @@
 			name = RentHouse;
 			packageProductDependencies = (
 				CE42F6712B64EA1B00124E92 /* Alamofire */,
+				CE8005642B91748D00E1D683 /* Kingfisher */,
 			);
 			productName = RentHouse;
 			productReference = CE42F6052B64A23200124E92 /* RentHouse.app */;
@@ -447,6 +510,7 @@
 			mainGroup = CE42F5FC2B64A23200124E92;
 			packageReferences = (
 				CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CE8005632B91748D00E1D683 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = CE42F6062B64A23200124E92 /* Products */;
 			projectDirPath = "";
@@ -492,7 +556,9 @@
 			files = (
 				CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */,
 				CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */,
+				CE34ED0E2B917DE300C0789F /* HouseService.swift in Sources */,
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
+				CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
 				CEBA4DB62B8EE387006F078A /* House.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
@@ -507,6 +573,7 @@
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
+				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
 				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
@@ -515,6 +582,7 @@
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
+				CE34ED102B917DEE00C0789F /* MockHouseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +946,14 @@
 				minimumVersion = 5.8.0;
 			};
 		};
+		CE8005632B91748D00E1D683 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -885,6 +961,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		CE8005642B91748D00E1D683 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE8005632B91748D00E1D683 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

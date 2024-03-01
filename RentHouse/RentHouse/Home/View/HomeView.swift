@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import Kingfisher
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel(service: HomeService())
@@ -54,7 +53,7 @@ struct HomeView: View {
         }
     }
 }
-
+ 
 struct HouseCell: View {
     var house: House
     
@@ -63,24 +62,33 @@ struct HouseCell: View {
             VStack(alignment: .leading) {
                 HStack {
                     // 假设images数组不为空，加载第一张图片作为封面
-                    if let imageUrl = house.images.first, let url = URL(string: imageUrl) {
-                        AsyncImage(url: url) { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 150, height: 93)
-                        .cornerRadius(16)
-                        .clipped() // 确保图片按照边界裁剪
+//                    if let imageUrl = house.images.first, let url = URL(string: imageUrl) {
+//                        AsyncImage(url: url) { image in
+//                            image.resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+//                        .frame(width: 150, height: 93)
+//                        .cornerRadius(16)
+//                        .clipped() // 确保图片按照边界裁剪
+//                    }
+                    
+                    if let imageUrl = house.images?.first {
+                        KFImage(URL(string: imageUrl))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 150, height: 93)
+                            .cornerRadius(16)
+                            .clipped()
                     }
                     
                     VStack(alignment: .leading) {
                         Spacer(minLength: 0)
-                        Text(house.community)
+                        Text(house.community ?? "")
                             .font(.headline)
                         Spacer()
-                        Text("价格: \(house.price)元/月")
+                        Text("价格: \(house.price ?? 0)元/月")
                             .font(.subheadline)
                         Spacer(minLength: 2)
                     }

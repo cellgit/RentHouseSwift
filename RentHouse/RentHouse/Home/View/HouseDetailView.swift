@@ -12,7 +12,7 @@ struct HouseDetailView: View {
 
     var body: some View {
         VStack {
-            Text(house.community) // 使用house对象的name属性
+            Text(house.community ?? "") // 使用house对象的name属性
             // 在这里添加更多UI元素来展示房源的详细信息
         }
         .navigationTitle("房源详情")

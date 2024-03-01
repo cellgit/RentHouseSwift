@@ -40,7 +40,7 @@ class LoginViewModel: ObservableObject {
                 }
             }, receiveValue: { (response: JsonResponse) in
                 // 成功获取验证码
-                print("成功获取验证码,请查看手机: \(response.message)")
+                print("成功获取验证码,请查看手机: \(String(describing: response.message))")
                 // 这里可以继续处理如保存 token 等操作
             })
             .store(in: &cancellables)
