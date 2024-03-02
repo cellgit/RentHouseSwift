@@ -205,7 +205,13 @@ class NetworkManager {
                 if apiResponse.code == 200, let data = apiResponse.data {
                     return .completion(.success(data))
                 } else {
+                    
+                    print("code码不是200 ==== \(String(describing: apiResponse.code)): \(apiResponse.message ?? "")")
+                    
                     throw NetworkError.serverError(message: apiResponse.message ?? "Unknown error")
+                    
+//                    return .errorMessage(apiResponse.message ?? "Unknown error")
+//                    return .errorMessage(apiResponse.message ?? "Unknown error")
                 }
             }
             .catch { Just(.completion(.failure($0))) }
@@ -245,12 +251,8 @@ struct UploadProgressTracker {
 enum UploadResult<T> {
     case progress(UploadProgress)
     case completion(Result<T, Error>)
+//    case errorMessage(String)
 }
-
-//enum UploadResult<T>: Decodable where T: Decodable {
-//    case progress(UploadProgress)
-//    case completion(Result<T, Error>)
-//}
 
 // UploadProgress 结构体定义
 struct UploadProgress {

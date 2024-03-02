@@ -5,45 +5,105 @@
 //  Created by liuhongli on 2024/2/27.
 //
 
+//    @State private var showCancelButton: Bool = false
+//    @State private var showingCancel = false
+
+
 import SwiftUI
 import Kingfisher
 
 struct HomeView: View {
+    @ObservedObject var locationService = LocationService()
     @StateObject var viewModel = HomeViewModel(service: HomeService())
-
+    @State private var searchText = ""
+    @State private var showingCancel = false
+    
     var body: some View {
         NavigationView {
-            List {
-                // 处理加载状态
-                if viewModel.isLoading {
-                    VStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                    }
-                // 使用实际的房源数据渲染列表
-                } else if let houses = viewModel.houses, !houses.isEmpty {
-                    ForEach(houses, id: \.id) { house in
-                        NavigationLink(destination: HouseDetailView(house: house)) {
-                            HouseCell(house: house)
+            VStack {
+                List {
+                    // 处理加载状态
+                    if viewModel.isLoading {
+                        VStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
                         }
+                        // 使用实际的房源数据渲染列表
+                    } else if let houses = viewModel.houses, !houses.isEmpty {
+                        ForEach(houses, id: \.id) { house in
+                            NavigationLink(destination: HouseDetailView(house: house)) {
+                                HouseCell(house: house)
+                            }
+                        }
+                        // 处理错误状态
+                    } else if let errorMessage = viewModel.errorMessage {
+                        VStack {
+                            Spacer()
+                            Text("Error: \(errorMessage)")
+                            Spacer()
+                        }
+                        // 处理空数据状态
+                    } else {
+                        emptyStateView
                     }
-                // 处理错误状态
-                } else if let errorMessage = viewModel.errorMessage {
-                    VStack {
-                        Spacer()
-                        Text("Error: \(errorMessage)")
-                        Spacer()
-                    }
-                // 处理空数据状态
-                } else {
-                    emptyStateView
                 }
             }
-            .navigationTitle("房源列表")
-            .navigationBarHidden(false)
+            .navigationBarTitle(Text("搜索"), displayMode: .large)
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         }
     }
+    
+    
+    
+//    var body: some View {
+//        NavigationView {
+//            VStack {
+//                if let location = locationService.location {
+//                    Text("位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+//                }
+//                if let placemark = locationService.placemark {
+//                    Text("地点: \(placemark.locality ?? "未知"), \(placemark.country ?? "未知"), postalCode: \(placemark.subLocality ?? "未知")")
+//                    Text("administrativeArea: \(placemark.administrativeArea ?? "未知")")
+//                    Text("placemark: \(placemark)")
+//                }
+//                Button("获取位置") {
+//                    locationService.requestLocation()
+//                }
+//            
+//            
+//                List {
+//                    // 处理加载状态
+//                    if viewModel.isLoading {
+//                        VStack {
+//                            Spacer()
+//                            ProgressView()
+//                            Spacer()
+//                        }
+//                        // 使用实际的房源数据渲染列表
+//                    } else if let houses = viewModel.houses, !houses.isEmpty {
+//                        ForEach(houses, id: \.id) { house in
+//                            NavigationLink(destination: HouseDetailView(house: house)) {
+//                                HouseCell(house: house)
+//                            }
+//                        }
+//                        // 处理错误状态
+//                    } else if let errorMessage = viewModel.errorMessage {
+//                        VStack {
+//                            Spacer()
+//                            Text("Error: \(errorMessage)")
+//                            Spacer()
+//                        }
+//                        // 处理空数据状态
+//                    } else {
+//                        emptyStateView
+//                    }
+//                }
+//            }
+//            .navigationTitle("房源列表")
+//            .navigationBarHidden(false)
+//        }
+//    }
     
     var emptyStateView: some View {
         VStack {

@@ -55,7 +55,7 @@ struct UploadView: View {
             ProgressView(value: viewModel.uploadProgress)
                 .progressViewStyle(LinearProgressViewStyle())
             
-            if let result = viewModel.uploadResult {
+            if let result = viewModel.responseData {
                 let name = result.community
                 Text("上传成功：\(name ?? "")")
                 

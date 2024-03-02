@@ -39,6 +39,10 @@
 		CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DBD2B8EE429006F078A /* TabBarView.swift */; };
 		CEBA4DC42B8EE4D4006F078A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DC22B8EE4D4006F078A /* ProfileView.swift */; };
 		CEBEFA2D2B92C0A6009A6DB0 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA2C2B92C0A6009A6DB0 /* UIImage+extension.swift */; };
+		CEBEFA302B930EE3009A6DB0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA2F2B930EE3009A6DB0 /* LocationManager.swift */; };
+		CEBEFA322B932382009A6DB0 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA312B932382009A6DB0 /* LocationService.swift */; };
+		CEBEFA342B932F56009A6DB0 /* MapSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA332B932F56009A6DB0 /* MapSearchManager.swift */; };
+		CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA352B933B10009A6DB0 /* String+extension.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -99,6 +103,10 @@
 		CEBA4DC22B8EE4D4006F078A /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CEBA4DC52B8F0283006F078A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CEBEFA2C2B92C0A6009A6DB0 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
+		CEBEFA2F2B930EE3009A6DB0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		CEBEFA312B932382009A6DB0 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		CEBEFA332B932F56009A6DB0 /* MapSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchManager.swift; sourceTree = "<group>"; };
+		CEBEFA352B933B10009A6DB0 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -321,8 +329,8 @@
 		CEBA4DBF2B8EE4D4006F078A /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				CEBA4DC02B8EE4D4006F078A /* ViewModel */,
 				CEBA4DC12B8EE4D4006F078A /* View */,
+				CEBA4DC02B8EE4D4006F078A /* ViewModel */,
 				CEBA4DC32B8EE4D4006F078A /* Api */,
 			);
 			path = Mine;
@@ -353,6 +361,8 @@
 		CEBEFA2A2B92C06B009A6DB0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CEBEFA372B9360EC009A6DB0 /* Component */,
+				CEBEFA2E2B930EB8009A6DB0 /* Location */,
 				CEBEFA2B2B92C08C009A6DB0 /* Extensions */,
 			);
 			path = Utils;
@@ -362,8 +372,26 @@
 			isa = PBXGroup;
 			children = (
 				CEBEFA2C2B92C0A6009A6DB0 /* UIImage+extension.swift */,
+				CEBEFA352B933B10009A6DB0 /* String+extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CEBEFA2E2B930EB8009A6DB0 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEFA2F2B930EE3009A6DB0 /* LocationManager.swift */,
+				CEBEFA312B932382009A6DB0 /* LocationService.swift */,
+				CEBEFA332B932F56009A6DB0 /* MapSearchManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		CEBEFA372B9360EC009A6DB0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		CEF6B6532B661CC7006CE0F1 /* User */ = {
@@ -573,6 +601,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBEFA342B932F56009A6DB0 /* MapSearchManager.swift in Sources */,
 				CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */,
 				CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */,
 				CE34ED0E2B917DE300C0789F /* HouseService.swift in Sources */,
@@ -580,6 +609,7 @@
 				CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
 				CEBA4DB62B8EE387006F078A /* House.swift in Sources */,
+				CEBEFA302B930EE3009A6DB0 /* LocationManager.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
 				CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */,
 				CEBA4DC42B8EE4D4006F078A /* ProfileView.swift in Sources */,
@@ -593,11 +623,13 @@
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
+				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
 				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
 				CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */,
+				CEBEFA322B932382009A6DB0 /* LocationService.swift in Sources */,
 				CEBA4DBB2B8EE387006F078A /* HomeService.swift in Sources */,
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
@@ -759,9 +791,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"RentHouse/Preview Content\"";
 				DEVELOPMENT_TEAM = WGTAZF6C7D;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RentHouse/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "是否允许使用定位功能";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -798,9 +832,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"RentHouse/Preview Content\"";
 				DEVELOPMENT_TEAM = WGTAZF6C7D;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RentHouse/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "是否允许使用定位功能";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
