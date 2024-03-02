@@ -171,6 +171,8 @@ class NetworkManager {
         .eraseToAnyPublisher()
     }
     
+    
+    
     func uploadWithProgress<T: Decodable>(_ router: ApiRouter) -> AnyPublisher<UploadResult<T>, Never> {
         let progressSubject = PassthroughSubject<UploadResult<T>, Never>()
         var progressTracker = UploadProgressTracker()
@@ -245,6 +247,10 @@ enum UploadResult<T> {
     case completion(Result<T, Error>)
 }
 
+//enum UploadResult<T>: Decodable where T: Decodable {
+//    case progress(UploadProgress)
+//    case completion(Result<T, Error>)
+//}
 
 // UploadProgress 结构体定义
 struct UploadProgress {
