@@ -36,6 +36,7 @@ class LocationService: NSObject, CLLocationManagerDelegate, ObservableObject {
                 return
             }
             self.placemark = placemarks?.first
+            debugPrint("self.placemark ==== \(self.placemark)")
         }
     }
 

@@ -13,4 +13,6 @@ protocol HomeServiceProtocol {
                      lat: String,
                      maxDistance: String
     ) -> AnyPublisher<[House], Error>
+    
+    func fetchCities(name: String) -> AnyPublisher<[District], Error>
 }

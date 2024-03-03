@@ -13,11 +13,16 @@ enum HomeApi: ApiRouter {
                       _ lat: String,
                       _ maxDistance: String)
     
+    case searchCities(_ name: String)
+    
+    
     // 定义路径
     private var path: String {
         switch self {
         case .searchHouses:
             return "/serach/houses"
+        case .searchCities:
+            return "/serach/cities"
         }
     }
     
@@ -25,6 +30,8 @@ enum HomeApi: ApiRouter {
     private var method: HTTPMethod {
         switch self {
         case .searchHouses:
+            return .post
+        case .searchCities:
             return .post
         }
     }
@@ -55,6 +62,9 @@ enum HomeApi: ApiRouter {
                             "maxDistance": maxDistance]
             let parameters = ["location": location]
             return request(parameters: parameters)
+        case .searchCities(let name):
+            let params = ["keyword": name]
+            return request(parameters: params)
         }
     }
     

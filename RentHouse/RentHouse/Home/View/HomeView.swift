@@ -5,15 +5,12 @@
 //  Created by liuhongli on 2024/2/27.
 //
 
-//    @State private var showCancelButton: Bool = false
-//    @State private var showingCancel = false
-
-
 import SwiftUI
 import Kingfisher
 
 struct HomeView: View {
     @ObservedObject var locationService = LocationService()
+    @ObservedObject var cityDataManager = CityDataManager.shared
     @StateObject var viewModel = HomeViewModel(service: HomeService())
     @State private var searchText = ""
     @State private var showingCancel = false
@@ -49,61 +46,36 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("搜索"), displayMode: .large)
+            .navigationBarTitle(Text("搜索"))
+            .navigationBarTitleDisplayMode(.large)
+//            .toolbarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        // 按钮点击事件
+                        print("用户头像被点击")
+                    }) {
+                        HStack {
+                            Image(systemName: "location.circle") //person.crop.circle
+                                .imageScale(.large)
+                            
+                            let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
+                            if let name = dict?["name"] {
+                                Text(name)
+                            }
+                            
+                            if let cityInfo = cityDataManager.cityInfo as? [String: String] {
+                                let name = cityInfo["name"] ?? ""
+                                Text(name)
+                            }
+                        }
+                    }
+                }
+                
+            }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         }
     }
-    
-    
-    
-//    var body: some View {
-//        NavigationView {
-//            VStack {
-//                if let location = locationService.location {
-//                    Text("位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-//                }
-//                if let placemark = locationService.placemark {
-//                    Text("地点: \(placemark.locality ?? "未知"), \(placemark.country ?? "未知"), postalCode: \(placemark.subLocality ?? "未知")")
-//                    Text("administrativeArea: \(placemark.administrativeArea ?? "未知")")
-//                    Text("placemark: \(placemark)")
-//                }
-//                Button("获取位置") {
-//                    locationService.requestLocation()
-//                }
-//            
-//            
-//                List {
-//                    // 处理加载状态
-//                    if viewModel.isLoading {
-//                        VStack {
-//                            Spacer()
-//                            ProgressView()
-//                            Spacer()
-//                        }
-//                        // 使用实际的房源数据渲染列表
-//                    } else if let houses = viewModel.houses, !houses.isEmpty {
-//                        ForEach(houses, id: \.id) { house in
-//                            NavigationLink(destination: HouseDetailView(house: house)) {
-//                                HouseCell(house: house)
-//                            }
-//                        }
-//                        // 处理错误状态
-//                    } else if let errorMessage = viewModel.errorMessage {
-//                        VStack {
-//                            Spacer()
-//                            Text("Error: \(errorMessage)")
-//                            Spacer()
-//                        }
-//                        // 处理空数据状态
-//                    } else {
-//                        emptyStateView
-//                    }
-//                }
-//            }
-//            .navigationTitle("房源列表")
-//            .navigationBarHidden(false)
-//        }
-//    }
     
     var emptyStateView: some View {
         VStack {
@@ -112,6 +84,25 @@ struct HomeView: View {
             Spacer()
         }
     }
+    
+//    var locationText: some View {
+//        
+//        VStack {
+//            if let location = locationService.location {
+//                Text("位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+//            }
+//            if let placemark = locationService.placemark {
+//                Text("地点: \(placemark.locality ?? "未知"), \(placemark.country ?? "未知"), postalCode: \(placemark.subLocality ?? "未知")")
+//                Text("administrativeArea: \(placemark.administrativeArea ?? "未知")")
+//                Text("placemark: \(placemark)")
+//            }
+//            Button("获取位置") {
+//                locationService.requestLocation()
+//            }
+//        }
+//    }
+    
+    
 }
  
 struct HouseCell: View {

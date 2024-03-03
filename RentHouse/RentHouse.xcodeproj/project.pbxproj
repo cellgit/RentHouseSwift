@@ -43,6 +43,10 @@
 		CEBEFA322B932382009A6DB0 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA312B932382009A6DB0 /* LocationService.swift */; };
 		CEBEFA342B932F56009A6DB0 /* MapSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA332B932F56009A6DB0 /* MapSearchManager.swift */; };
 		CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA352B933B10009A6DB0 /* String+extension.swift */; };
+		CEBEFA3C2B947FA1009A6DB0 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA3B2B947FA1009A6DB0 /* UserDefaultsManager.swift */; };
+		CEBEFA3F2B948097009A6DB0 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA3E2B948097009A6DB0 /* UserDefaultsKey.swift */; };
+		CEBEFA412B948A6D009A6DB0 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA402B948A6D009A6DB0 /* District.swift */; };
+		CEBEFA452B94B971009A6DB0 /* CityDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA442B94B971009A6DB0 /* CityDataManager.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -107,6 +111,10 @@
 		CEBEFA312B932382009A6DB0 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		CEBEFA332B932F56009A6DB0 /* MapSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchManager.swift; sourceTree = "<group>"; };
 		CEBEFA352B933B10009A6DB0 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		CEBEFA3B2B947FA1009A6DB0 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		CEBEFA3E2B948097009A6DB0 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		CEBEFA402B948A6D009A6DB0 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
+		CEBEFA442B94B971009A6DB0 /* CityDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDataManager.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -221,11 +229,13 @@
 				CEBA4DBD2B8EE429006F078A /* TabBarView.swift */,
 				CE42F66F2B64E1B900124E92 /* Network */,
 				CE42F6812B652C9C00124E92 /* Router */,
+				CEBEFA422B94B952009A6DB0 /* Global */,
 				CEF6B6532B661CC7006CE0F1 /* User */,
 				CEBA4DA82B8EE387006F078A /* Home */,
 				CE3524532B8F319F0068E9C7 /* SearchView */,
 				CEF6B6542B661CD6006CE0F1 /* House */,
 				CEBA4DBF2B8EE4D4006F078A /* Mine */,
+				CEBEFA3D2B948077009A6DB0 /* Tools */,
 				CEBEFA2A2B92C06B009A6DB0 /* Utils */,
 				CE42F6112B64A23400124E92 /* Assets.xcassets */,
 				CE42F6132B64A23400124E92 /* RentHouse.entitlements */,
@@ -302,6 +312,7 @@
 		CEBA4DAB2B8EE387006F078A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEBEFA402B948A6D009A6DB0 /* District.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -361,6 +372,7 @@
 		CEBEFA2A2B92C06B009A6DB0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CEBEFA3A2B947F5E009A6DB0 /* Storage */,
 				CEBEFA372B9360EC009A6DB0 /* Component */,
 				CEBEFA2E2B930EB8009A6DB0 /* Location */,
 				CEBEFA2B2B92C08C009A6DB0 /* Extensions */,
@@ -392,6 +404,38 @@
 			children = (
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		CEBEFA3A2B947F5E009A6DB0 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEFA3B2B947FA1009A6DB0 /* UserDefaultsManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		CEBEFA3D2B948077009A6DB0 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEFA3E2B948097009A6DB0 /* UserDefaultsKey.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		CEBEFA422B94B952009A6DB0 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEFA432B94B963009A6DB0 /* Data */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		CEBEFA432B94B963009A6DB0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEFA442B94B971009A6DB0 /* CityDataManager.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		CEF6B6532B661CC7006CE0F1 /* User */ = {
@@ -601,6 +645,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBEFA3F2B948097009A6DB0 /* UserDefaultsKey.swift in Sources */,
 				CEBEFA342B932F56009A6DB0 /* MapSearchManager.swift in Sources */,
 				CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */,
 				CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */,
@@ -608,6 +653,7 @@
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
+				CEBEFA452B94B971009A6DB0 /* CityDataManager.swift in Sources */,
 				CEBA4DB62B8EE387006F078A /* House.swift in Sources */,
 				CEBEFA302B930EE3009A6DB0 /* LocationManager.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
@@ -625,6 +671,7 @@
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
 				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
+				CEBEFA412B948A6D009A6DB0 /* District.swift in Sources */,
 				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
@@ -632,6 +679,7 @@
 				CEBEFA322B932382009A6DB0 /* LocationService.swift in Sources */,
 				CEBA4DBB2B8EE387006F078A /* HomeService.swift in Sources */,
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
+				CEBEFA3C2B947FA1009A6DB0 /* UserDefaultsManager.swift in Sources */,
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
 				CE34ED102B917DEE00C0789F /* MockHouseService.swift in Sources */,
@@ -806,7 +854,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -847,7 +895,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;

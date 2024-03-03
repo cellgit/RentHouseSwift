@@ -9,13 +9,14 @@ import SwiftUI
 
 @main
 struct RentHouseApp: App {
-    let persistenceController = PersistenceController.shared
-
+    
+    init() {
+        CityDataManager.shared.startLocationAndFetchData()
+    }
+    
     var body: some Scene {
         WindowGroup {
             TabBarView()
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
