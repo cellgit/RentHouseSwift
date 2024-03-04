@@ -27,6 +27,7 @@ class CityDataManager: ObservableObject {
             .sink { [weak self] placemark in
                 // 当placemark更新时执行的代码
                 self?.placemarkUpdated(placemark: placemark)
+                debugPrint("thoroughfare ==== \(placemark)")
             }
             .store(in: &cancellables)
     }
@@ -60,6 +61,8 @@ class CityDataManager: ObservableObject {
                             "name": model?.name ?? "",
                             "id": model?.id ?? ""
                 ]
+                
+                
                 
                 UserDefaultsManager.save(info, forKey: UserDefaultsKey.selectedCity.key)
                 let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)

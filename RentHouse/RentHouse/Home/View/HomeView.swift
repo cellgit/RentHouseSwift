@@ -15,6 +15,9 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var showingCancel = false
     
+    @State private var isPresented = true
+    
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -48,7 +51,6 @@ struct HomeView: View {
             }
             .navigationBarTitle(Text("搜索"))
             .navigationBarTitleDisplayMode(.large)
-//            .toolbarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -73,7 +75,7 @@ struct HomeView: View {
                 }
                 
             }
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
         }
     }
     
@@ -85,23 +87,6 @@ struct HomeView: View {
         }
     }
     
-//    var locationText: some View {
-//        
-//        VStack {
-//            if let location = locationService.location {
-//                Text("位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-//            }
-//            if let placemark = locationService.placemark {
-//                Text("地点: \(placemark.locality ?? "未知"), \(placemark.country ?? "未知"), postalCode: \(placemark.subLocality ?? "未知")")
-//                Text("administrativeArea: \(placemark.administrativeArea ?? "未知")")
-//                Text("placemark: \(placemark)")
-//            }
-//            Button("获取位置") {
-//                locationService.requestLocation()
-//            }
-//        }
-//    }
-    
     
 }
  
@@ -112,19 +97,6 @@ struct HouseCell: View {
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading) {
                 HStack {
-                    // 假设images数组不为空，加载第一张图片作为封面
-//                    if let imageUrl = house.images.first, let url = URL(string: imageUrl) {
-//                        AsyncImage(url: url) { image in
-//                            image.resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                        } placeholder: {
-//                            ProgressView()
-//                        }
-//                        .frame(width: 150, height: 93)
-//                        .cornerRadius(16)
-//                        .clipped() // 确保图片按照边界裁剪
-//                    }
-                    
                     if let imageUrl = house.images?.first {
                         KFImage(URL(string: imageUrl))
                             .resizable()
@@ -154,3 +126,37 @@ struct HouseCell: View {
 #Preview {
     HomeView()
 }
+
+
+
+
+
+// 假设images数组不为空，加载第一张图片作为封面
+//                    if let imageUrl = house.images.first, let url = URL(string: imageUrl) {
+//                        AsyncImage(url: url) { image in
+//                            image.resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+//                        .frame(width: 150, height: 93)
+//                        .cornerRadius(16)
+//                        .clipped() // 确保图片按照边界裁剪
+//                    }
+
+//    var locationText: some View {
+//
+//        VStack {
+//            if let location = locationService.location {
+//                Text("位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+//            }
+//            if let placemark = locationService.placemark {
+//                Text("地点: \(placemark.locality ?? "未知"), \(placemark.country ?? "未知"), postalCode: \(placemark.subLocality ?? "未知")")
+//                Text("administrativeArea: \(placemark.administrativeArea ?? "未知")")
+//                Text("placemark: \(placemark)")
+//            }
+//            Button("获取位置") {
+//                locationService.requestLocation()
+//            }
+//        }
+//    }
