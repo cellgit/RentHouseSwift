@@ -34,8 +34,8 @@ struct UploadView: View {
     
     //    @State private var images: [UIImage] = []
     @State private var images: [UIImage] = [UIImage.init(named: "009")!]
-    @State private var price: Double = 2600
-    @State private var rentalMethod: Int = 1
+    @State private var price: String = ""
+    @State private var rentalMethod: String = "整租"
     @State private var lon: Double = 116.306121
     @State private var lat: Double = 40.052978
     @State private var province: String = "浙江省"
@@ -43,13 +43,13 @@ struct UploadView: View {
     @State private var district: String = "钱塘区"
     @State private var citycode: String = "0571"
     @State private var community: String?
-    @State private var building: String = "17号楼"
-    @State private var unit: String = "3"
-    @State private var houseNumber: String = "501"
-    @State private var roomNumber: String = "A"
+    @State private var building: String = ""
+    @State private var unit: String = ""
+    @State private var houseNumber: String = ""
+    @State private var roomNumber: String = ""
     @State private var contact: String = "18298269622"
     @State private var status: Int = 1
-    @State private var roomType: String = "1"
+    @State private var roomType: String = "整租" // 租赁方式
     @State private var floor: Int = 5
     @State private var totalFloors: Int = 17
     @State private var area: Double = 25
@@ -71,26 +71,7 @@ struct UploadView: View {
     
     @State private var isShowingSearchCommunityView = false
     @State private var isShowingSearchCityView = false
-    
-    
-    //    let list = ["所在城市", "所在小区", "具体地址", "期望租金"]
-    
-    
-    //    var body: some View {
-    //
-    //        HStack(alignment: .center, spacing: 8) {
-    //
-    //            Text("所在城市")
-    //                .font(Font.system(size: 15, weight: .medium, design: .default))
-    //                .padding(EdgeInsets.init(top: 8, leading: 8, bottom: 8, trailing: 16))
-    //
-    //
-    //
-    //
-    //
-    //        }
-    //
-    //    }
+    @State private var isShowingActionSheetOfRoomType = false
     
     
     
@@ -99,7 +80,7 @@ struct UploadView: View {
         NavigationView {
             VStack {
                 List {
-                    RowViewStyle1(title: "所在城市", text: Binding<String>(
+                    RowViewStyle1(title: "城市", text: Binding<String>(
                         get: { self.city ?? self.infoViewModel.city ?? "" },
                         set: { self.city = $0 }
                     ), placeholder: "选择房源所在的城市") {
@@ -114,7 +95,7 @@ struct UploadView: View {
                     })
                     
                     
-                    RowViewStyle1(title: "所在小区", text: Binding<String>(
+                    RowViewStyle1(title: "小区", text: Binding<String>(
                         get: { self.community ?? self.infoViewModel.community ?? "" },
                         set: { self.community = $0 }
                     ), placeholder: "请输入小区名称") {
@@ -130,58 +111,50 @@ struct UploadView: View {
                     })
                     
                     
-                    RowViewStyle1(title: "具体地址", text: Binding<String>(
-                        get: { self.community ?? self.infoViewModel.community ?? "" },
-                        set: { self.community = $0 }
-                    ), placeholder: "请输入门牌号") {
-                        
+                    RowViewStyle1(title: "方式", text: $rentalMethod, placeholder: "请输入小区名称") {
+                        isShowingSearchCommunityView = true
+                    }
+                    .onTapGesture {
+                        isShowingActionSheetOfRoomType = true // 点击时显示ActionSheet
+                    }
+                    .actionSheet(isPresented: $isShowingActionSheetOfRoomType) { // ActionSheet的定义
+                        ActionSheet(title: Text("选择租赁方式"), message: nil, buttons: [
+                            .default(Text("整租")) { rentalMethod = "整租" },
+                            .default(Text("合租")) { rentalMethod = "合租" },
+                            .cancel()
+                        ])
                     }
                     
+                    RowViewStyleWithInput(title: "楼号", text: $building, placeholder: "请输入楼号,如1号楼输入: 1", keyboardType: .numberPad)
+                    RowViewStyleWithInput(title: "单元", text: $unit, placeholder: "请输入单元号,如2单元输入: 2", keyboardType: .numberPad)
+                    RowViewStyleWithInput(title: "房号", text: $houseNumber, placeholder: "请输入房号,如301单元输入: 301")
+                    if self.roomType == "合租" {
+                        RowViewStyleWithInput(title: "房间", text: $roomNumber, placeholder: "(选填)房间编码,如A房间: A")
+                    }
+                    RowViewStyleWithInput(title: "租金", text: $price, placeholder: "如期望5000元,请输入: 5000", keyboardType: .decimalPad)
                     
-                    // 为具体地址创建文本字段
-                    TextField("楼房编号", text: $building)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("单元号", text: $unit)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("楼层", text: Binding<String>(
-                        get: { String(self.floor) },
-                        set: { self.floor = Int($0) ?? 0 }
-                    ))
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("房号", text: $houseNumber)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("房间号", text: $roomNumber)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    // 为期望租金创建文本字段
-                    TextField("期望租金", text: Binding<String>(
-                        get: { String(self.price) },
-                        set: { self.price = Double($0) ?? 0 }
-                    ))
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
+//                .listStyle(PlainListStyle()) // 使List背景透明
             }
             .navigationBarTitle(Text("发布房源"))
             .navigationBarTitleDisplayMode(.large)
             
             
             VStack {
-                //            ProgressView(value: viewModel.uploadProgress)
-                //                .progressViewStyle(LinearProgressViewStyle())
-                //
-                //            if let result = viewModel.responseData {
-                //                let name = result.community
-                //                Text("上传成功：\(name ?? "")")
-                //
-                //            }
-                //            else if let error = viewModel.uploadError {
-                //                Text("上传失败：\(error.localizedDescription)")
-                //            }
-                //            else {
-                //                EmptyView()
-                //            }
+                ProgressView(value: viewModel.uploadProgress)
+                    .progressViewStyle(LinearProgressViewStyle())
+                
+                if let result = viewModel.responseData {
+                    let name = result.community
+                    Text("上传成功：\(name ?? "")")
+                    
+                }
+                else if let error = viewModel.uploadError {
+                    Text("上传失败：\(error.localizedDescription)")
+                }
+                else {
+                    EmptyView()
+                }
                 
                 
                 
@@ -189,9 +162,11 @@ struct UploadView: View {
                 
                 Button("上传数据") {
                     
+                    let rentalMethodInt = rentalMethod == "整租" ? 1 : 2
+                    let priceDouble = Double(price) ?? 0
                     let router = HouseApi.uploadHouse(images: images,
-                                                      price: price,
-                                                      rentalMethod: rentalMethod,
+                                                      price: priceDouble,
+                                                      rentalMethod: rentalMethodInt,
                                                       lon: lon,
                                                       lat: lat,
                                                       province: province,
@@ -224,6 +199,7 @@ struct UploadView: View {
                     
                     viewModel.uploadData(router: router)
                 }
+                
             }
         }
     }
