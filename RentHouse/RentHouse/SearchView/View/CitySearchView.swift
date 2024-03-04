@@ -21,6 +21,7 @@ struct CitySearchView: View {
                     groupedListView
                 } else {
                     simpleListView
+                        
                 }
             }
             .navigationBarTitle("搜索所在城市", displayMode: .large)
@@ -53,13 +54,16 @@ struct CitySearchView: View {
         List {
             ForEach(viewModel.sectionCityList, id: \.id) { section in
                 Section(header: Text(section.sectionName ?? "未知").font(Font.system(size: 18, weight: .regular))) {
-                    ForEach(section.cities, id: \.citycode) { city in
+                    ForEach(section.cities, id: \.name) { item in
                         HStack {
-                            Text(city.name ?? "")
+                            Text(item.name ?? "")
                             Spacer()
-//                            Text("(\(city.citycode ?? ""))")
                         }
-                        .onTapGesture { onSelect(city) }
+                        .background()
+                        .onTapGesture {
+                            onSelect(item)
+                            onDismiss()
+                        }
                     }
                 }
             }
@@ -68,11 +72,20 @@ struct CitySearchView: View {
 
     // 简单列表视图
     private var simpleListView: some View {
-        List(viewModel.cityList, id: \.id) { item in
-            Text(item.name ?? "未知")
-                .onTapGesture { onSelect(item) }
+        List(viewModel.cityList, id: \.name) { item in
+            HStack {
+                Text(item.name ?? "")
+                Spacer()
+            }
+            .background()
+            .onTapGesture {
+                onSelect(item)
+                onDismiss()
+            }
         }
     }
-
     
 }
+
+
+                        

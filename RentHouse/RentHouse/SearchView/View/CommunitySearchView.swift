@@ -23,7 +23,7 @@ struct CommunitySearchView: View {
     var city: String
     
     
-    var onSelect: (CommunityData) -> Void
+    var onSelected: (MKMapItem) -> Void
     let onDismiss: () -> Void
     
     @State private var searchResults = [MKMapItem]()
@@ -68,6 +68,10 @@ struct CommunitySearchView: View {
                     Text(item.placemark.title ?? "")
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                }
+                .onTapGesture {
+                    onSelected(item)
+                    onDismiss()
                 }
             }
         }

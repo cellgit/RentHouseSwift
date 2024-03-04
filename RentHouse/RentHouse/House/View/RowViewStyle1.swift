@@ -42,12 +42,14 @@ import SwiftUI
 
 struct RowViewStyleWithInput: View {
     
-    //    var onTextChanged: (String) -> Void // 定义一个回调闭包
-    
     var title: String
     @Binding var text: String
     var placeholder: String
     var keyboardType: UIKeyboardType = .default // 添加键盘类型参数
+    
+//    @FocusState private var isFocused: Bool
+    
+    
     
     var body: some View {
         HStack {
@@ -55,11 +57,22 @@ struct RowViewStyleWithInput: View {
             Spacer()
             TextField(placeholder, text: $text)
                 .keyboardType(keyboardType) // 设置键盘类型
+//                .focused($isFocused)
                 .foregroundColor(.primary) // 输入文本的颜色
                 .padding(.leading, 0) // 在TextField左侧增加一些内边距
                 .frame(height: 52) // 设置高度，确保有足够的点击区域
+//                .toolbar {
+//                    // 仅在显示数字键盘时添加完成按钮
+//                    
+//                    ToolbarItemGroup(id: title, placement: .keyboard) {
+//                        Spacer()
+//                        Button("完成") {
+//                            isFocused = false // 改变焦点状态来收起键盘
+//                        }
+//                    }
+//                    
+//                }
             Spacer()
-            //            Image(systemName: "chevron.right").foregroundColor(.gray)
         }
         .padding(.leading)
         .background(Color.white) // 背景色
