@@ -33,11 +33,11 @@ struct UploadView: View {
     @State private var cancellables = Set<AnyCancellable>()
     
     //    @State private var images: [UIImage] = []
-    @State private var images: [UIImage] = [UIImage.init(named: "009")!]
+    @State private var images: [UIImage] = []//[UIImage.init(named: "009")!]
     @State private var price: String = ""
     @State private var rentalMethod: String = "整租"
-    @State private var lon: Double = 116.306121
-    @State private var lat: Double = 40.052978
+    @State private var lon: Double? // = 116.306121
+    @State private var lat: Double? // = 40.052978
     @State private var province: String?
     @State private var city: String?
     @State private var district: String?
@@ -77,6 +77,13 @@ struct UploadView: View {
     
     @FocusState private var isTextFieldFocused: Bool
     
+    @State private var selectedImages: [UIImage] = []
+    
+    @State private var showingImagePicker = false
+    
+    private let maxImageCount = 9
+    private var columns: Int = 3
+    
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -87,6 +94,7 @@ struct UploadView: View {
             VStack {
                 List {
                     
+                    ImageBrowserView(images: $images)
                     
                     RowViewStyle1(title: "城市", text: Binding<String>(
                         get: { self.city ?? self.infoViewModel.city ?? "" },
@@ -112,7 +120,7 @@ struct UploadView: View {
                         self.isShowingSearchCommunityView = true
                     }
                     .fullScreenCover(isPresented: $isShowingSearchCommunityView, content: {
-                        CommunitySearchView(latitude: infoViewModel.lat ?? lat, longitude: infoViewModel.lon ?? lon, city: city ?? infoViewModel.city ?? "")
+                        CommunitySearchView(latitude: lat ?? (infoViewModel.lat ?? 40.052978), longitude: lon ?? (infoViewModel.lon ?? 116.306121), city: city ?? infoViewModel.city ?? "")
                         { item in
                             self.isShowingSearchCommunityView = false
                             community = item.name ?? ""
@@ -200,17 +208,19 @@ struct UploadView: View {
             EmptyView()
         }
         
+        debugPrint("infoViewModel.citycode ==== \(infoViewModel.citycode) , \(lon), \(lat)")
+        
         let rentalMethodInt = rentalMethod == "整租" ? 1 : 2
         let priceDouble = Double(price) ?? 0
         let router = HouseApi.uploadHouse(images: images,
                                           price: priceDouble,
                                           rentalMethod: rentalMethodInt,
-                                          lon: lon,
-                                          lat: lat,
+                                          lon: lon ?? infoViewModel.lon ?? 116,
+                                          lat: lat ?? infoViewModel.lat ?? 40,
                                           province: province ?? "",
                                           city: city ?? (infoViewModel.city ?? ""),
                                           district: district ?? "",
-                                          citycode: citycode ?? "",
+                                          citycode: citycode ?? (infoViewModel.citycode ?? ""),
                                           community: community ?? (infoViewModel.community ?? ""),
                                           building: building,
                                           unit: unit,

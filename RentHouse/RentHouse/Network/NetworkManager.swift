@@ -176,7 +176,6 @@ class NetworkManager {
     func uploadWithProgress<T: Decodable>(_ router: ApiRouter) -> AnyPublisher<UploadResult<T>, Never> {
         let progressSubject = PassthroughSubject<UploadResult<T>, Never>()
         var progressTracker = UploadProgressTracker()
-
         let uploadRequest = AF.upload(multipartFormData: { formData in
             router.configureMultipartFormData(formData)
         }, with: try! router.builder.build())

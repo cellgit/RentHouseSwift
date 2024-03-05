@@ -60,6 +60,10 @@
 		CEBEFA5E2B95AFE1009A6DB0 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA5D2B95AFE1009A6DB0 /* View+extension.swift */; };
 		CEBEFA602B9602B3009A6DB0 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */; };
 		CEBEFA622B96B3C1009A6DB0 /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA612B96B3C1009A6DB0 /* Color+extension.swift */; };
+		CEBEFA642B96C8BC009A6DB0 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */; };
+		CEBEFA662B96E62B009A6DB0 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */; };
+		CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */; };
+		CEBEFA6D2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -141,6 +145,9 @@
 		CEBEFA5D2B95AFE1009A6DB0 /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
 		CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		CEBEFA612B96B3C1009A6DB0 /* Color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
+		CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
+		CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserRepresentable.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -154,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */,
+				CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */,
 				CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +413,7 @@
 		CEBEFA2A2B92C06B009A6DB0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CEBEFA6B2B97068B009A6DB0 /* Representable */,
 				CEBEFA2B2B92C08C009A6DB0 /* Extensions */,
 				CEBEFA5A2B95AFAA009A6DB0 /* Modifier */,
 				CEBEFA3A2B947F5E009A6DB0 /* Storage */,
@@ -439,6 +448,8 @@
 			isa = PBXGroup;
 			children = (
 				CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */,
+				CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */,
+				CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -481,6 +492,14 @@
 				CEBEFA5B2B95AFB5009A6DB0 /* DragToDismissModifier.swift */,
 			);
 			path = Modifier;
+			sourceTree = "<group>";
+		};
+		CEBEFA6B2B97068B009A6DB0 /* Representable */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */,
+			);
+			path = Representable;
 			sourceTree = "<group>";
 		};
 		CEF6B6532B661CC7006CE0F1 /* User */ = {
@@ -573,6 +592,7 @@
 			packageProductDependencies = (
 				CE42F6712B64EA1B00124E92 /* Alamofire */,
 				CE8005642B91748D00E1D683 /* Kingfisher */,
+				CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */,
 			);
 			productName = RentHouse;
 			productReference = CE42F6052B64A23200124E92 /* RentHouse.app */;
@@ -649,6 +669,7 @@
 			packageReferences = (
 				CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE8005632B91748D00E1D683 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CEBEFA682B97065D009A6DB0 /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */,
 			);
 			productRefGroup = CE42F6062B64A23200124E92 /* Products */;
 			projectDirPath = "";
@@ -697,6 +718,7 @@
 				CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */,
 				CEBEFA592B9587D0009A6DB0 /* CitySearchViewModel.swift in Sources */,
 				CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */,
+				CEBEFA642B96C8BC009A6DB0 /* PhotoPicker.swift in Sources */,
 				CE34ED0E2B917DE300C0789F /* HouseService.swift in Sources */,
 				CEBEFA572B958680009A6DB0 /* MockSearchService.swift in Sources */,
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
@@ -727,6 +749,7 @@
 				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
 				CEBEFA412B948A6D009A6DB0 /* District.swift in Sources */,
+				CEBEFA662B96E62B009A6DB0 /* PhotoGridView.swift in Sources */,
 				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
 				CEBEFA5C2B95AFB5009A6DB0 /* DragToDismissModifier.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
@@ -742,6 +765,7 @@
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
 				CE34ED102B917DEE00C0789F /* MockHouseService.swift in Sources */,
+				CEBEFA6D2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift in Sources */,
 				CEBEFA532B95865B009A6DB0 /* SearchServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1118,6 +1142,14 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		CEBEFA682B97065D009A6DB0 /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/SKPhotoBrowser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1130,6 +1162,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE8005632B91748D00E1D683 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEBEFA682B97065D009A6DB0 /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */;
+			productName = SKPhotoBrowser;
 		};
 /* End XCSwiftPackageProductDependency section */
 

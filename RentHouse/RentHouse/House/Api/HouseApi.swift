@@ -94,10 +94,11 @@ enum HouseApi: ApiRouter {
     
     private var encoding: ParameterEncoding {
         switch self {
-        case .uploadHouse:
-            return .formData
-//        default:
-//            return .json
+//        case .uploadHouse(images: let images, price: _, rentalMethod: _, lon: _, lat: _, province: _, city: _, district: _, citycode: _, community: _, building: _, unit: _, houseNumber: _, roomNumber: _, contact: _, status: _, roomType: _, floor: _, totalFloors: _, area: _, orientation: _, availableDate: _, leaseTerm: _, paymentMethod: _, decoration: _, desc: _, facilities: _, tags: _, petPolicy: _, moveInRequirements: _, additionalFees: _):
+//            
+//            return images.isEmpty ? .json : .formData
+        default:
+            return .json
         }
     }
     
