@@ -41,6 +41,8 @@ class HouseInfoViewModel: ObservableObject {
         adcode = dict?["adcode"]
         id = dict?["id"]
         
+        
+        
         if let cityInfo = cityDataManager.cityInfo as? [String: String] {
             let name = cityInfo["name"] ?? ""
             self.city = name

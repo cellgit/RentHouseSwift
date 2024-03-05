@@ -10,7 +10,7 @@ import Combine
 
 class HouseUploadViewModel: ObservableObject {
     
-    @Published var uploadResult: House?
+//    @Published var uploadResult: House?
     @Published var uploadError: Error?
     @Published var isLoading = false
     @Published var errorMessage: String?
@@ -20,7 +20,7 @@ class HouseUploadViewModel: ObservableObject {
     @Published var uploadCompleted: Bool = false // 图片上传完成
     @Published var estimatedTimeRemaining: TimeInterval = 0.0
     @Published var responseCompleted: Bool = false // 响应结束,房源所有信息上传完成
-    @Published var responseData: House?
+    @Published var responseData: House? = nil
     
     private var cancellables = Set<AnyCancellable>()
 

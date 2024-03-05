@@ -14,9 +14,9 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-    var onImagesUpdated: ([UIImage]) -> Void // 图片更新回调
     var selectedImages: [UIImage]
     var maxSelection: Int
+    var onImagesUpdated: ([UIImage]) -> Void // 图片更新回调
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()

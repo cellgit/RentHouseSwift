@@ -9,31 +9,16 @@ import Foundation
 import SwiftUI
 import Combine
 
-struct RentalInfo {
-    var city: String = ""
-    var community: String = ""
-    var address: String = ""
-    var expectedRent: String = ""
-}
-
 struct UploadView: View {
-    @State private var rentalInfo = RentalInfo()
-    
     @ObservedObject var locationService = LocationService()
     @ObservedObject var cityDataManager = CityDataManager.shared
     @State private var searchText = ""
     @State private var showingCancel = false
-    
-    
-    
     @StateObject var infoViewModel = HouseInfoViewModel()
-    
     @StateObject var viewModel = HouseUploadViewModel()
     @State private var uploadResult: Bool?
     @State private var cancellables = Set<AnyCancellable>()
-    
-    //    @State private var images: [UIImage] = []
-    @State private var images: [UIImage] = []//[UIImage.init(named: "009")!]
+    @State private var images: [UIImage] = []
     @State private var price: String = ""
     @State private var rentalMethod: String = "整租"
     @State private var lon: Double? // = 116.306121
@@ -64,16 +49,11 @@ struct UploadView: View {
     @State private var petPolicy: Bool = false
     @State private var moveInRequirements: String = ""
     @State private var additionalFees: [String] = []
-    
     @State private var combinedAddress: String = ""
-    
-    //    @State private var isNavigationActive = false
     
     @State private var isShowingSearchCommunityView = false
     @State private var isShowingSearchCityView = false
     @State private var isShowingActionSheetOfRoomType = false
-    
-    //    @ObservedObject private var keyboardResponder = KeyboardResponder()
     
     @FocusState private var isTextFieldFocused: Bool
     
@@ -83,6 +63,8 @@ struct UploadView: View {
     
     private let maxImageCount = 9
     private var columns: Int = 3
+    
+    @StateObject private var toastManager = ToastManager()
     
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -105,7 +87,6 @@ struct UploadView: View {
                     .fullScreenCover(isPresented: $isShowingSearchCityView, content: {
                         CitySearchView { district in
                             self.isShowingSearchCityView = false
-                            debugPrint("district ==== \(district.name)")
                             city = district.name
                             citycode = district.citycode
                         } onDismiss: {
@@ -126,7 +107,7 @@ struct UploadView: View {
                             community = item.name ?? ""
                             let placemark = item.placemark
                             lat = placemark.coordinate.latitude
-                            lat = placemark.coordinate.longitude
+                            lon = placemark.coordinate.longitude
                             province = placemark.administrativeArea // 省份
                             city = placemark.locality // 市
                             district = placemark.subLocality // 区县
@@ -142,7 +123,6 @@ struct UploadView: View {
                             self.isShowingSearchCommunityView = false
                         }
                     })
-                    
                     
                     RowViewStyle1(title: "方式", text: $rentalMethod, placeholder: "请输入小区名称") {
                         isShowingActionSheetOfRoomType = true // 点击时显示ActionSheet
@@ -192,23 +172,14 @@ struct UploadView: View {
             .navigationBarTitleDisplayMode(.large)
             
         }
+        .toast(isPresented: $toastManager.isShowing) {
+            ToastView(message: toastManager.message, type: toastManager.type)
+        }
     }
     
     func onSubmit() {
-        
-        if let result = viewModel.responseData {
-            let name = result.community
-            Text("上传成功：\(name ?? "")")
-            
-        }
-        else if let error = viewModel.uploadError {
-            Text("上传失败：\(error.localizedDescription)")
-        }
-        else {
-            EmptyView()
-        }
-        
-        debugPrint("infoViewModel.citycode ==== \(infoViewModel.citycode) , \(lon), \(lat)")
+        // 确保之前的订阅被取消，避免重复订阅
+        cancellables.removeAll()
         
         let rentalMethodInt = rentalMethod == "整租" ? 1 : 2
         let priceDouble = Double(price) ?? 0
@@ -244,8 +215,21 @@ struct UploadView: View {
                                           moveInRequirements: moveInRequirements,
                                           additionalFees: additionalFees)
         
-        
         viewModel.uploadData(router: router)
+        // 监听responseData的变化
+        viewModel.$responseData
+            .receive(on: RunLoop.main) // 确保在主线程上接收数据
+            .sink { responseData in
+                if let result = responseData {
+                    self.toastManager.showToast(message: "上传成功", type: .success)
+                    debugPrint("上传成功：\(String(describing: result.community))")
+                } else if let error = self.viewModel.uploadError {
+                    self.toastManager.showToast(message: "上传失败,请重试\n \(error.localizedDescription)", type: .error)
+                } else {
+                    debugPrint("响应无数据")
+                }
+            }
+            .store(in: &cancellables) // 将订阅存储起来
     }
     
 }
@@ -255,9 +239,9 @@ struct FooterView: View {
     
     let onSubmit: () -> Void
     
-//    init(onSubmit: @escaping () -> Void) {
-//        self.onSubmit = onSubmit
-//    }
+    //    init(onSubmit: @escaping () -> Void) {
+    //        self.onSubmit = onSubmit
+    //    }
     
     var body: some View {
         

@@ -64,6 +64,7 @@
 		CEBEFA662B96E62B009A6DB0 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */; };
 		CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */; };
 		CEBEFA6D2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */; };
+		CEBEFA6F2B974E5C009A6DB0 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -148,6 +149,7 @@
 		CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserRepresentable.swift; sourceTree = "<group>"; };
+		CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */,
 				CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */,
 				CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */,
+				CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -765,6 +768,7 @@
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
 				CE34ED102B917DEE00C0789F /* MockHouseService.swift in Sources */,
+				CEBEFA6F2B974E5C009A6DB0 /* ToastManager.swift in Sources */,
 				CEBEFA6D2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift in Sources */,
 				CEBEFA532B95865B009A6DB0 /* SearchServiceProtocol.swift in Sources */,
 			);
