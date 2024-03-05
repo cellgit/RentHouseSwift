@@ -15,7 +15,6 @@ struct CommunityData {
 
 struct CommunitySearchView: View {
     
-    
     public var latitude: CLLocationDegrees
 
     public var longitude: CLLocationDegrees
@@ -53,9 +52,6 @@ struct CommunitySearchView: View {
                         }
                     }
                 }
-//                .dragToDismiss {
-//                    onDismiss()
-//                }
         }
     }
     
@@ -63,15 +59,17 @@ struct CommunitySearchView: View {
     private var simpleListView: some View {
         VStack {
             List(searchResults, id: \.self) { item in
-                VStack(alignment: .leading) {
-                    Text(item.name ?? "未知")
-                    Text(item.placemark.title ?? "")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                .onTapGesture {
+                Button {
                     onSelected(item)
                     onDismiss()
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(item.name ?? "未知")
+                            .foregroundColor(.primary)
+                        Text(item.placemark.title ?? "")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
         }

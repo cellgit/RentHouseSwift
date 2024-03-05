@@ -59,6 +59,7 @@
 		CEBEFA5C2B95AFB5009A6DB0 /* DragToDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA5B2B95AFB5009A6DB0 /* DragToDismissModifier.swift */; };
 		CEBEFA5E2B95AFE1009A6DB0 /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA5D2B95AFE1009A6DB0 /* View+extension.swift */; };
 		CEBEFA602B9602B3009A6DB0 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */; };
+		CEBEFA622B96B3C1009A6DB0 /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA612B96B3C1009A6DB0 /* Color+extension.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -139,6 +140,7 @@
 		CEBEFA5B2B95AFB5009A6DB0 /* DragToDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToDismissModifier.swift; sourceTree = "<group>"; };
 		CEBEFA5D2B95AFE1009A6DB0 /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
 		CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		CEBEFA612B96B3C1009A6DB0 /* Color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -263,9 +265,9 @@
 				CE42F6812B652C9C00124E92 /* Router */,
 				CEBEFA422B94B952009A6DB0 /* Global */,
 				CEF6B6532B661CC7006CE0F1 /* User */,
+				CEBA4DBF2B8EE4D4006F078A /* Mine */,
 				CEBA4DA82B8EE387006F078A /* Home */,
 				CEF6B6542B661CD6006CE0F1 /* House */,
-				CEBA4DBF2B8EE4D4006F078A /* Mine */,
 				CE3524532B8F319F0068E9C7 /* SearchView */,
 				CEBEFA3D2B948077009A6DB0 /* Tools */,
 				CEBEFA2A2B92C06B009A6DB0 /* Utils */,
@@ -418,6 +420,7 @@
 				CEBEFA2C2B92C0A6009A6DB0 /* UIImage+extension.swift */,
 				CEBEFA352B933B10009A6DB0 /* String+extension.swift */,
 				CEBEFA5D2B95AFE1009A6DB0 /* View+extension.swift */,
+				CEBEFA612B96B3C1009A6DB0 /* Color+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				CEBA4DC42B8EE4D4006F078A /* ProfileView.swift in Sources */,
 				CE42F67A2B65104C00124E92 /* AuthAPI.swift in Sources */,
 				CEBEFA4F2B9584BC009A6DB0 /* CitySearchView.swift in Sources */,
+				CEBEFA622B96B3C1009A6DB0 /* Color+extension.swift in Sources */,
 				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
 				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,

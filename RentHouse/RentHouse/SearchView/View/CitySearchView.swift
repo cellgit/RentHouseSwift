@@ -55,14 +55,14 @@ struct CitySearchView: View {
             ForEach(viewModel.sectionCityList, id: \.id) { section in
                 Section(header: Text(section.sectionName ?? "未知").font(Font.system(size: 18, weight: .regular))) {
                     ForEach(section.cities, id: \.name) { item in
-                        HStack {
-                            Text(item.name ?? "")
-                            Spacer()
-                        }
-                        .background()
-                        .onTapGesture {
+                        Button {
                             onSelect(item)
                             onDismiss()
+                        } label: {
+                            HStack {
+                                Text(item.name ?? "")
+                                    .foregroundColor(.primary)
+                            }
                         }
                     }
                 }
@@ -73,15 +73,16 @@ struct CitySearchView: View {
     // 简单列表视图
     private var simpleListView: some View {
         List(viewModel.cityList, id: \.name) { item in
-            HStack {
-                Text(item.name ?? "")
-                Spacer()
-            }
-            .background()
-            .onTapGesture {
+            Button {
                 onSelect(item)
                 onDismiss()
+            } label: {
+                HStack {
+                    Text(item.name ?? "")
+                        .foregroundColor(.primary)
+                }
             }
+            
         }
     }
     

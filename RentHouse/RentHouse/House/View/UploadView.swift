@@ -137,9 +137,6 @@ struct UploadView: View {
                     
                     
                     RowViewStyle1(title: "方式", text: $rentalMethod, placeholder: "请输入小区名称") {
-                        isShowingSearchCommunityView = true
-                    }
-                    .onTapGesture {
                         isShowingActionSheetOfRoomType = true // 点击时显示ActionSheet
                     }
                     .actionSheet(isPresented: $isShowingActionSheetOfRoomType) { // ActionSheet的定义
@@ -263,7 +260,7 @@ struct FooterView: View {
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(Color.blue)
+        .background(.blue)
         .foregroundColor(.white)
         .cornerRadius(16)
     }

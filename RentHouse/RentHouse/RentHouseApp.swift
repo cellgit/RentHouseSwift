@@ -10,6 +10,9 @@ import SwiftUI
 @main
 struct RentHouseApp: App {
     
+    // 监听系统的界面样式变化
+    @Environment(\.colorScheme) var colorScheme
+    
     init() {
         CityDataManager.shared.startLocationAndFetchData()
     }
@@ -17,6 +20,7 @@ struct RentHouseApp: App {
     var body: some Scene {
         WindowGroup {
             TabBarView()
+//                .accentColor(colorScheme == .dark ? .primary : .kleinBlue)
         }
     }
 }
