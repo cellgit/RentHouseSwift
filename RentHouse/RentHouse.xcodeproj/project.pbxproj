@@ -65,6 +65,9 @@
 		CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */ = {isa = PBXBuildFile; productRef = CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */; };
 		CEBEFA6D2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */; };
 		CEBEFA6F2B974E5C009A6DB0 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */; };
+		CEBEFA712B9837FB009A6DB0 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA702B9837FB009A6DB0 /* Test.swift */; };
+		CEBEFA732B9855AD009A6DB0 /* ImagePickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */; };
+		CEBEFA762B985664009A6DB0 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEBEFA752B985664009A6DB0 /* BSImagePicker */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -150,6 +153,8 @@
 		CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserRepresentable.swift; sourceTree = "<group>"; };
 		CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		CEBEFA702B9837FB009A6DB0 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerRepresentable.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -165,6 +170,7 @@
 				CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */,
 				CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */,
 				CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */,
+				CEBEFA762B985664009A6DB0 /* BSImagePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +277,7 @@
 				CE42F60A2B64A23200124E92 /* Persistence.swift */,
 				CE42F60F2B64A23200124E92 /* ContentView.swift */,
 				CEBA4DBD2B8EE429006F078A /* TabBarView.swift */,
+				CEBEFA702B9837FB009A6DB0 /* Test.swift */,
 				CE42F66F2B64E1B900124E92 /* Network */,
 				CE42F6812B652C9C00124E92 /* Router */,
 				CEBEFA422B94B952009A6DB0 /* Global */,
@@ -501,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */,
+				CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */,
 			);
 			path = Representable;
 			sourceTree = "<group>";
@@ -596,6 +604,7 @@
 				CE42F6712B64EA1B00124E92 /* Alamofire */,
 				CE8005642B91748D00E1D683 /* Kingfisher */,
 				CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */,
+				CEBEFA752B985664009A6DB0 /* BSImagePicker */,
 			);
 			productName = RentHouse;
 			productReference = CE42F6052B64A23200124E92 /* RentHouse.app */;
@@ -673,6 +682,7 @@
 				CE42F6702B64EA1B00124E92 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE8005632B91748D00E1D683 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CEBEFA682B97065D009A6DB0 /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */,
+				CEBEFA742B985664009A6DB0 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 			);
 			productRefGroup = CE42F6062B64A23200124E92 /* Products */;
 			projectDirPath = "";
@@ -743,6 +753,7 @@
 				CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */,
 				CEBEFA4B2B95751A009A6DB0 /* HouseInfoViewModel.swift in Sources */,
 				CEBEFA492B9572DB009A6DB0 /* RowViewStyle1.swift in Sources */,
+				CEBEFA732B9855AD009A6DB0 /* ImagePickerRepresentable.swift in Sources */,
 				CEBEFA2D2B92C0A6009A6DB0 /* UIImage+extension.swift in Sources */,
 				CEBA4DBC2B8EE387006F078A /* HomeApi.swift in Sources */,
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
@@ -761,6 +772,7 @@
 				CEBEFA472B956704009A6DB0 /* CommunitySearchView.swift in Sources */,
 				CEBEFA322B932382009A6DB0 /* LocationService.swift in Sources */,
 				CEBA4DBB2B8EE387006F078A /* HomeService.swift in Sources */,
+				CEBEFA712B9837FB009A6DB0 /* Test.swift in Sources */,
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
 				CEBEFA602B9602B3009A6DB0 /* KeyboardResponder.swift in Sources */,
 				CEBEFA3C2B947FA1009A6DB0 /* UserDefaultsManager.swift in Sources */,
@@ -932,6 +944,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RentHouse/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "是否允许使用定位功能";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -973,6 +986,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RentHouse/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "是否允许使用定位功能";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -1154,6 +1168,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		CEBEFA742B985664009A6DB0 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/BSImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1171,6 +1193,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEBEFA682B97065D009A6DB0 /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */;
 			productName = SKPhotoBrowser;
+		};
+		CEBEFA752B985664009A6DB0 /* BSImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEBEFA742B985664009A6DB0 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
+			productName = BSImagePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 

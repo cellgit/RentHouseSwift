@@ -7,6 +7,11 @@
 
 /*
  图片选择器
+ 
+ PhotoPicker(selectedImages: images, maxSelection: maxImageCount - images.count) { images in
+     self.images = images
+ } // 不使用第三方库
+ 
  */
 
 import Foundation

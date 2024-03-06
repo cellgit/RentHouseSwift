@@ -75,7 +75,7 @@ struct UploadView: View {
         NavigationView {
             VStack {
                 List {
-                    
+//                    ImagePickerCoordinatorView
                     ImageBrowserView(images: $images)
                     
                     RowViewStyle1(title: "城市", text: Binding<String>(
