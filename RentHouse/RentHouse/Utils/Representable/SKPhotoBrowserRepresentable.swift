@@ -9,47 +9,6 @@ import Foundation
 import SwiftUI
 import SKPhotoBrowser
 
-//struct SKPhotoBrowserRepresentable: UIViewControllerRepresentable {
-//    @Binding var isPresented: Bool
-//    var photos: [SKPhoto]
-//
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        let controller = UIViewController()
-//        return controller
-//    }
-//
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//        if isPresented && uiViewController.presentedViewController == nil {
-//            let browser = SKPhotoBrowser(photos: photos)
-//            uiViewController.present(browser, animated: true, completion: nil)
-//        }
-//    }
-//}
-
-import SwiftUI
-import SKPhotoBrowser
-
-//struct SKPhotoBrowserRepresentable: UIViewControllerRepresentable {
-//    @Binding var isPresented: Bool
-//    var photos: [SKPhoto]
-//    var initialIndex: Int
-//
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        // 创建一个容器UIViewController
-//        let controller = UIViewController()
-//        return controller
-//    }
-//
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//        if isPresented && uiViewController.presentedViewController == nil {
-//            // 使用initialIndex初始化SKPhotoBrowser
-//            let browser = SKPhotoBrowser(photos: photos, initialPageIndex: initialIndex)
-//            uiViewController.present(browser, animated: true, completion: nil)
-//        }
-//    }
-//}
-
-
 class SKPhotoBrowserHostingController: UIViewController {
     var photos: [SKPhoto]
     var initialIndex: Int
@@ -98,12 +57,35 @@ class PhotoBrowserManager: ObservableObject {
 }
 
 extension View {
-    func getRootViewController() -> UIViewController? {
-        return UIApplication.shared.windows.first { $0.isKeyWindow }?.rootViewController
+    func getCurrentViewController() -> UIViewController? {
+        // 遍历所有的场景
+        let activeScenes = UIApplication.shared.connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .compactMap { $0 as? UIWindowScene }
+        
+        // 尝试找到第一个UIWindowScene并获取其keyWindow
+        if let keyWindow = activeScenes.first?.windows
+            .first(where: { $0.isKeyWindow }) {
+            
+            var currentViewController = keyWindow.rootViewController
+            // 遍历presentedViewController来找到最上层的视图控制器
+            while let presented = currentViewController?.presentedViewController {
+                currentViewController = presented
+            }
+            return currentViewController
+        }
+        return nil
     }
+
+    
     
     func showSKPhotoBrowser(photos: [SKPhoto], initialIndex: Int = 0) {
-        if let viewController = getRootViewController() {
+//        if let viewController = getRootViewController() {
+//            debugPrint("viewController ==== \(viewController)")
+//            PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
+//        }
+        if let viewController = getCurrentViewController() {
+            debugPrint("viewController ==== \(viewController)")
             PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
         }
     }

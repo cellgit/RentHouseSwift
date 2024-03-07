@@ -91,9 +91,9 @@ public struct ImagePickerCoordinatorView {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    private func dismiss() {
-        self.presentationMode.wrappedValue.dismiss()
-    }
+//    private func dismiss() {
+//        self.presentationMode.wrappedValue.dismiss()
+//    }
 }
 
 extension ImagePickerCoordinatorView: UIViewControllerRepresentable {
@@ -107,7 +107,8 @@ extension ImagePickerCoordinatorView: UIViewControllerRepresentable {
         picker.settings.selection.unselectOnReachingMax = false
         picker.settings.theme.selectionStyle = .numbered
         picker.settings.fetch.assets.supportedMediaTypes = [.image]
-        
+        picker.doneButtonTitle = "完成"
+        picker.cancelButton = UIBarButtonItem(title: "取消", style: .done, target: nil, action: nil)
         picker.imagePickerDelegate = context.coordinator
         
         return picker
@@ -155,12 +156,13 @@ extension ImagePickerCoordinatorView {
                 }
             }
             // 关闭图片选择器
-            parent.dismiss()
+            // 通知要关闭图片选择器
+            imagePicker.dismiss(animated: true)
         }
         
         public func imagePicker(_ imagePicker: ImagePickerController, didCancelWithAssets assets: [PHAsset]) {
             print("Canceled with selections: \(assets)")
-            parent.dismiss()
+            imagePicker.dismiss(animated: true)
         }
         
         public func imagePicker(_ imagePicker: ImagePickerController, didReachSelectionLimit count: Int) {

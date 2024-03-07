@@ -13,6 +13,8 @@ struct RentHouseApp: App {
     // 监听系统的界面样式变化
     @Environment(\.colorScheme) var colorScheme
     
+    @State private var showingUploadView = false
+    
     init() {
         CityDataManager.shared.startLocationAndFetchData()
     }

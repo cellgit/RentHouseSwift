@@ -68,6 +68,9 @@
 		CEBEFA712B9837FB009A6DB0 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA702B9837FB009A6DB0 /* Test.swift */; };
 		CEBEFA732B9855AD009A6DB0 /* ImagePickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */; };
 		CEBEFA762B985664009A6DB0 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEBEFA752B985664009A6DB0 /* BSImagePicker */; };
+		CEBEFA782B996A8F009A6DB0 /* MyHousesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */; };
+		CEBEFA7A2B996F28009A6DB0 /* ContentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA792B996F28009A6DB0 /* ContentView2.swift */; };
+		CEBEFA7C2B998F8E009A6DB0 /* UIApplication+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA7B2B998F8E009A6DB0 /* UIApplication+extension.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
 		CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */; };
@@ -155,6 +158,9 @@
 		CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		CEBEFA702B9837FB009A6DB0 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerRepresentable.swift; sourceTree = "<group>"; };
+		CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHousesView.swift; sourceTree = "<group>"; };
+		CEBEFA792B996F28009A6DB0 /* ContentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
+		CEBEFA7B2B998F8E009A6DB0 /* UIApplication+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+extension.swift"; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CEF6B6612B663B23006CE0F1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -439,6 +445,7 @@
 				CEBEFA352B933B10009A6DB0 /* String+extension.swift */,
 				CEBEFA5D2B95AFE1009A6DB0 /* View+extension.swift */,
 				CEBEFA612B96B3C1009A6DB0 /* Color+extension.swift */,
+				CEBEFA7B2B998F8E009A6DB0 /* UIApplication+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -555,7 +562,9 @@
 			isa = PBXGroup;
 			children = (
 				CEF6B65C2B663127006CE0F1 /* UploadView.swift */,
+				CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */,
 				CEBEFA482B9572DB009A6DB0 /* RowViewStyle1.swift */,
+				CEBEFA792B996F28009A6DB0 /* ContentView2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -758,14 +767,17 @@
 				CEBA4DBC2B8EE387006F078A /* HomeApi.swift in Sources */,
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
+				CEBEFA7A2B996F28009A6DB0 /* ContentView2.swift in Sources */,
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
 				CEBEFA552B958666009A6DB0 /* SearchService.swift in Sources */,
 				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
 				CEBEFA412B948A6D009A6DB0 /* District.swift in Sources */,
+				CEBEFA782B996A8F009A6DB0 /* MyHousesView.swift in Sources */,
 				CEBEFA662B96E62B009A6DB0 /* PhotoGridView.swift in Sources */,
 				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
 				CEBEFA5C2B95AFB5009A6DB0 /* DragToDismissModifier.swift in Sources */,
+				CEBEFA7C2B998F8E009A6DB0 /* UIApplication+extension.swift in Sources */,
 				CE42F6102B64A23200124E92 /* ContentView.swift in Sources */,
 				CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */,
 				CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */,

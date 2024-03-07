@@ -10,8 +10,15 @@ import SwiftUI
 import Combine
 
 struct UploadView: View {
-    @ObservedObject var locationService = LocationService()
-    @ObservedObject var cityDataManager = CityDataManager.shared
+    
+    private var dismiss: () -> Void
+    
+    init(onDismiss: @escaping () -> Void) {
+        self.dismiss = onDismiss
+    }
+    
+    @ObservedObject private var locationService = LocationService()
+    @ObservedObject private var cityDataManager = CityDataManager.shared
     @State private var searchText = ""
     @State private var showingCancel = false
     @StateObject var infoViewModel = HouseInfoViewModel()
@@ -74,6 +81,7 @@ struct UploadView: View {
         
         NavigationView {
             VStack {
+                
                 List {
 //                    ImagePickerCoordinatorView
                     ImageBrowserView(images: $images)
@@ -147,16 +155,6 @@ struct UploadView: View {
                     }
                     RowViewStyleWithInput(title: "租金", text: $price, placeholder: "如期望5000元,请输入: 5000", keyboardType: .decimalPad)
                         .focused($isTextFieldFocused)
-                    
-                    VStack {
-                        Spacer()
-                        FooterView {
-                            onSubmit()
-                        }
-                        .padding()
-                    }
-                    .frame(height: 120, alignment: .center)
-                    
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
@@ -167,10 +165,29 @@ struct UploadView: View {
                     }
                 }
                 
+                VStack {
+                    Spacer()
+                    FooterView {
+                        onSubmit()
+                    }
+                    .padding()
+                }
+                .frame(height: 80, alignment: .center)
+                
             }
             .navigationBarTitle(Text("发布房源"))
-            .navigationBarTitleDisplayMode(.large)
-            
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.gray)
+                    })
+                    
+                }
+            })
         }
         .toast(isPresented: $toastManager.isShowing) {
             ToastView(message: toastManager.message, type: toastManager.type)
@@ -239,9 +256,9 @@ struct FooterView: View {
     
     let onSubmit: () -> Void
     
-    //    init(onSubmit: @escaping () -> Void) {
-    //        self.onSubmit = onSubmit
-    //    }
+        init(onSubmit: @escaping () -> Void) {
+            self.onSubmit = onSubmit
+        }
     
     var body: some View {
         
@@ -259,70 +276,3 @@ struct FooterView: View {
         .cornerRadius(16)
     }
 }
-
-
-//@ObservedObject var locationService = LocationService()
-//@ObservedObject var cityDataManager = CityDataManager.shared
-//@StateObject var viewModel = HomeViewModel(service: HomeService())
-//@State private var searchText = ""
-//@State private var showingCancel = false
-
-//var body: some View {
-//    NavigationView {
-//        VStack {
-//            List {
-//                // 处理加载状态
-//                if viewModel.isLoading {
-//                    VStack {
-//                        Spacer()
-//                        ProgressView()
-//                        Spacer()
-//                    }
-//                    // 使用实际的房源数据渲染列表
-//                } else if let houses = viewModel.houses, !houses.isEmpty {
-//                    ForEach(houses, id: \.id) { house in
-//                        NavigationLink(destination: HouseDetailView(house: house)) {
-//                            HouseCell(house: house)
-//                        }
-//                    }
-//                    // 处理错误状态
-//                } else if let errorMessage = viewModel.errorMessage {
-//                    VStack {
-//                        Spacer()
-//                        Text("Error: \(errorMessage)")
-//                        Spacer()
-//                    }
-//                    // 处理空数据状态
-//                } else {
-//                    emptyStateView
-//                }
-//            }
-//        }
-//        .navigationBarTitle(Text("搜索"))
-//        .navigationBarTitleDisplayMode(.large)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {
-//                    // 按钮点击事件
-//                    print("用户头像被点击")
-//                }) {
-//                    HStack {
-//                        Image(systemName: "location.circle") //person.crop.circle
-//                            .imageScale(.large)
-//
-//                        let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
-//                        if let name = dict?["name"] {
-//                            Text(name)
-//                        }
-//
-//                        if let cityInfo = cityDataManager.cityInfo as? [String: String] {
-//                            let name = cityInfo["name"] ?? ""
-//                            Text(name)
-//                        }
-//                    }
-//                }
-//            }
-//
-//        }
-//        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-//    }
