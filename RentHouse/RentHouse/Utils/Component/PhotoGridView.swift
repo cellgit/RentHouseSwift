@@ -83,6 +83,7 @@ struct ImageBrowserView: View {
                     .background(.gray).opacity(0.08)
                     .cornerRadius(9) // 回复注释，确保一致性
             }
+            .interactiveDismissDisabled()
         }
     }
     

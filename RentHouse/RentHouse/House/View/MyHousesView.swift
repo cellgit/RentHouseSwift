@@ -17,9 +17,20 @@ struct MyHousesView: View {
     @State private var isPresentedUploadView = false
     
     
+    @StateObject var uploadStateManager = UploadStateManager()
+    
+    @StateObject private var toastManager = ToastManager()
+    
+//    @ObservedObject var uploadStateManager = UploadStateManager()
+    
+    
     var body: some View {
         NavigationView {
             VStack {
+                // 在视图中使用
+                if uploadStateManager.isUploading {
+                    ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
+                }
                 List {
                     // 处理加载状态
                     if viewModel.isLoading {
@@ -76,7 +87,7 @@ struct MyHousesView: View {
                         }
                     }
                     .fullScreenCover(isPresented: $isPresentedUploadView, content: {
-                        UploadView(onDismiss: {
+                        UploadView(uploadStateManager: uploadStateManager, onDismiss: {
                             isPresentedUploadView = false
                         })
                         .animation(.smooth, value: 1)
@@ -86,6 +97,15 @@ struct MyHousesView: View {
                 
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
+            .toast(isPresented: $uploadStateManager.uploadSuccess) {
+                if uploadStateManager.uploadSuccess == true {
+                    ToastView.init(message: "上传成功", type: .success)
+                }
+                else {
+                    ToastView.init(message: "上传失败,请重试", type: .error)
+                }
+            }
+            
         }
     }
     
@@ -99,36 +119,6 @@ struct MyHousesView: View {
     
     
 }
- 
-//struct HouseCell: View {
-//    var house: House
-//    var body: some View {
-//        HStack(alignment: .top, spacing: 8) {
-//            VStack(alignment: .leading) {
-//                HStack {
-//                    if let imageUrl = house.images?.first {
-//                        KFImage(URL(string: imageUrl))
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fill)
-//                            .frame(width: 150, height: 93)
-//                            .cornerRadius(16)
-//                            .clipped()
-//                    }
-//                    
-//                    VStack(alignment: .leading) {
-//                        Spacer(minLength: 0)
-//                        Text(house.community ?? "")
-//                            .font(.headline)
-//                        Spacer()
-//                        Text("价格: \(house.price ?? 0)元/月")
-//                            .font(.subheadline)
-//                        Spacer(minLength: 2)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
 
 
 #Preview {

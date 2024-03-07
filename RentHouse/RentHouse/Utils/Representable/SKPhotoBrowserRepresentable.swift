@@ -57,35 +57,8 @@ class PhotoBrowserManager: ObservableObject {
 }
 
 extension View {
-    func getCurrentViewController() -> UIViewController? {
-        // 遍历所有的场景
-        let activeScenes = UIApplication.shared.connectedScenes
-            .filter { $0.activationState == .foregroundActive }
-            .compactMap { $0 as? UIWindowScene }
-        
-        // 尝试找到第一个UIWindowScene并获取其keyWindow
-        if let keyWindow = activeScenes.first?.windows
-            .first(where: { $0.isKeyWindow }) {
-            
-            var currentViewController = keyWindow.rootViewController
-            // 遍历presentedViewController来找到最上层的视图控制器
-            while let presented = currentViewController?.presentedViewController {
-                currentViewController = presented
-            }
-            return currentViewController
-        }
-        return nil
-    }
-
-    
-    
     func showSKPhotoBrowser(photos: [SKPhoto], initialIndex: Int = 0) {
-//        if let viewController = getRootViewController() {
-//            debugPrint("viewController ==== \(viewController)")
-//            PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
-//        }
-        if let viewController = getCurrentViewController() {
-            debugPrint("viewController ==== \(viewController)")
+        if let viewController = UIApplication.shared.getCurrentViewController() {
             PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
         }
     }

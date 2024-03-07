@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class ToastManager: ObservableObject {
-    @Published var isShowing: Bool = false
+    @Published var isShowing: Bool? = false
     @Published var message: String = ""
     @Published var type: ToastView.ToastType = .success
     
@@ -64,10 +64,10 @@ struct ToastView: View {
 
 
 extension View {
-    func toast(isPresented: Binding<Bool>, content: () -> ToastView) -> some View {
+    func toast(isPresented: Binding<Bool?>, content: () -> ToastView) -> some View {
         ZStack {
             self
-            if isPresented.wrappedValue {
+            if ((isPresented.wrappedValue) != nil) {
                 content()
                     .transition(.opacity)
                     .onTapGesture {

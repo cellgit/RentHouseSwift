@@ -11,10 +11,14 @@ import Combine
 
 struct UploadView: View {
     
-    private var dismiss: () -> Void
+    @ObservedObject var uploadStateManager: UploadStateManager
     
-    init(onDismiss: @escaping () -> Void) {
-        self.dismiss = onDismiss
+    private var onDismiss: () -> Void
+    
+    // 修改初始化器以接受 UploadStateManager
+    init(uploadStateManager: UploadStateManager, onDismiss: @escaping () -> Void) {
+        self.uploadStateManager = uploadStateManager
+        self.onDismiss = onDismiss
     }
     
     @ObservedObject private var locationService = LocationService()
@@ -72,6 +76,8 @@ struct UploadView: View {
     private var columns: Int = 3
     
     @StateObject private var toastManager = ToastManager()
+    
+    
     
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -180,7 +186,7 @@ struct UploadView: View {
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        dismiss()
+                        onDismiss()
                     }, label: {
                         Image(systemName: "xmark")
                             .foregroundColor(.gray)
@@ -189,14 +195,17 @@ struct UploadView: View {
                 }
             })
         }
-        .toast(isPresented: $toastManager.isShowing) {
-            ToastView(message: toastManager.message, type: toastManager.type)
-        }
+//        .toast(isPresented: $toastManager.isShowing) {
+//            ToastView(message: toastManager.message, type: toastManager.type)
+//        }
     }
     
     func onSubmit() {
         // 确保之前的订阅被取消，避免重复订阅
         cancellables.removeAll()
+        
+        // 设置上传状态为正在上传
+//        self.uploadStateManager.isUploading = true
         
         let rentalMethodInt = rentalMethod == "整租" ? 1 : 2
         let priceDouble = Double(price) ?? 0
@@ -232,21 +241,42 @@ struct UploadView: View {
                                           moveInRequirements: moveInRequirements,
                                           additionalFees: additionalFees)
         
-        viewModel.uploadData(router: router)
-        // 监听responseData的变化
-        viewModel.$responseData
-            .receive(on: RunLoop.main) // 确保在主线程上接收数据
-            .sink { responseData in
-                if let result = responseData {
-                    self.toastManager.showToast(message: "上传成功", type: .success)
-                    debugPrint("上传成功：\(String(describing: result.community))")
-                } else if let error = self.viewModel.uploadError {
-                    self.toastManager.showToast(message: "上传失败,请重试\n \(error.localizedDescription)", type: .error)
-                } else {
-                    debugPrint("响应无数据")
-                }
-            }
-            .store(in: &cancellables) // 将订阅存储起来
+        uploadStateManager.startUpload(router: router)
+        
+        onDismiss()
+        
+        
+//        viewModel.uploadData(router: router)
+//        viewModel.$uploadProgress
+//            .receive(on: RunLoop.main)
+//            .sink { progress in
+//                DispatchQueue.main.async {
+//                    self.uploadStateManager.uploadProgress = progress
+//                }
+//            }
+//            .store(in: &cancellables)
+//        // 监听responseData的变化
+//        viewModel.$responseData
+//            .receive(on: RunLoop.main) // 确保在主线程上接收数据
+//            .sink { responseData in
+////                if let result = responseData {
+////                    self.toastManager.showToast(message: "上传成功", type: .success)
+////                    debugPrint("上传成功：\(String(describing: result.community))")
+////                } else if let error = self.viewModel.uploadError {
+////                    self.toastManager.showToast(message: "上传失败,请重试\n \(error.localizedDescription)", type: .error)
+////                } else {
+////                    debugPrint("响应无数据")
+////                }
+//                DispatchQueue.main.async {
+//                    if responseData != nil {
+//                        self.uploadStateManager.showToast(message: "上传成功", isSuccess: true)
+//                    } else {
+//                        self.uploadStateManager.showToast(message: "上传失败，请重试", isSuccess: false)
+//                    }
+//                    self.uploadStateManager.isUploading = false
+//                }
+//            }
+//            .store(in: &cancellables) // 将订阅存储起来
     }
     
 }
@@ -265,6 +295,7 @@ struct FooterView: View {
         Button {
             print("提交按钮被点击")
             onSubmit()
+            
         } label: {
             Text("提交")
                 .fontWeight(.medium)

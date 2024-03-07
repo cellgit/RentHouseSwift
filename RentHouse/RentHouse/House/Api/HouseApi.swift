@@ -219,7 +219,7 @@ enum HouseApi: ApiRouter {
         images.forEach { image in
             let imageData1 = image.jpegData(compressionQuality: 1)
             debugPrint("Not Optimized Image Size: \(String(describing: imageData1?.count))")
-            if let imageData = image.compressToLessThan200KB() {
+            if let imageData = image.jpegData(compressionQuality: 1) {//.compressToLessThan200KB() {
                 debugPrint("Optimized Image Size: \(imageData.count)")
                 formData.append(imageData, withName: "images", fileName: "house.jpg", mimeType: "image/jpeg")
             }
