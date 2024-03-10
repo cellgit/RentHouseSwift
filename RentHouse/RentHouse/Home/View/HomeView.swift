@@ -122,73 +122,7 @@ struct HomeView: View {
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
         }
-    }
-    
-    
-    
-    
-    
-    
-//    var body: some View {
-//        NavigationView {
-//            VStack {
-//                List {
-//                    // 处理加载状态
-//                    if viewModel.isLoading {
-//                        VStack {
-//                            Spacer()
-//                            ProgressView()
-//                            Spacer()
-//                        }
-//                        // 使用实际的房源数据渲染列表
-//                    } else if let houses = viewModel.houses, !houses.isEmpty {
-//                        ForEach(houses, id: \.id) { house in
-//                            NavigationLink(destination: HouseDetailView(house: house)) {
-//                                HouseCell(house: house)
-//                            }
-//                        }
-//                        // 处理错误状态
-//                    } else if let errorMessage = viewModel.errorMessage {
-//                        VStack {
-//                            Spacer()
-//                            Text("Error: \(errorMessage)")
-//                            Spacer()
-//                        }
-//                        // 处理空数据状态
-//                    } else {
-//                        emptyStateView
-//                    }
-//                }
-//            }
-//            .navigationBarTitle(Text("搜索"))
-//            .navigationBarTitleDisplayMode(.large)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button(action: {
-//                        // 按钮点击事件
-//                        print("用户头像被点击")
-//                    }) {
-//                        HStack {
-//                            Image(systemName: "location.circle") //person.crop.circle
-//                                .imageScale(.large)
-//                            
-//                            let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
-//                            if let name = dict?["name"] {
-//                                Text(name)
-//                            }
-//                            
-//                            if let cityInfo = cityDataManager.cityInfo as? [String: String] {
-//                                let name = cityInfo["name"] ?? ""
-//                                Text(name)
-//                            }
-//                        }
-//                    }
-//                }
-//                
-//            }
-//            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
-//        }
-//    }
+    }    
     
     var emptyStateView: some View {
         VStack {
@@ -223,7 +157,20 @@ struct HouseCell: View {
 //                    }
                     
                     
-                    if let imageUrl = house.images?.first {
+//                    if let imageUrl1 = house.images?.first {
+//                        let imageUrl = imageUrl1 + thumb_900// thumb_heic_600// + thumb_400
+//                        KFImage(URL(string: imageUrl))
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .frame(width: 150, height: 93)
+//                            .cornerRadius(16)
+//                            .clipped()
+//                    }
+                    
+                    
+                    
+                    if let imageUrl1 = house.images?.first?.small {
+                        let imageUrl = imageUrl1 + thumb_heic_600// thumb_heic_600// + thumb_400
                         KFImage(URL(string: imageUrl))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -231,6 +178,23 @@ struct HouseCell: View {
                             .cornerRadius(16)
                             .clipped()
                     }
+                    
+                    
+                    
+                    
+                    
+                    // 使用缩略图,减少内存占用
+//                    if let imageUrl = house.images?.first {
+//                        let processor = DownsamplingImageProcessor(size: CGSize(width: 600, height: 392))
+//                                         |> RoundCornerImageProcessor(cornerRadius: 16)
+//                        KFImage(URL(string: imageUrl))
+//                            .setProcessor(processor)
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .frame(width: 150, height: 93)
+//                            .cornerRadius(16)
+//                            .clipped()
+//                    }
                     
                     VStack(alignment: .leading) {
                         Spacer(minLength: 0)

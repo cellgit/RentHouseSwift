@@ -10,6 +10,15 @@ import UIKit
 
 extension UIImage {
     
+    
+    /// 压缩图片
+    /// - Parameter CGFloat: 0.8
+    /// - Returns: 压缩后的图片
+    func compress(to compressionQuality: CGFloat = 0.5) -> Data? {
+        return self.jpegData(compressionQuality: compressionQuality)
+    }
+    
+    
     // 压缩jpg图片
     func compressToLessThan200KB() -> Data? {
         let maxFileSize = 200 * 1024 // 200 KB

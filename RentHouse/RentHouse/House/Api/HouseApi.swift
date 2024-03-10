@@ -98,14 +98,15 @@ enum HouseApi: ApiRouter {
 //            
 //            return images.isEmpty ? .json : .formData
         default:
-            return .json
+            return .url
         }
     }
     
     // 创建共享构建函数
-    private func request(parameters: Parameters? = nil) -> RequestBuilder {
+//    private func request(parameters: Parameters? = nil) -> RequestBuilder {
+    private func request() -> RequestBuilder {
         RequestBuilder(baseURL: baseURL, path: path)
-            .with(parameters: parameters)
+//            .with(parameters: parameters)
             .with(method: method)
             .with(encoding: encoding)
     }
@@ -113,71 +114,8 @@ enum HouseApi: ApiRouter {
     // 实现 builder 属性
     var builder: RequestBuilder {
         switch self {
-        case .uploadHouse(images: _,
-                          price: let price,
-                          rentalMethod: let rentalMethod,
-                          lon: let lon, 
-                          lat: let lat,
-                          province: let province,
-                          city: let city,
-                          district: let district,
-                          citycode: let citycode,
-                          community: let community,
-                          building: let building,
-                          unit: let unit,
-                          houseNumber: let houseNumber,
-                          roomNumber: let roomNumber,
-                          contact: let contact,
-                          status: let status,
-                          roomType: let roomType,
-                          floor: let floor,
-                          totalFloors: let totalFloors,
-                          area: let area,
-                          orientation: let orientation,
-                          availableDate: let availableDate,
-                          leaseTerm: let leaseTerm,
-                          paymentMethod: let paymentMethod,
-                          decoration: let decoration,
-                          desc: let desc,
-                          facilities: let facilities,
-                          tags: let tags,
-                          petPolicy: let petPolicy,
-                          moveInRequirements: let moveInRequirements,
-                          additionalFees: let additionalFees
-        ):
-            
-            let params = ["price": price,
-                          "rentalMethod": rentalMethod,
-                          "lon": lon,
-                          "lat": lat,
-                          "province": province,
-                          "city": city,
-                          "district": district,
-                          "citycode": citycode,
-                          "community": community,
-                          "building": building,
-                          "unit": unit,
-                          "houseNumber": houseNumber,
-                          "roomNumber": roomNumber,
-                          "contact": contact,
-                          "status": status,
-                          "roomType": roomType,
-                          "floor": floor,
-                          "totalFloors": totalFloors,
-                          "area": area,
-                          "orientation": orientation,
-                          "availableDate": availableDate,
-                          "leaseTerm": leaseTerm,
-                          "paymentMethod": paymentMethod,
-                          "decoration": decoration,
-                          "desc": desc,
-                          "facilities": facilities,
-                          "tags": tags,
-                          "petPolicy": petPolicy,
-                          "moveInRequirements": moveInRequirements,
-                          "additionalFees": additionalFees,
-            ] as [String : Any]
-            return request(parameters: params)
+        case .uploadHouse:
+            return request()
         }
     }
 
@@ -216,14 +154,29 @@ enum HouseApi: ApiRouter {
             additionalFees
         ) = self else { return }
         
+//        images.forEach { image in
+////            let imageData1 = image.jpegData(compressionQuality: 1)
+////            debugPrint("Not Optimized Image Size: \(String(describing: imageData1?.count))")
+//            if let imageData = image.compress(to: 0.1) {
+//                debugPrint("Optimized Image Size: \(imageData.count)")
+//                formData.append(imageData, withName: "images", fileName: "house.jpg", mimeType: "image/jpeg")
+//            }
+//        }
+        
+        
         images.forEach { image in
-            let imageData1 = image.jpegData(compressionQuality: 1)
-            debugPrint("Not Optimized Image Size: \(String(describing: imageData1?.count))")
-            if let imageData = image.jpegData(compressionQuality: 1) {//.compressToLessThan200KB() {
+            if let imageData = image.toHEIF(compressionQuality: 0.1) {
                 debugPrint("Optimized Image Size: \(imageData.count)")
-                formData.append(imageData, withName: "images", fileName: "house.jpg", mimeType: "image/jpeg")
+                formData.append(imageData, withName: "images", fileName: "house.heic", mimeType: "image/heic")
             }
         }
+        
+//        images.forEach { image in
+//            if let imageData = image.toHEIFThenJPEG(compressionQualityForHEIF: 0.1, compressionQualityForJPEG: 0.1) {
+//                debugPrint("Optimized Image Size: \(imageData.count)")
+//                formData.append(imageData, withName: "images", fileName: "house.jpg", mimeType: "image/jpeg")
+//            }
+//        }
         
         let params = ["price": price,
                       "rentalMethod": rentalMethod,

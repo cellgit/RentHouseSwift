@@ -172,14 +172,139 @@ class NetworkManager {
     }
     
     
+    func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
+        let boundary = "Boundary-\(UUID().uuidString)"
+        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        
+//        urlRequest.httpBody = createBody(with: parameters, boundary: boundary)
+    }
+    
+//    private func createBody(with parameters: Parameters, boundary: String) -> Data {
+//        var body = Data()
+//        
+//        for (key, value) in parameters {
+//            if let imageData = value as? Data {
+//                body.append("--\(boundary)\r\n")
+//                body.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"image.jpg\"\r\n")
+//                body.append("Content-Type: image/jpeg\r\n\r\n")
+//                body.append(imageData)
+//                body.append("\r\n")
+//            } else {
+//                body.append("--\(boundary)\r\n")
+//                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+//                body.append("\(value)\r\n")
+//            }
+//        }
+//        
+//        body.append("--\(boundary)--\r\n")
+//        return body
+//    }
+    
+    private func createBody(with parameters: Parameters, boundary: String) -> Data {
+        var body = Data()
+        
+        for (key, value) in parameters {
+            if let imageData = value as? Data {
+                body.append("--\(boundary)\r\n")
+                body.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"image.jpg\"\r\n")
+                body.append("Content-Type: image/jpeg\r\n\r\n")
+                body.append(imageData)
+                body.append("\r\n")
+            } else {
+                body.append("--\(boundary)\r\n")
+                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.append("\(value)\r\n")
+            }
+        }
+        
+        body.append("--\(boundary)--\r\n")
+        return body
+    }
     
     func uploadWithProgress<T: Decodable>(_ router: ApiRouter) -> AnyPublisher<UploadResult<T>, Never> {
         let progressSubject = PassthroughSubject<UploadResult<T>, Never>()
         var progressTracker = UploadProgressTracker()
+        
+        
+        
+//        var urlRequest = try URLRequest(url: URL(string: "http://47.116.24.54:3001/api/v1/user/house/add")!, method: .post, headers: router.builder.headers)
+//            urlRequest.timeoutInterval = 180 // 设置超时时间为30秒
+        
+        
+        // 使用自定义的Session实例来创建上传请求
         let uploadRequest = AF.upload(multipartFormData: { formData in
             router.configureMultipartFormData(formData)
         }, with: try! router.builder.build())
 
+        
+        
+//        do {
+//            
+//            var urlRequest = try try URLRequest(url: URL(string: "http://47.116.24.54:3001/api/v1/user/house/add")!, method: .post, headers: router.builder.headers)
+//            urlRequest.timeoutInterval = 180 // 设置超时时间为30秒
+//            
+//            let boundary = "Boundary-\(UUID().uuidString)"
+//            urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//            urlRequest.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+//            
+////            urlRequest.httpBody = createBody(with: parameters, boundary: boundary)
+//            
+//            debugPrint("uploadRequest.request?.timeoutInterval ==== \(urlRequest.timeoutInterval)")
+//            
+//            let uploadRequest = AF.upload(multipartFormData: { formData in
+//                // 配置你的 formData
+//                router.configureMultipartFormData(formData)
+//            }, with: urlRequest)
+//
+////            uploadRequest.response { response in
+////                // 在这里处理响应
+////            }
+//            
+//            uploadRequest.uploadProgress { progress in
+//                let speed = progressTracker.calculateUploadSpeed(currentlyUploaded: progress.completedUnitCount)
+//                debugPrint("speed ===== \(String(describing: speed))")
+//                if let speed = speed {
+//                    let uploadProgress = UploadProgress(
+//                        progress: progress.fractionCompleted,
+//                        isCompleted: false,
+//                        uploadSpeed: speed,
+//                        estimatedTimeRemaining: progress.estimatedTimeRemaining,
+//                        bytesUploaded: progress.completedUnitCount,
+//                        totalBytesToUpload: progress.totalUnitCount
+//                    )
+//                    progressSubject.send(.progress(uploadProgress))
+//                }
+//            }
+//
+//            uploadRequest.publishDecodable(type: ApiResponse<T>.self)
+//                .tryMap { response in
+//                    guard let apiResponse = response.value else {
+//                        throw NetworkError.decodingError(error: response.error ?? AFError.explicitlyCancelled)
+//                    }
+//                    if apiResponse.code == 200, let data = apiResponse.data {
+//                        return .completion(.success(data))
+//                    } else {
+//                        
+//                        print("code码不是200 ==== \(String(describing: apiResponse.code)): \(apiResponse.message ?? "")")
+//                        
+//                        throw NetworkError.serverError(message: apiResponse.message ?? "Unknown error")
+//                        
+//    //                    return .errorMessage(apiResponse.message ?? "Unknown error")
+//    //                    return .errorMessage(apiResponse.message ?? "Unknown error")
+//                    }
+//                }
+//                .catch { Just(.completion(.failure($0))) }
+//                .subscribe(Subscribers.Sink(receiveCompletion: { _ in },
+//                                            receiveValue: { progressSubject.send($0) }))
+//            
+//            debugPrint("uploadRequest.request?.timeoutInterval ==== \(urlRequest.timeoutInterval)")
+//        } catch {
+//            print(error)
+//        }
+        
+        
+        
         uploadRequest.uploadProgress { progress in
             let speed = progressTracker.calculateUploadSpeed(currentlyUploaded: progress.completedUnitCount)
             debugPrint("speed ===== \(String(describing: speed))")

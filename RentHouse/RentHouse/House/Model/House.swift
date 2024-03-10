@@ -7,9 +7,26 @@
 
 import Foundation
 
+
+struct UploadHouseData: Decodable {
+    var house: House?
+}
+
+
+struct ImageModel: Decodable {
+    // 原图URL
+    var original: String?
+    // 中图URL
+    var medium: String?
+    // 小图URL
+    var small: String?
+}
+
 // MARK: - House
 struct House: Decodable {
-    var images: [String]?
+//    var images: [String]?
+    
+    var images: [ImageModel]?
     var price: Int?
     var rentalMethod: Int?
     var community: String?

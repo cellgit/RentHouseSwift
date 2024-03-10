@@ -204,9 +204,6 @@ struct UploadView: View {
         // 确保之前的订阅被取消，避免重复订阅
         cancellables.removeAll()
         
-        // 设置上传状态为正在上传
-//        self.uploadStateManager.isUploading = true
-        
         let rentalMethodInt = rentalMethod == "整租" ? 1 : 2
         let priceDouble = Double(price) ?? 0
         let router = HouseApi.uploadHouse(images: images,
@@ -244,39 +241,6 @@ struct UploadView: View {
         uploadStateManager.startUpload(router: router)
         
         onDismiss()
-        
-        
-//        viewModel.uploadData(router: router)
-//        viewModel.$uploadProgress
-//            .receive(on: RunLoop.main)
-//            .sink { progress in
-//                DispatchQueue.main.async {
-//                    self.uploadStateManager.uploadProgress = progress
-//                }
-//            }
-//            .store(in: &cancellables)
-//        // 监听responseData的变化
-//        viewModel.$responseData
-//            .receive(on: RunLoop.main) // 确保在主线程上接收数据
-//            .sink { responseData in
-////                if let result = responseData {
-////                    self.toastManager.showToast(message: "上传成功", type: .success)
-////                    debugPrint("上传成功：\(String(describing: result.community))")
-////                } else if let error = self.viewModel.uploadError {
-////                    self.toastManager.showToast(message: "上传失败,请重试\n \(error.localizedDescription)", type: .error)
-////                } else {
-////                    debugPrint("响应无数据")
-////                }
-//                DispatchQueue.main.async {
-//                    if responseData != nil {
-//                        self.uploadStateManager.showToast(message: "上传成功", isSuccess: true)
-//                    } else {
-//                        self.uploadStateManager.showToast(message: "上传失败，请重试", isSuccess: false)
-//                    }
-//                    self.uploadStateManager.isUploading = false
-//                }
-//            }
-//            .store(in: &cancellables) // 将订阅存储起来
     }
     
 }

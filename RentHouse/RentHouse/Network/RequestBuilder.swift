@@ -15,7 +15,7 @@ struct RequestBuilder {
     var parameters: Parameters?
     var headers: HTTPHeaders?
     var encoding: ParameterEncoding// = .json // 默认为 URL 编码
-    var timeoutInterval: TimeInterval = 60  // 默认超时时间，例如60秒
+    var timeoutInterval: TimeInterval = 180  // 默认超时时间，例如60秒
     
     init(baseURL: URL, path: String, method: HTTPMethod = .get, parameters: Parameters? = nil, headers: HTTPHeaders? = nil, encoding: ParameterEncoding = .json) {
         self.baseURL = baseURL
