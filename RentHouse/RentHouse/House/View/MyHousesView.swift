@@ -40,7 +40,34 @@ struct MyHousesView: View {
                 if uploadStateManager.isUploading {
                     ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
                 }
-                contentListView
+                ScrollView{
+                    //                contentListView
+                    GeometryReader { geometry in
+                        let width = geometry.size.width / 2 - 15 // 假设每列的宽度为屏幕宽度的一半减去15点的间距
+                        let columns = [
+                            GridItem(.fixed(width), spacing: 10),
+                            GridItem(.fixed(width), spacing: 10)
+                        ]
+                        
+                        // 使用LazyVGrid来创建两列的网格布局
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            if viewModel.isLoading {
+                                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+                            } else if let houses = viewModel.houses, !houses.isEmpty {
+                                ForEach(houses, id: \.id) { house in
+                                    NavigationLink(destination: HouseDetailView(house: house)) {
+                                        UploadHouseCell(house: house, width: width) // 传入宽度以调整HouseCell的尺寸
+                                    }
+                                }
+                            } else if let errorMessage = viewModel.errorMessage {
+                                Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
+                            } else {
+                                emptyStateView
+                            }
+                        }
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                
             }
             .navigationBarTitle(Text("搜索"))
             .navigationBarTitleDisplayMode(.large)
@@ -55,25 +82,6 @@ struct MyHousesView: View {
                 }
             }
             
-        }
-    }
-    
-    @ViewBuilder
-    private var contentListView: some View {
-        List {
-            if viewModel.isLoading {
-                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let houses = viewModel.houses, !houses.isEmpty {
-                ForEach(houses, id: \.id) { house in
-                    NavigationLink(destination: HouseDetailView(house: house)) {
-                        HouseCell(house: house)
-                    }
-                }
-            } else if let errorMessage = viewModel.errorMessage {
-                Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                emptyStateView
-            }
         }
     }
     
@@ -106,7 +114,62 @@ struct MyHousesView: View {
     
 }
 
+struct UploadHouseCell: View {
+    let house: House // 假设House是你的模型类型
+    let width: CGFloat // 接受宽度参数
+
+    var body: some View {
+        VStack {
+            if let imageUrl1 = house.images?.first?.tiny {
+                let imageUrl = imageUrl1 //+ thumb_heic_600// thumb_heic_600// + thumb_400
+                KFImage(URL(string: imageUrl))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: width, height: width * 0.75) // 使用传入的宽度，高度按比例计算
+                    .clipped()
+            }
+            
+            Text(house.community ?? "") // 假设house有一个title属性
+                .font(.headline)
+                .padding([.top, .bottom], 4)
+            
+            Text("价格: \(house.price ?? 0)元/月") // 假设house有一个price属性
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        }
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
+        .padding(5)
+    }
+}
+
 
 #Preview {
     MyHousesView()
 }
+
+
+
+
+
+
+
+//@ViewBuilder
+//private var contentListView: some View {
+//    List {
+//        if viewModel.isLoading {
+//            ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+//        } else if let houses = viewModel.houses, !houses.isEmpty {
+//            ForEach(houses, id: \.id) { house in
+//                NavigationLink(destination: HouseDetailView(house: house)) {
+//                    HouseCell(house: house)
+//                }
+//            }
+//        } else if let errorMessage = viewModel.errorMessage {
+//            Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
+//        } else {
+//            emptyStateView
+//        }
+//    }
+//}
