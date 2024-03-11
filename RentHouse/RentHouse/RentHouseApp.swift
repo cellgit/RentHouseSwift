@@ -22,6 +22,7 @@ struct RentHouseApp: App {
     var body: some Scene {
         WindowGroup {
             TabBarView()
+                .background(Color(.systemBackground))
 //                .accentColor(colorScheme == .dark ? .primary : .kleinBlue)
         }
     }

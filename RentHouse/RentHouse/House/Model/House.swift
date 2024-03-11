@@ -14,23 +14,39 @@ struct UploadHouseData: Decodable {
 
 
 struct ImageModel: Decodable {
-    // 原图URL
-    var original: String?
-    // 中图URL
-    var medium: String?
-    // 小图URL
-    var small: String?
-    // 特小图
-    var tiny: String?
-    // 微图
-    var micro: String?
+    // URL
+    var url: String?
+    // 图片宽度
+    var width: Double?
+    // 图片高度
+    var height: Double?
 }
 
+
+struct ImageGroupModel: Decodable {
+    // 原图URL
+    var original: ImageModel?
+    // 中图URL
+    var medium: ImageModel?
+    // 小图URL
+    var small: ImageModel?
+    // 特小图
+    var tiny: ImageModel?
+    // 微图
+    var micro: ImageModel?
+}
+
+
+extension House: Equatable {
+    static func == (lhs: House, rhs: House) -> Bool {
+        return lhs.id == rhs.id // 假设比较id属性即可判断两个House实例是否相等
+    }
+}
 // MARK: - House
-struct House: Decodable {
+struct House: Decodable, Identifiable {
 //    var images: [String]?
     
-    var images: [ImageModel]?
+    var images: [ImageGroupModel]?
     var price: Int?
     var rentalMethod: Int?
     var community: String?

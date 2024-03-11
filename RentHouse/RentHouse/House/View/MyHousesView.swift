@@ -23,6 +23,8 @@ struct MyHousesView: View {
     // 将必要的UserDefaults数据提前加载到状态变量中
     @State private var selectedCityName: String?
     
+    @State private var isSearchActive = false // 用于控制搜索激活状态
+    
     init() {
         // 加载选中的城市名称
         let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
@@ -35,54 +37,59 @@ struct MyHousesView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                // 在视图中使用
-                if uploadStateManager.isUploading {
-                    ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
+                VStack {
+                    // 在视图中使用
+                    if uploadStateManager.isUploading {
+                        ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
+                    }
+                    
+                    ScrollView(.vertical) {
+                        GridListView(viewModel: viewModel)
+                    }
+                    .background(Color(.secondarySystemBackground))
                 }
-                ScrollView{
-                    //                contentListView
-                    GeometryReader { geometry in
-                        let width = geometry.size.width / 2 - 15 // 假设每列的宽度为屏幕宽度的一半减去15点的间距
-                        let columns = [
-                            GridItem(.fixed(width), spacing: 10),
-                            GridItem(.fixed(width), spacing: 10)
-                        ]
-                        
-                        // 使用LazyVGrid来创建两列的网格布局
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            if viewModel.isLoading {
-                                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-                            } else if let houses = viewModel.houses, !houses.isEmpty {
-                                ForEach(houses, id: \.id) { house in
-                                    NavigationLink(destination: HouseDetailView(house: house)) {
-                                        UploadHouseCell(house: house, width: width) // 传入宽度以调整HouseCell的尺寸
-                                    }
-                                }
-                            } else if let errorMessage = viewModel.errorMessage {
-                                Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
-                            } else {
-                                emptyStateView
-                            }
-                        }
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .navigationBarTitle(Text("搜索"))
+                .navigationBarTitleDisplayMode(.large)
+                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
+                .onChange(of: searchText) { _ in
+                    // 当搜索框被激活时，更新状态以触发动画
+                    withAnimation {
+                        isSearchActive = !searchText.isEmpty
+                    }
                 }
-                
-            }
-            .navigationBarTitle(Text("搜索"))
-            .navigationBarTitleDisplayMode(.large)
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
-            .navigationBarItems(trailing: uploadButton)
-            .toast(isPresented: $uploadStateManager.uploadSuccess) {
-                if uploadStateManager.uploadSuccess == true {
-                    ToastView.init(message: "上传成功", type: .success)
+                .navigationBarItems(trailing: uploadButton)
+                .toast(isPresented: $uploadStateManager.uploadSuccess) {
+                    if uploadStateManager.uploadSuccess == true {
+                        ToastView.init(message: "上传成功", type: .success)
+                    }
+                    else {
+                        ToastView.init(message: "上传失败,请重试", type: .error)
+                    }
                 }
-                else {
-                    ToastView.init(message: "上传失败,请重试", type: .error)
-                }
-            }
-            
         }
+        .tabItem {
+            Image(systemName: "magnifyingglass")
+            Text("搜索")
+        }
+        
+    }
+    
+    
+    
+    // 将houses数组转换为每两个一组的新数组
+    private func pairedHouses() -> [[House]] {
+        guard let houses = viewModel.houses else {
+            return []
+        }
+        var pairs = [[House]]()
+        for i in stride(from: 0, to: houses.count, by: 2) {
+            var pair = [houses[i]]
+            if i + 1 < houses.count {
+                pair.append(houses[i + 1])
+            }
+            pairs.append(pair)
+        }
+        return pairs
     }
     
     private var uploadButton: some View {
@@ -114,33 +121,136 @@ struct MyHousesView: View {
     
 }
 
+import SwiftUI
+// 假设已经导入了SwiftUILayouts或者你有自己的实现
+
+struct GridListView: View {
+    @ObservedObject var viewModel: HomeViewModel
+    var columns: Int = 2 // 可以根据需要调整列数
+
+    var body: some View {
+        ScrollView(.vertical) {
+            VStack(spacing: 0) {
+                if viewModel.isLoading {
+                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if let houses = viewModel.houses, !houses.isEmpty {
+                    AnyLayout(VerticalWaterfallLayout(columns: columns)) {
+                        ForEach(houses, id: \.id) { house in
+                            NavigationLink(destination: HouseDetailView(house: house)) {
+                                UploadHouseCell(house: house, width: (UIScreen.main.bounds.width-16-16-8) / CGFloat(columns))
+                            }
+                        }
+                    }
+                } else if let errorMessage = viewModel.errorMessage {
+                    Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    Text("没有找到房源").frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+            .padding(EdgeInsets.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+//            .padding(.horizontal, 10)
+        }
+        .animation(.default, value: columns)
+        .animation(.default, value: viewModel.houses)
+    }
+}
+
+
+//struct GridListView: View {
+//    @ObservedObject var viewModel: HomeViewModel
+//    private let columnSpacing: CGFloat = 5
+//    private let rowSpacing: CGFloat = 8
+//    private let padding: CGFloat = 16
+//    private var columnWidth: CGFloat {
+//        (UIScreen.main.bounds.width - columnSpacing - padding * 2) / 2
+//    }
+//
+//    var body: some View {
+//        ScrollView {
+//            HStack(alignment: .top, spacing: columnSpacing) {
+//                VStack(spacing: rowSpacing) {
+//                    // Even indices
+//                    ForEach(0..<numberOfItems(isEven: true), id: \.self) { index in
+//                        if let house = viewModel.houses?[safe: index * 2] {
+//                            NavigationLink(destination: HouseDetailView(house: house)) {
+//                                UploadHouseCell(house: house, width: columnWidth)
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                VStack(spacing: rowSpacing) {
+//                    // Odd indices
+//                    ForEach(0..<numberOfItems(isEven: false), id: \.self) { index in
+//                        if let house = viewModel.houses?[safe: index * 2 + 1] {
+//                            NavigationLink(destination: HouseDetailView(house: house)) {
+//                                UploadHouseCell(house: house, width: columnWidth)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            .padding(.horizontal, padding)
+//        }
+//    }
+//
+//    private func numberOfItems(isEven: Bool) -> Int {
+//        guard let houses = viewModel.houses else { return 0 }
+//        let totalCount = houses.count
+//        return isEven ? (totalCount + 1) / 2 : totalCount / 2
+//    }
+//}
+//
+//extension Array {
+//    subscript(safe index: Index) -> Element? {
+//        return indices.contains(index) ? self[index] : nil
+//    }
+//}
+
+
+
 struct UploadHouseCell: View {
     let house: House // 假设House是你的模型类型
     let width: CGFloat // 接受宽度参数
-
+    // 假设你已经知道了图片的宽度和高度
     var body: some View {
         VStack {
-            if let imageUrl1 = house.images?.first?.tiny {
-                let imageUrl = imageUrl1 //+ thumb_heic_600// thumb_heic_600// + thumb_400
-                KFImage(URL(string: imageUrl))
+            if let image = house.images?.first?.tiny, let url = image.url, let imageWidth = image.width, let imageHeight = image.height {
+                KFImage(URL(string: url))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: width, height: width * 0.75) // 使用传入的宽度，高度按比例计算
+                    .frame(width: width, height: width * CGFloat(imageHeight) / CGFloat(imageWidth)) // 根据原始宽高比计算高度
                     .clipped()
             }
             
-            Text(house.community ?? "") // 假设house有一个title属性
+            Text(house.community ?? "")
                 .font(.headline)
+                .lineLimit(2) // 最多显示两行
+                .fixedSize(horizontal: false, vertical: true) // 允许Text在垂直方向上根据内容调整大小
                 .padding([.top, .bottom], 4)
             
-            Text("价格: \(house.price ?? 0)元/月") // 假设house有一个price属性
+            Text("价格: \(house.price ?? 0)元/月")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
         .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
+        .cornerRadius(16)
+//        .shadow(radius: 1)
         .padding(5)
+    }
+}
+
+
+struct AnimatedSearchView<Content: View>: View {
+    @Binding var isSearchActive: Bool
+    let content: () -> Content
+
+    var body: some View {
+        VStack {
+            content()
+        }
+        .offset(y: isSearchActive ? -100 : 0) // 根据搜索状态调整Y轴偏移量
+        .animation(.smooth, value: isSearchActive) // 应用平滑动画效果
     }
 }
 

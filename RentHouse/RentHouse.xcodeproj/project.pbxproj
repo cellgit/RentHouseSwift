@@ -74,6 +74,11 @@
 		CEBEFA7E2B9993CE009A6DB0 /* UploadStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA7D2B9993CE009A6DB0 /* UploadStateManager.swift */; };
 		CEBEFA802B99BCE8009A6DB0 /* CacheConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA7F2B99BCE8009A6DB0 /* CacheConfig.swift */; };
 		CEBEFA822B9A0F83009A6DB0 /* ImageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEFA812B9A0F83009A6DB0 /* ImageConfig.swift */; };
+		CECB72E42B9F08AE006A523A /* EqualVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72DF2B9F08AE006A523A /* EqualVStack.swift */; };
+		CECB72E52B9F08AE006A523A /* EqualHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E02B9F08AE006A523A /* EqualHStack.swift */; };
+		CECB72E62B9F08AE006A523A /* CompressingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E12B9F08AE006A523A /* CompressingHStack.swift */; };
+		CECB72E72B9F08AE006A523A /* VerticalWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E22B9F08AE006A523A /* VerticalWaterfallLayout.swift */; };
+		CECB72E82B9F08AE006A523A /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E32B9F08AE006A523A /* FlowLayout.swift */; };
 		CEE9141F2B9D598800ADDB62 /* HeicFormatConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
@@ -168,6 +173,11 @@
 		CEBEFA7D2B9993CE009A6DB0 /* UploadStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadStateManager.swift; sourceTree = "<group>"; };
 		CEBEFA7F2B99BCE8009A6DB0 /* CacheConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheConfig.swift; sourceTree = "<group>"; };
 		CEBEFA812B9A0F83009A6DB0 /* ImageConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConfig.swift; sourceTree = "<group>"; };
+		CECB72DF2B9F08AE006A523A /* EqualVStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualVStack.swift; sourceTree = "<group>"; };
+		CECB72E02B9F08AE006A523A /* EqualHStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualHStack.swift; sourceTree = "<group>"; };
+		CECB72E12B9F08AE006A523A /* CompressingHStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressingHStack.swift; sourceTree = "<group>"; };
+		CECB72E22B9F08AE006A523A /* VerticalWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalWaterfallLayout.swift; sourceTree = "<group>"; };
+		CECB72E32B9F08AE006A523A /* FlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeicFormatConvert.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
@@ -474,6 +484,7 @@
 		CEBEFA372B9360EC009A6DB0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				CECB72DE2B9F08AE006A523A /* SwiftUILayouts */,
 				CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */,
 				CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */,
 				CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */,
@@ -529,6 +540,18 @@
 				CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */,
 			);
 			path = Representable;
+			sourceTree = "<group>";
+		};
+		CECB72DE2B9F08AE006A523A /* SwiftUILayouts */ = {
+			isa = PBXGroup;
+			children = (
+				CECB72DF2B9F08AE006A523A /* EqualVStack.swift */,
+				CECB72E02B9F08AE006A523A /* EqualHStack.swift */,
+				CECB72E12B9F08AE006A523A /* CompressingHStack.swift */,
+				CECB72E22B9F08AE006A523A /* VerticalWaterfallLayout.swift */,
+				CECB72E32B9F08AE006A523A /* FlowLayout.swift */,
+			);
+			path = SwiftUILayouts;
 			sourceTree = "<group>";
 		};
 		CEE9141D2B9D596400ADDB62 /* Image */ = {
@@ -755,6 +778,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB72E52B9F08AE006A523A /* EqualHStack.swift in Sources */,
 				CEBEFA802B99BCE8009A6DB0 /* CacheConfig.swift in Sources */,
 				CEBEFA3F2B948097009A6DB0 /* UserDefaultsKey.swift in Sources */,
 				CEBEFA342B932F56009A6DB0 /* MapSearchManager.swift in Sources */,
@@ -779,11 +803,14 @@
 				CE42F67A2B65104C00124E92 /* AuthAPI.swift in Sources */,
 				CEBEFA4F2B9584BC009A6DB0 /* CitySearchView.swift in Sources */,
 				CEBEFA622B96B3C1009A6DB0 /* Color+extension.swift in Sources */,
+				CECB72E42B9F08AE006A523A /* EqualVStack.swift in Sources */,
 				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
 				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,
 				CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */,
 				CEBEFA4B2B95751A009A6DB0 /* HouseInfoViewModel.swift in Sources */,
+				CECB72E82B9F08AE006A523A /* FlowLayout.swift in Sources */,
+				CECB72E62B9F08AE006A523A /* CompressingHStack.swift in Sources */,
 				CEBEFA492B9572DB009A6DB0 /* RowViewStyle1.swift in Sources */,
 				CEBEFA732B9855AD009A6DB0 /* ImagePickerRepresentable.swift in Sources */,
 				CEBEFA2D2B92C0A6009A6DB0 /* UIImage+extension.swift in Sources */,
@@ -814,6 +841,7 @@
 				CEBEFA3C2B947FA1009A6DB0 /* UserDefaultsManager.swift in Sources */,
 				CEBEFA512B95858B009A6DB0 /* SearchApi.swift in Sources */,
 				CEF6B6672B6648F4006CE0F1 /* LoginView.swift in Sources */,
+				CECB72E72B9F08AE006A523A /* VerticalWaterfallLayout.swift in Sources */,
 				CE42F60E2B64A23200124E92 /* RentHouse.xcdatamodeld in Sources */,
 				CE34ED102B917DEE00C0789F /* MockHouseService.swift in Sources */,
 				CEBEFA6F2B974E5C009A6DB0 /* ToastManager.swift in Sources */,
@@ -991,7 +1019,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1033,7 +1061,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
