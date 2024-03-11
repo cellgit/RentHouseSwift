@@ -16,13 +16,22 @@ struct MyHousesView: View {
     @State private var showingCancel = false
     @State private var isPresentedUploadView = false
     
-    
     @StateObject var uploadStateManager = UploadStateManager()
     
     @StateObject private var toastManager = ToastManager()
     
-//    @ObservedObject var uploadStateManager = UploadStateManager()
+    // 将必要的UserDefaults数据提前加载到状态变量中
+    @State private var selectedCityName: String?
     
+    init() {
+        // 加载选中的城市名称
+        let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
+        _selectedCityName = State(initialValue: dict?["name"])
+        
+        if let cityInfo = cityDataManager.cityInfo as? [String: String] {
+            _selectedCityName = State(initialValue: cityInfo["name"])
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -31,72 +40,12 @@ struct MyHousesView: View {
                 if uploadStateManager.isUploading {
                     ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
                 }
-                List {
-                    // 处理加载状态
-                    if viewModel.isLoading {
-                        VStack {
-                            Spacer()
-                            ProgressView()
-                            Spacer()
-                        }
-                        // 使用实际的房源数据渲染列表
-                    } else if let houses = viewModel.houses, !houses.isEmpty {
-                        ForEach(houses, id: \.id) { house in
-                            NavigationLink(destination: HouseDetailView(house: house)) {
-                                HouseCell(house: house)
-                            }
-                        }
-                        // 处理错误状态
-                    } else if let errorMessage = viewModel.errorMessage {
-                        VStack {
-                            Spacer()
-                            Text("Error: \(errorMessage)")
-                            Spacer()
-                        }
-                        // 处理空数据状态
-                    } else {
-                        emptyStateView
-                    }
-                }
+                contentListView
             }
             .navigationBarTitle(Text("搜索"))
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        
-                        // 按钮点击事件
-                        print("用户头像被点击")
-                        isPresentedUploadView = true
-                        
-                        
-                    }) {
-                        HStack {
-                            Image(systemName: "plus.square.fill.on.square.fill")
-                                .imageScale(.large)
-                            
-                            let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
-                            if let name = dict?["name"] {
-                                Text(name)
-                            }
-                            
-                            if let cityInfo = cityDataManager.cityInfo as? [String: String] {
-                                let name = cityInfo["name"] ?? ""
-                                Text(name)
-                            }
-                        }
-                    }
-                    .fullScreenCover(isPresented: $isPresentedUploadView, content: {
-                        UploadView(uploadStateManager: uploadStateManager, onDismiss: {
-                            isPresentedUploadView = false
-                        })
-                        .animation(.smooth, value: 1)
-                    })
-                    
-                }
-                
-            }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
+            .navigationBarItems(trailing: uploadButton)
             .toast(isPresented: $uploadStateManager.uploadSuccess) {
                 if uploadStateManager.uploadSuccess == true {
                     ToastView.init(message: "上传成功", type: .success)
@@ -106,6 +55,43 @@ struct MyHousesView: View {
                 }
             }
             
+        }
+    }
+    
+    @ViewBuilder
+    private var contentListView: some View {
+        List {
+            if viewModel.isLoading {
+                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if let houses = viewModel.houses, !houses.isEmpty {
+                ForEach(houses, id: \.id) { house in
+                    NavigationLink(destination: HouseDetailView(house: house)) {
+                        HouseCell(house: house)
+                    }
+                }
+            } else if let errorMessage = viewModel.errorMessage {
+                Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                emptyStateView
+            }
+        }
+    }
+    
+    private var uploadButton: some View {
+        Button(action: {
+            isPresentedUploadView = true
+        }) {
+            HStack {
+                Image(systemName: "plus.square.fill.on.square.fill").imageScale(.large)
+                if let name = selectedCityName {
+                    Text(name)
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $isPresentedUploadView) {
+            UploadView(uploadStateManager: uploadStateManager) {
+                isPresentedUploadView = false
+            }
         }
     }
     

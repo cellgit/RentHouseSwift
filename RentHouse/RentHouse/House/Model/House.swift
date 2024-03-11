@@ -20,6 +20,10 @@ struct ImageModel: Decodable {
     var medium: String?
     // 小图URL
     var small: String?
+    // 特小图
+    var tiny: String?
+    // 微图
+    var micro: String?
 }
 
 // MARK: - House
