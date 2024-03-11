@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import WaterfallGrid
 
 struct MyHousesView: View {
     @ObservedObject var locationService = LocationService()
@@ -74,24 +75,6 @@ struct MyHousesView: View {
         
     }
     
-    
-    
-    // 将houses数组转换为每两个一组的新数组
-    private func pairedHouses() -> [[House]] {
-        guard let houses = viewModel.houses else {
-            return []
-        }
-        var pairs = [[House]]()
-        for i in stride(from: 0, to: houses.count, by: 2) {
-            var pair = [houses[i]]
-            if i + 1 < houses.count {
-                pair.append(houses[i + 1])
-            }
-            pairs.append(pair)
-        }
-        return pairs
-    }
-    
     private var uploadButton: some View {
         Button(action: {
             isPresentedUploadView = true
@@ -130,17 +113,19 @@ struct GridListView: View {
 
     var body: some View {
         ScrollView(.vertical) {
-            VStack(spacing: 0) {
+            VStack(alignment: .center, spacing: 0) {
                 if viewModel.isLoading {
                     ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let houses = viewModel.houses, !houses.isEmpty {
+                    
                     AnyLayout(VerticalWaterfallLayout(columns: columns)) {
                         ForEach(houses, id: \.id) { house in
                             NavigationLink(destination: HouseDetailView(house: house)) {
-                                UploadHouseCell(house: house, width: (UIScreen.main.bounds.width-16-16-8) / CGFloat(columns))
+                                UploadHouseCell(house: house)
                             }
                         }
                     }
+                    
                 } else if let errorMessage = viewModel.errorMessage {
                     Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
@@ -148,7 +133,6 @@ struct GridListView: View {
                 }
             }
             .padding(EdgeInsets.init(top: 0, leading: 16, bottom: 0, trailing: 16))
-//            .padding(.horizontal, 10)
         }
         .animation(.default, value: columns)
         .animation(.default, value: viewModel.houses)
@@ -156,103 +140,66 @@ struct GridListView: View {
 }
 
 
-//struct GridListView: View {
-//    @ObservedObject var viewModel: HomeViewModel
-//    private let columnSpacing: CGFloat = 5
-//    private let rowSpacing: CGFloat = 8
-//    private let padding: CGFloat = 16
-//    private var columnWidth: CGFloat {
-//        (UIScreen.main.bounds.width - columnSpacing - padding * 2) / 2
-//    }
-//
-//    var body: some View {
-//        ScrollView {
-//            HStack(alignment: .top, spacing: columnSpacing) {
-//                VStack(spacing: rowSpacing) {
-//                    // Even indices
-//                    ForEach(0..<numberOfItems(isEven: true), id: \.self) { index in
-//                        if let house = viewModel.houses?[safe: index * 2] {
-//                            NavigationLink(destination: HouseDetailView(house: house)) {
-//                                UploadHouseCell(house: house, width: columnWidth)
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                VStack(spacing: rowSpacing) {
-//                    // Odd indices
-//                    ForEach(0..<numberOfItems(isEven: false), id: \.self) { index in
-//                        if let house = viewModel.houses?[safe: index * 2 + 1] {
-//                            NavigationLink(destination: HouseDetailView(house: house)) {
-//                                UploadHouseCell(house: house, width: columnWidth)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            .padding(.horizontal, padding)
-//        }
-//    }
-//
-//    private func numberOfItems(isEven: Bool) -> Int {
-//        guard let houses = viewModel.houses else { return 0 }
-//        let totalCount = houses.count
-//        return isEven ? (totalCount + 1) / 2 : totalCount / 2
-//    }
-//}
-//
-//extension Array {
-//    subscript(safe index: Index) -> Element? {
-//        return indices.contains(index) ? self[index] : nil
-//    }
-//}
-
-
-
 struct UploadHouseCell: View {
     let house: House // 假设House是你的模型类型
-    let width: CGFloat // 接受宽度参数
     // 假设你已经知道了图片的宽度和高度
     var body: some View {
         VStack {
-            if let image = house.images?.first?.tiny, let url = image.url, let imageWidth = image.width, let imageHeight = image.height {
+//            if let image = house.images?.first?.tiny, let url = image.url, let imageWidth = image.width, let imageHeight = image.height {
+//                KFImage(URL(string: url))
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .clipped()
+//                    .layoutPriority(97)
+//            }
+            
+            if let image = house.images?.first?.small, let url = image.url {
                 KFImage(URL(string: url))
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: width, height: width * CGFloat(imageHeight) / CGFloat(imageWidth)) // 根据原始宽高比计算高度
+                    .aspectRatio(contentMode: .fit)
                     .clipped()
+                    .layoutPriority(97)
             }
             
-            Text(house.community ?? "")
-                .font(.headline)
-                .lineLimit(2) // 最多显示两行
-                .fixedSize(horizontal: false, vertical: true) // 允许Text在垂直方向上根据内容调整大小
-                .padding([.top, .bottom], 4)
             
-            Text("价格: \(house.price ?? 0)元/月")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+            HStack() {
+                VStack(alignment: .leading) {
+                    
+                    Text(house.community ?? "")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                        .padding(.bottom, 8)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .layoutPriority(98)
+                    Text("\(house.price ?? 0)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .layoutPriority(99)
+                }
+                Spacer()
+            }
+            .padding([.leading, .trailing, .bottom], 8)
         }
-        .background(Color.white)
+        .background(Color(.tertiarySystemBackground))
         .cornerRadius(16)
-//        .shadow(radius: 1)
-        .padding(5)
+        .padding(0)
     }
 }
 
 
-struct AnimatedSearchView<Content: View>: View {
-    @Binding var isSearchActive: Bool
-    let content: () -> Content
-
-    var body: some View {
-        VStack {
-            content()
-        }
-        .offset(y: isSearchActive ? -100 : 0) // 根据搜索状态调整Y轴偏移量
-        .animation(.smooth, value: isSearchActive) // 应用平滑动画效果
-    }
-}
+//struct AnimatedSearchView<Content: View>: View {
+//    @Binding var isSearchActive: Bool
+//    let content: () -> Content
+//
+//    var body: some View {
+//        VStack {
+//            content()
+//        }
+//        .offset(y: isSearchActive ? -100 : 0) // 根据搜索状态调整Y轴偏移量
+//        .animation(.smooth, value: isSearchActive) // 应用平滑动画效果
+//    }
+//}
 
 
 #Preview {
@@ -281,5 +228,50 @@ struct AnimatedSearchView<Content: View>: View {
 //        } else {
 //            emptyStateView
 //        }
+//    }
+//}
+
+
+
+//struct CardsGrid: View {
+//
+//    @Binding var cards: [House]
+//    @Binding var settings: Settings
+//
+//    var body: some View {
+//
+//        #if os(iOS) && !targetEnvironment(macCatalyst)
+//
+//        return
+//            ScrollView(showsIndicators: settings.showsIndicators) {
+//                WaterfallGrid((0..<cards.count), id: \.self) { index in
+//                    CardView(card: self.cards[index])
+//                }
+//                .gridStyle(
+//                    columnsInPortrait: Int(settings.columnsInPortrait),
+//                    columnsInLandscape: Int(settings.columnsInLandscape),
+//                    spacing: CGFloat(settings.spacing),
+//                    animation: settings.animation
+//                )
+//                .padding(settings.padding)
+//            }
+//
+//        #else
+//
+//        return
+//            ScrollView(showsIndicators: settings.showsIndicators) {
+//                WaterfallGrid((0..<cards.count), id: \.self) { index in
+//                    CardView(card: self.cards[index])
+//                }
+//                .gridStyle(
+//                    columns: Int(settings.columns),
+//                    spacing: CGFloat(settings.spacing),
+//                    animation: settings.animation
+//                )
+//                .padding(settings.padding)
+//            }
+//
+//        #endif
+//
 //    }
 //}
