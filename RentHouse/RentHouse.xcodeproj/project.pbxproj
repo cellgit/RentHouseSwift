@@ -79,8 +79,9 @@
 		CECB72E62B9F08AE006A523A /* CompressingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E12B9F08AE006A523A /* CompressingHStack.swift */; };
 		CECB72E72B9F08AE006A523A /* VerticalWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E22B9F08AE006A523A /* VerticalWaterfallLayout.swift */; };
 		CECB72E82B9F08AE006A523A /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72E32B9F08AE006A523A /* FlowLayout.swift */; };
-		CECB72EB2B9F2F54006A523A /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72EA2B9F2F54006A523A /* WaterfallGrid */; };
 		CECB72EF2B9F3CDE006A523A /* Binding+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72EE2B9F3CDE006A523A /* Binding+extension.swift */; };
+		CECB72F22BA04E00006A523A /* JDStatusBarNotification in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72F12BA04E00006A523A /* JDStatusBarNotification */; };
+		CECB72F52BA05435006A523A /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72F42BA05435006A523A /* Drops */; };
 		CEE9141F2B9D598800ADDB62 /* HeicFormatConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
@@ -194,10 +195,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB72F22BA04E00006A523A /* JDStatusBarNotification in Frameworks */,
 				CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */,
 				CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */,
+				CECB72F52BA05435006A523A /* Drops in Frameworks */,
 				CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */,
-				CECB72EB2B9F2F54006A523A /* WaterfallGrid in Frameworks */,
 				CEBEFA762B985664009A6DB0 /* BSImagePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,7 +664,8 @@
 				CE8005642B91748D00E1D683 /* Kingfisher */,
 				CEBEFA692B97065D009A6DB0 /* SKPhotoBrowser */,
 				CEBEFA752B985664009A6DB0 /* BSImagePicker */,
-				CECB72EA2B9F2F54006A523A /* WaterfallGrid */,
+				CECB72F12BA04E00006A523A /* JDStatusBarNotification */,
+				CECB72F42BA05435006A523A /* Drops */,
 			);
 			productName = RentHouse;
 			productReference = CE42F6052B64A23200124E92 /* RentHouse.app */;
@@ -742,6 +745,8 @@
 				CEBEFA682B97065D009A6DB0 /* XCRemoteSwiftPackageReference "SKPhotoBrowser" */,
 				CEBEFA742B985664009A6DB0 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 				CECB72E92B9F2F54006A523A /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
+				CECB72F02BA04E00006A523A /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */,
+				CECB72F32BA05435006A523A /* XCRemoteSwiftPackageReference "Drops" */,
 			);
 			productRefGroup = CE42F6062B64A23200124E92 /* Products */;
 			projectDirPath = "";
@@ -1256,6 +1261,22 @@
 				minimumVersion = 1.0.1;
 			};
 		};
+		CECB72F02BA04E00006A523A /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/JDStatusBarNotification.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
+		CECB72F32BA05435006A523A /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/Drops.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1279,10 +1300,15 @@
 			package = CEBEFA742B985664009A6DB0 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
 			productName = BSImagePicker;
 		};
-		CECB72EA2B9F2F54006A523A /* WaterfallGrid */ = {
+		CECB72F12BA04E00006A523A /* JDStatusBarNotification */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CECB72E92B9F2F54006A523A /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
-			productName = WaterfallGrid;
+			package = CECB72F02BA04E00006A523A /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */;
+			productName = JDStatusBarNotification;
+		};
+		CECB72F42BA05435006A523A /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CECB72F32BA05435006A523A /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
 		};
 /* End XCSwiftPackageProductDependency section */
 

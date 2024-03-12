@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Kingfisher
-import WaterfallGrid
+//import WaterfallGrid
 
 struct MyHousesView: View {
     @ObservedObject var locationService = LocationService()
@@ -26,6 +26,8 @@ struct MyHousesView: View {
     
     @State private var isSearchActive = false // 用于控制搜索激活状态
     
+    @State private var isChangeListMode = false // 用于控制列表模式, false grid, true list
+    
     init() {
         // 加载选中的城市名称
         let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
@@ -43,12 +45,22 @@ struct MyHousesView: View {
                     if uploadStateManager.isUploading {
                         ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
                     }
-                    
-                    ScrollView(.vertical) {
-                        GridListView(viewModel: viewModel)
+                    if isChangeListMode {
+                        contentListView
+                            .transition(.asymmetric(insertion: .opacity.combined(with: .identity), removal: .opacity.combined(with: .identity)))
                     }
-                    .background(Color(.secondarySystemBackground))
+                    else {
+                        List {
+                            GridListView(viewModel: viewModel)
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        }
+                        .transition(.asymmetric(insertion: .opacity.combined(with: .identity), removal: .opacity.combined(with: .identity)))
+//                        .padding(.horizontal, 8)
+                        .background(Color(.secondarySystemBackground))
+                    }
                 }
+                .animation(.easeInOut(duration: 0.3), value: isChangeListMode)
                 .navigationBarTitle(Text("搜索"))
                 .navigationBarTitleDisplayMode(.large)
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
@@ -58,15 +70,17 @@ struct MyHousesView: View {
                         isSearchActive = !searchText.isEmpty
                     }
                 }
+                .navigationBarItems(trailing: changeListModeButton)
                 .navigationBarItems(trailing: uploadButton)
-                .toast(isPresented: $uploadStateManager.uploadSuccess) {
-                    if uploadStateManager.uploadSuccess == true {
-                        ToastView.init(message: "上传成功", type: .success)
-                    }
-                    else {
-                        ToastView.init(message: "上传失败,请重试", type: .error)
-                    }
-                }
+//                .toast(isPresented: $uploadStateManager.uploadSuccess) {
+//                    if uploadStateManager.uploadSuccess == true {
+//                        ToastView.init(message: "上传成功", type: .success)
+//                    }
+//                    else {
+//                        ToastView.init(message: "上传失败,请重试", type: .error)
+//                    }
+//                }
+//                .background(.red)
         }
         .tabItem {
             Image(systemName: "magnifyingglass")
@@ -80,7 +94,8 @@ struct MyHousesView: View {
             isPresentedUploadView = true
         }) {
             HStack {
-                Image(systemName: "plus.square.fill.on.square.fill").imageScale(.large)
+                // plus.square.fill.on.square.fill
+                Image(systemName: "plus.square.on.square").imageScale(.medium)
                 if let name = selectedCityName {
                     Text(name)
                 }
@@ -90,6 +105,44 @@ struct MyHousesView: View {
             UploadView(uploadStateManager: uploadStateManager) {
                 isPresentedUploadView = false
             }
+        }
+    }
+    
+    private var changeListModeButton: some View {
+        Button(action: {
+            withAnimation {
+                isChangeListMode.toggle()
+            }
+//            isChangeListMode = !isChangeListMode
+        }) {
+            HStack {//"square.grid.2x2" : "list.dash"  "rectangle.grid.2x2" : "list.bullet.rectangle"
+                Image(systemName: isChangeListMode ? "square.grid.2x2" : "list.dash").imageScale(.medium)
+                    .animation(.spring, value: isChangeListMode)
+            }
+            .frame(width: 30, height: 30, alignment: .center)
+        }
+    }
+    
+    @ViewBuilder
+    private var contentListView: some View {
+        List {
+//            VStack {
+                if viewModel.isLoading {
+                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if let houses = viewModel.houses, !houses.isEmpty {
+                    ForEach(houses, id: \.id) { house in
+                        NavigationLink(destination: HouseDetailView(house: house)) {
+                            HouseCell(house: house)
+                        }
+                    }
+//                    .padding(.horizontal, -4)
+                } else if let errorMessage = viewModel.errorMessage {
+                    Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    emptyStateView
+                }
+//            }
+            
         }
     }
     
@@ -117,7 +170,6 @@ struct GridListView: View {
                 if viewModel.isLoading {
                     ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let houses = viewModel.houses, !houses.isEmpty {
-                    
                     AnyLayout(VerticalWaterfallLayout(columns: columns)) {
                         ForEach(houses, id: \.id) { house in
                             NavigationLink(destination: HouseDetailView(house: house)) {
@@ -125,15 +177,14 @@ struct GridListView: View {
                             }
                         }
                     }
-                    
                 } else if let errorMessage = viewModel.errorMessage {
                     Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     Text("没有找到房源").frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
-            .padding(EdgeInsets.init(top: 0, leading: 16, bottom: 0, trailing: 16))
         }
+        .padding(EdgeInsets(top: -10, leading: 0, bottom: 0, trailing: 0))
         .animation(.default, value: columns)
         .animation(.default, value: viewModel.houses)
     }
@@ -182,96 +233,11 @@ struct UploadHouseCell: View {
             .padding([.leading, .trailing, .bottom], 8)
         }
         .background(Color(.tertiarySystemBackground))
-        .cornerRadius(16)
-        .padding(0)
+        .cornerRadius(10)
     }
 }
-
-
-//struct AnimatedSearchView<Content: View>: View {
-//    @Binding var isSearchActive: Bool
-//    let content: () -> Content
-//
-//    var body: some View {
-//        VStack {
-//            content()
-//        }
-//        .offset(y: isSearchActive ? -100 : 0) // 根据搜索状态调整Y轴偏移量
-//        .animation(.smooth, value: isSearchActive) // 应用平滑动画效果
-//    }
-//}
 
 
 #Preview {
     MyHousesView()
 }
-
-
-
-
-
-
-
-//@ViewBuilder
-//private var contentListView: some View {
-//    List {
-//        if viewModel.isLoading {
-//            ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-//        } else if let houses = viewModel.houses, !houses.isEmpty {
-//            ForEach(houses, id: \.id) { house in
-//                NavigationLink(destination: HouseDetailView(house: house)) {
-//                    HouseCell(house: house)
-//                }
-//            }
-//        } else if let errorMessage = viewModel.errorMessage {
-//            Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
-//        } else {
-//            emptyStateView
-//        }
-//    }
-//}
-
-
-
-//struct CardsGrid: View {
-//
-//    @Binding var cards: [House]
-//    @Binding var settings: Settings
-//
-//    var body: some View {
-//
-//        #if os(iOS) && !targetEnvironment(macCatalyst)
-//
-//        return
-//            ScrollView(showsIndicators: settings.showsIndicators) {
-//                WaterfallGrid((0..<cards.count), id: \.self) { index in
-//                    CardView(card: self.cards[index])
-//                }
-//                .gridStyle(
-//                    columnsInPortrait: Int(settings.columnsInPortrait),
-//                    columnsInLandscape: Int(settings.columnsInLandscape),
-//                    spacing: CGFloat(settings.spacing),
-//                    animation: settings.animation
-//                )
-//                .padding(settings.padding)
-//            }
-//
-//        #else
-//
-//        return
-//            ScrollView(showsIndicators: settings.showsIndicators) {
-//                WaterfallGrid((0..<cards.count), id: \.self) { index in
-//                    CardView(card: self.cards[index])
-//                }
-//                .gridStyle(
-//                    columns: Int(settings.columns),
-//                    spacing: CGFloat(settings.spacing),
-//                    animation: settings.animation
-//                )
-//                .padding(settings.padding)
-//            }
-//
-//        #endif
-//
-//    }
-//}

@@ -7,6 +7,9 @@
 
 import Foundation
 import Combine
+import JDStatusBarNotification
+import Drops
+import UIKit
 
 class UploadStateManager: ObservableObject {
     @Published var isUploading: Bool = false
@@ -17,7 +20,7 @@ class UploadStateManager: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    var toastManager = ToastManager()
+//    var toastManager = ToastManager()
     
     
     func startUpload(router: ApiRouter) {
@@ -55,13 +58,13 @@ class UploadStateManager: ObservableObject {
                                 // 成功逻辑处理
                                 self.uploadSuccess = true
                                 self.isUploading = false
-                                self.toastManager.showToast(message: "上传成功", type: .success)
+                                self.uploadAlert(true)
                             case .failure(let error):
                                 // 失败逻辑处理
                                 self.uploadError = error
                                 self.isUploading = false
                                 self.uploadSuccess = false
-                                self.toastManager.showToast(message: "上传失败", type: .error)
+                                self.uploadAlert(false)
                             }
                         }
                     }
@@ -69,6 +72,39 @@ class UploadStateManager: ObservableObject {
                 .store(in: &self.cancellables)
         }
 
+        
+    }
+    
+    func uploadAlert(_ isSuccess: Bool) {
+        if isSuccess {
+            let drop = Drop(
+                title: "上传成功",
+                icon: UIImage.init(named: "checkmark.circle"),
+                action: .init {
+                    print("Drop tapped")
+                    Drops.hideCurrent()
+                },
+                position: .top,
+                duration: 5.0,
+                accessibility: "Alert: 上传成功, Subtitle"
+            )
+            Drops.show(drop)
+        }
+        else {
+            let drop = Drop(
+                title: "上传失败,请重试",
+                subtitle: "Subtitle",
+                icon: UIImage.init(named: "xmark.circle"),
+                action: .init {
+                    print("Drop tapped")
+                    Drops.hideCurrent()
+                },
+                position: .top,
+                duration: 5.0,
+                accessibility: "Alert: 上传成功, Subtitle"
+            )
+            Drops.show(drop)
+        }
         
     }
     
