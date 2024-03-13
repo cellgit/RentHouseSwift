@@ -165,7 +165,7 @@ enum HouseApi: ApiRouter {
         
         
         images.forEach { image in
-            if let imageData = image.toHEIF(compressionQuality: 0.1) {
+            if let imageData = image.toHEIF(compressionQuality: 0.3) {
                 debugPrint("Optimized Image Size: \(imageData.count)")
                 formData.append(imageData, withName: "images", fileName: "house.heic", mimeType: "image/heic")
             }

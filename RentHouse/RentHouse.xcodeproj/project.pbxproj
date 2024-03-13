@@ -82,6 +82,12 @@
 		CECB72EF2B9F3CDE006A523A /* Binding+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB72EE2B9F3CDE006A523A /* Binding+extension.swift */; };
 		CECB72F22BA04E00006A523A /* JDStatusBarNotification in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72F12BA04E00006A523A /* JDStatusBarNotification */; };
 		CECB72F52BA05435006A523A /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72F42BA05435006A523A /* Drops */; };
+		CECB72F82BA0A51A006A523A /* ProgressIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72F72BA0A51A006A523A /* ProgressIndicatorView */; };
+		CECB72FB2BA0A6F0006A523A /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72FA2BA0A6F0006A523A /* PopupView */; };
+		CECB72FE2BA0A84C006A523A /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = CECB72FD2BA0A84C006A523A /* ActivityIndicatorView */; };
+		CECB73012BA13F7E006A523A /* ProgressHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73002BA13F7E006A523A /* ProgressHandler.swift */; };
+		CECB73032BA13FD2006A523A /* ProgressViewOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73022BA13FD2006A523A /* ProgressViewOverlay.swift */; };
+		CECB73052BA159DD006A523A /* UploadStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73042BA159DD006A523A /* UploadStatusView.swift */; };
 		CEE9141F2B9D598800ADDB62 /* HeicFormatConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
@@ -182,6 +188,9 @@
 		CECB72E22B9F08AE006A523A /* VerticalWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalWaterfallLayout.swift; sourceTree = "<group>"; };
 		CECB72E32B9F08AE006A523A /* FlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		CECB72EE2B9F3CDE006A523A /* Binding+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+extension.swift"; sourceTree = "<group>"; };
+		CECB73002BA13F7E006A523A /* ProgressHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHandler.swift; sourceTree = "<group>"; };
+		CECB73022BA13FD2006A523A /* ProgressViewOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewOverlay.swift; sourceTree = "<group>"; };
+		CECB73042BA159DD006A523A /* UploadStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadStatusView.swift; sourceTree = "<group>"; };
 		CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeicFormatConvert.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
@@ -195,8 +204,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB72FB2BA0A6F0006A523A /* PopupView in Frameworks */,
+				CECB72FE2BA0A84C006A523A /* ActivityIndicatorView in Frameworks */,
 				CECB72F22BA04E00006A523A /* JDStatusBarNotification in Frameworks */,
 				CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */,
+				CECB72F82BA0A51A006A523A /* ProgressIndicatorView in Frameworks */,
 				CEBEFA6A2B97065D009A6DB0 /* SKPhotoBrowser in Frameworks */,
 				CECB72F52BA05435006A523A /* Drops in Frameworks */,
 				CE42F6722B64EA1B00124E92 /* Alamofire in Frameworks */,
@@ -491,6 +503,7 @@
 		CEBEFA372B9360EC009A6DB0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				CECB72FF2BA0AD56006A523A /* Progress */,
 				CECB72DE2B9F08AE006A523A /* SwiftUILayouts */,
 				CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */,
 				CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */,
@@ -559,6 +572,16 @@
 				CECB72E32B9F08AE006A523A /* FlowLayout.swift */,
 			);
 			path = SwiftUILayouts;
+			sourceTree = "<group>";
+		};
+		CECB72FF2BA0AD56006A523A /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				CECB73002BA13F7E006A523A /* ProgressHandler.swift */,
+				CECB73022BA13FD2006A523A /* ProgressViewOverlay.swift */,
+				CECB73042BA159DD006A523A /* UploadStatusView.swift */,
+			);
+			path = Progress;
 			sourceTree = "<group>";
 		};
 		CEE9141D2B9D596400ADDB62 /* Image */ = {
@@ -666,6 +689,9 @@
 				CEBEFA752B985664009A6DB0 /* BSImagePicker */,
 				CECB72F12BA04E00006A523A /* JDStatusBarNotification */,
 				CECB72F42BA05435006A523A /* Drops */,
+				CECB72F72BA0A51A006A523A /* ProgressIndicatorView */,
+				CECB72FA2BA0A6F0006A523A /* PopupView */,
+				CECB72FD2BA0A84C006A523A /* ActivityIndicatorView */,
 			);
 			productName = RentHouse;
 			productReference = CE42F6052B64A23200124E92 /* RentHouse.app */;
@@ -747,6 +773,9 @@
 				CECB72E92B9F2F54006A523A /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 				CECB72F02BA04E00006A523A /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */,
 				CECB72F32BA05435006A523A /* XCRemoteSwiftPackageReference "Drops" */,
+				CECB72F62BA0A51A006A523A /* XCRemoteSwiftPackageReference "ProgressIndicatorView" */,
+				CECB72F92BA0A6F0006A523A /* XCRemoteSwiftPackageReference "PopupView" */,
+				CECB72FC2BA0A84C006A523A /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			productRefGroup = CE42F6062B64A23200124E92 /* Products */;
 			projectDirPath = "";
@@ -803,6 +832,7 @@
 				CEBEFA822B9A0F83009A6DB0 /* ImageConfig.swift in Sources */,
 				CEBEFA572B958680009A6DB0 /* MockSearchService.swift in Sources */,
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
+				CECB73052BA159DD006A523A /* UploadStatusView.swift in Sources */,
 				CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */,
 				CEBEFA5E2B95AFE1009A6DB0 /* View+extension.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
@@ -820,6 +850,7 @@
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
 				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,
 				CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */,
+				CECB73032BA13FD2006A523A /* ProgressViewOverlay.swift in Sources */,
 				CEBEFA4B2B95751A009A6DB0 /* HouseInfoViewModel.swift in Sources */,
 				CECB72E82B9F08AE006A523A /* FlowLayout.swift in Sources */,
 				CECB72E62B9F08AE006A523A /* CompressingHStack.swift in Sources */,
@@ -829,6 +860,7 @@
 				CEBA4DBC2B8EE387006F078A /* HomeApi.swift in Sources */,
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
+				CECB73012BA13F7E006A523A /* ProgressHandler.swift in Sources */,
 				CEBEFA7A2B996F28009A6DB0 /* ContentView2.swift in Sources */,
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
 				CEBEFA552B958666009A6DB0 /* SearchService.swift in Sources */,
@@ -1277,6 +1309,30 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		CECB72F62BA0A51A006A523A /* XCRemoteSwiftPackageReference "ProgressIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/ProgressIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		CECB72F92BA0A6F0006A523A /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.0;
+			};
+		};
+		CECB72FC2BA0A84C006A523A /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://gitee.com/cellgit/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1309,6 +1365,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CECB72F32BA05435006A523A /* XCRemoteSwiftPackageReference "Drops" */;
 			productName = Drops;
+		};
+		CECB72F72BA0A51A006A523A /* ProgressIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CECB72F62BA0A51A006A523A /* XCRemoteSwiftPackageReference "ProgressIndicatorView" */;
+			productName = ProgressIndicatorView;
+		};
+		CECB72FA2BA0A6F0006A523A /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CECB72F92BA0A6F0006A523A /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+		CECB72FD2BA0A84C006A523A /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CECB72FC2BA0A84C006A523A /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

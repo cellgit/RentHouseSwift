@@ -16,8 +16,12 @@ struct MyHousesView: View {
     @State private var searchText = ""
     @State private var showingCancel = false
     @State private var isPresentedUploadView = false
+    @State private var isShowingSearchCityView = false
     
-    @StateObject var uploadStateManager = UploadStateManager()
+//    @StateObject var uploadStateManager = UploadStateManager()
+    
+    @EnvironmentObject var progressHandler: ProgressHandler
+    @StateObject var uploadStateManager: UploadStateManager
     
     @StateObject private var toastManager = ToastManager()
     
@@ -28,7 +32,9 @@ struct MyHousesView: View {
     
     @State private var isChangeListMode = false // 用于控制列表模式, false grid, true list
     
-    init() {
+    init(progressHandler: ProgressHandler) {
+//        self.progressHandler = progressHandler
+        _uploadStateManager = StateObject(wrappedValue: UploadStateManager(progressHandler: progressHandler))
         // 加载选中的城市名称
         let dict = UserDefaultsManager.get(forKey: UserDefaultsKey.selectedCity.key, ofType: [String:String].self)
         _selectedCityName = State(initialValue: dict?["name"])
@@ -43,7 +49,7 @@ struct MyHousesView: View {
                 VStack {
                     // 在视图中使用
                     if uploadStateManager.isUploading {
-                        ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
+//                        ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
                     }
                     if isChangeListMode {
                         contentListView
@@ -70,23 +76,37 @@ struct MyHousesView: View {
                         isSearchActive = !searchText.isEmpty
                     }
                 }
+                .navigationBarItems(leading: locationButton)
                 .navigationBarItems(trailing: changeListModeButton)
                 .navigationBarItems(trailing: uploadButton)
-//                .toast(isPresented: $uploadStateManager.uploadSuccess) {
-//                    if uploadStateManager.uploadSuccess == true {
-//                        ToastView.init(message: "上传成功", type: .success)
-//                    }
-//                    else {
-//                        ToastView.init(message: "上传失败,请重试", type: .error)
-//                    }
-//                }
-//                .background(.red)
         }
         .tabItem {
             Image(systemName: "magnifyingglass")
             Text("搜索")
         }
         
+    }
+    
+    
+    private var locationButton: some View {
+        Button(action: {
+            isShowingSearchCityView = true
+        }) {
+            HStack {
+                if let name = selectedCityName {
+                    Text(name)
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $isShowingSearchCityView, content: {
+            CitySearchView { district in
+                self.isShowingSearchCityView = false
+                selectedCityName = district.name
+                let citycode = district.citycode
+            } onDismiss: {
+                self.isShowingSearchCityView = false
+            }
+        })
     }
     
     private var uploadButton: some View {
@@ -96,9 +116,6 @@ struct MyHousesView: View {
             HStack {
                 // plus.square.fill.on.square.fill
                 Image(systemName: "plus.square.on.square").imageScale(.medium)
-                if let name = selectedCityName {
-                    Text(name)
-                }
             }
         }
         .fullScreenCover(isPresented: $isPresentedUploadView) {
@@ -113,13 +130,11 @@ struct MyHousesView: View {
             withAnimation {
                 isChangeListMode.toggle()
             }
-//            isChangeListMode = !isChangeListMode
         }) {
             HStack {//"square.grid.2x2" : "list.dash"  "rectangle.grid.2x2" : "list.bullet.rectangle"
                 Image(systemName: isChangeListMode ? "square.grid.2x2" : "list.dash").imageScale(.medium)
                     .animation(.spring, value: isChangeListMode)
             }
-            .frame(width: 30, height: 30, alignment: .center)
         }
     }
     
@@ -128,7 +143,7 @@ struct MyHousesView: View {
         List {
 //            VStack {
                 if viewModel.isLoading {
-                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let houses = viewModel.houses, !houses.isEmpty {
                     ForEach(houses, id: \.id) { house in
                         NavigationLink(destination: HouseDetailView(house: house)) {
@@ -166,27 +181,18 @@ struct GridListView: View {
 
     var body: some View {
         ScrollView(.vertical) {
-            VStack(alignment: .center, spacing: 0) {
-                if viewModel.isLoading {
-                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if let houses = viewModel.houses, !houses.isEmpty {
-                    AnyLayout(VerticalWaterfallLayout(columns: columns)) {
-                        ForEach(houses, id: \.id) { house in
-                            NavigationLink(destination: HouseDetailView(house: house)) {
-                                UploadHouseCell(house: house)
-                            }
+            if let houses = viewModel.houses, !houses.isEmpty {
+                AnyLayout(VerticalWaterfallLayout(columns: columns)) {
+                    ForEach(houses, id: \.id) { house in
+                        NavigationLink(destination: HouseDetailView(house: house)) {
+                            UploadHouseCell(house: house)
                         }
                     }
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text("Error: \(errorMessage)").frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    Text("没有找到房源").frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
         .padding(EdgeInsets(top: -10, leading: 0, bottom: 0, trailing: 0))
-        .animation(.default, value: columns)
-        .animation(.default, value: viewModel.houses)
+//        .animation(.default, value: viewModel.houses)
     }
 }
 
@@ -238,6 +244,6 @@ struct UploadHouseCell: View {
 }
 
 
-#Preview {
-    MyHousesView()
-}
+//#Preview {
+//    MyHousesView()
+//}

@@ -15,6 +15,8 @@ struct RentHouseApp: App {
     
     @State private var showingUploadView = false
     
+    @StateObject private var progressHandler = ProgressHandler()
+    
     init() {
         CityDataManager.shared.startLocationAndFetchData()
     }
@@ -23,6 +25,7 @@ struct RentHouseApp: App {
         WindowGroup {
             TabBarView()
                 .background(Color(.systemBackground))
+                .environmentObject(progressHandler)
 //                .accentColor(colorScheme == .dark ? .primary : .kleinBlue)
         }
     }

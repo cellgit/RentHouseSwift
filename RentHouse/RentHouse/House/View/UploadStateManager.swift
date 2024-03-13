@@ -10,6 +10,7 @@ import Combine
 import JDStatusBarNotification
 import Drops
 import UIKit
+//import SwiftUI
 
 class UploadStateManager: ObservableObject {
     @Published var isUploading: Bool = false
@@ -20,7 +21,13 @@ class UploadStateManager: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+    var progressHandler: ProgressHandler
+    
 //    var toastManager = ToastManager()
+    
+    init(progressHandler: ProgressHandler) {
+        self.progressHandler = progressHandler
+    }
     
     
     func startUpload(router: ApiRouter) {
@@ -28,6 +35,10 @@ class UploadStateManager: ObservableObject {
         uploadSuccess = nil
         cancellables.removeAll()
         isUploading = true
+        
+        // 上传时, 0则是在处理资源中..., 大于0小于1上传中,等于1上传完成,失败后设置为0.1
+        self.uploadProgress(isUploading, progress: 0)
+        
         DispatchQueue.global(qos: .background).async {
             NetworkManager.shared.uploadWithProgress(router)
                 .sink(receiveCompletion: { completion in
@@ -50,6 +61,9 @@ class UploadStateManager: ObservableObject {
                         case .progress(let uploadProgress):
                             // 处理上传进度
                             self.uploadProgress = uploadProgress.progress
+                            //uploadProgress.progress >= 1
+                            self.uploadProgress(self.isUploading, progress: uploadProgress.progress)
+                            
                             // 其他进度更新逻辑
                         case .completion(let result):
                             // 处理完成后的响应数据
@@ -59,12 +73,14 @@ class UploadStateManager: ObservableObject {
                                 self.uploadSuccess = true
                                 self.isUploading = false
                                 self.uploadAlert(true)
+                                self.uploadProgress(self.isUploading, progress: 1)
                             case .failure(let error):
                                 // 失败逻辑处理
                                 self.uploadError = error
                                 self.isUploading = false
                                 self.uploadSuccess = false
                                 self.uploadAlert(false)
+                                self.uploadProgress(self.isUploading, progress: 0.1)
                             }
                         }
                     }
@@ -75,11 +91,17 @@ class UploadStateManager: ObservableObject {
         
     }
     
+    func uploadProgress(_ isVisiable: Bool, progress: CGFloat = 0) {
+        progressHandler.isVisible = isVisiable
+        progressHandler.progress = progress // 或者根据实际情况更新进度
+    }
+    
+    
     func uploadAlert(_ isSuccess: Bool) {
         if isSuccess {
             let drop = Drop(
                 title: "上传成功",
-                icon: UIImage.init(named: "checkmark.circle"),
+                icon: UIImage.init(named: "checkmark.circle.pulse.byLayer"),
                 action: .init {
                     print("Drop tapped")
                     Drops.hideCurrent()
@@ -93,7 +115,6 @@ class UploadStateManager: ObservableObject {
         else {
             let drop = Drop(
                 title: "上传失败,请重试",
-                subtitle: "Subtitle",
                 icon: UIImage.init(named: "xmark.circle"),
                 action: .init {
                     print("Drop tapped")

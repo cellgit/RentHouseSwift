@@ -34,7 +34,7 @@ struct HomeView: View {
     private var contentListView: some View {
         List {
             if viewModel.isLoading {
-                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+//                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if let houses = viewModel.houses, !houses.isEmpty {
                 ForEach(houses, id: \.id) { house in
                     NavigationLink(destination: HouseDetailView(house: house)) {
