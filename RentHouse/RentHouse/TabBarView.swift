@@ -45,9 +45,9 @@ struct TabBarView: View {
                     }
             }
             
-            ProgressViewOverlay()
-                .frame(width: 30, height: 30, alignment: .center)
-                .padding(EdgeInsets(top: 1, leading: 0, bottom: 0, trailing: 16+70))
+//            ProgressViewOverlay()
+//                .frame(width: 30, height: 30, alignment: .center)
+//                .padding(EdgeInsets(top: 1, leading: 0, bottom: 0, trailing: 16+70))
                 
             
         }

@@ -14,25 +14,14 @@ struct ProgressViewOverlay: View {
     @EnvironmentObject var progressHandler: ProgressHandler
 
     var body: some View {
-        
-        
-//        ZStack(alignment: .center) {
-//            VStack {
-//                MagicProgressView(isVisible: $progressHandler.isVisible, type: .circle(progress: $progressHandler.progress, lineWidth: 2.5, strokeColor: .green, backgroundColor: .gray))
-//                    .frame(width: 20, height: 20, alignment: .center)
-//                    .foregroundColor(.green)
-//            }
-//            .edgesIgnoringSafeArea(.all) // 如果需要，可以忽略安全区域
-//            UploadStatusView(status: $progressHandler.uploadStatus, progress: $progressHandler.progress)
-//        }
-        
         if progressHandler.isVisible {
             switch progressHandler.uploadStatus {
             case .preparing, .uploading, .success, .failure:
                 ZStack(alignment: .center) {
                     VStack {
                         MagicProgressView(isVisible: $progressHandler.isVisible, type: .circle(progress: $progressHandler.progress, lineWidth: 2.5, strokeColor: .green, backgroundColor: .gray))
-                            .frame(width: 20, height: 20, alignment: .center)
+                            .padding(4)
+                            .frame(width: 28, height: 28, alignment: .center)
                             .foregroundColor(.green)
                     }
                     .edgesIgnoringSafeArea(.all) // 如果需要，可以忽略安全区域
@@ -42,25 +31,7 @@ struct ProgressViewOverlay: View {
                 EmptyView()
             }
         }
-        
-        
-        
-//        if progressHandler.isVisible {
-//            ZStack(alignment: .center) {
-//                VStack {
-//                    MagicProgressView(isVisible: $progressHandler.isVisible, type: .circle(progress: $progressHandler.progress, lineWidth: 2.5, strokeColor: .green, backgroundColor: .gray))
-//                        .frame(width: 20, height: 20, alignment: .center)
-//                        .foregroundColor(.green)
-//                }
-//                .edgesIgnoringSafeArea(.all) // 如果需要，可以忽略安全区域
-//                UploadStatusView(status: $progressHandler.uploadStatus, progress: $progressHandler.progress)
-//            }
-//        }
-        
-        
-        
     }
-    
 }
 
 

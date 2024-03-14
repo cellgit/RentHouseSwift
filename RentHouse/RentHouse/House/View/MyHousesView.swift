@@ -77,8 +77,16 @@ struct MyHousesView: View {
                     }
                 }
                 .navigationBarItems(leading: locationButton)
-                .navigationBarItems(trailing: changeListModeButton)
-                .navigationBarItems(trailing: uploadButton)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        HStack(alignment: .center, spacing: 0, content: {
+                            ProgressViewOverlay()
+                            uploadButton//.padding(0)
+                            changeListModeButton//.padding(0)
+                        })
+                        
+                    }
+                }
         }
         .tabItem {
             Image(systemName: "magnifyingglass")
@@ -115,7 +123,9 @@ struct MyHousesView: View {
         }) {
             HStack {
                 // plus.square.fill.on.square.fill
-                Image(systemName: "plus.square.on.square").imageScale(.medium)
+                Image(systemName: "plus.square.on.square")
+                    .frame(width: 25, height: 25)
+                    .imageScale(.medium)
             }
         }
         .fullScreenCover(isPresented: $isPresentedUploadView) {
@@ -131,8 +141,9 @@ struct MyHousesView: View {
                 isChangeListMode.toggle()
             }
         }) {
-            HStack {//"square.grid.2x2" : "list.dash"  "rectangle.grid.2x2" : "list.bullet.rectangle"
+            HStack {
                 Image(systemName: isChangeListMode ? "square.grid.2x2" : "list.dash").imageScale(.medium)
+                    .frame(width: 25, height: 25)
                     .animation(.spring, value: isChangeListMode)
             }
         }
