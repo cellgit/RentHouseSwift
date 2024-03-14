@@ -13,62 +13,55 @@ extension CGFloat {
 }
 
 enum UploadProgressStatus: Int8 {
+    
+    /// 初始化状态
+    case none = 0
     /// 准备中,一般为处理资源中
-    case preparing = 0
+    case preparing = 1
     /// 上传中,进度显示
-    case uploading = 1
+    case uploading = 2
     /// 上传成功
-    case success = 2
+    case success = 3
     /// 上传失败
-    case failure = 3
+    case failure = 4
 }
 
 import SwiftUI
 
 struct UploadStatusView: View {
     /// 上传状态
-    @State var status: UploadProgressStatus
+    @Binding var status: UploadProgressStatus
     /// 上传进度
-    @State var progress: CGFloat
+    @Binding var progress: CGFloat
 
     var body: some View {
-        VStack {
-            UploadSFSymbols(status: $status, progress: $progress)
-        }
-    }
-}
-
-struct UploadSFSymbols : View {
-    
-    @Binding var status: UploadProgressStatus
-    
-    @Binding var progress: CGFloat
-    
-    var body: some  View {
-        
         switch status {
         case .preparing:
             Image (systemName: "arrow.up" )
                 .foregroundColor(.green)
     //            .symbolEffect(.pulse, value: true)
-                .font(Font.system(size: 15))
+                .font(Font.system(size: 12))
         case .uploading:
-            Text(progress.toPercentage)
+            Text("\(progress.toPercentage)%")
+                .foregroundColor(.green)
+                .font(Font.system(size: 7))
         case .success:
-            Image (systemName: "checkmark.circle" )
+            Image (systemName: "checkmark" )
                 .foregroundColor(.green)
     //            .symbolEffect(.pulse, value: true)
-                .font(Font.system(size: 15))
+                .font(Font.system(size: 12))
         case .failure:
-            Image (systemName: "xmark.circle" )
+            Image (systemName: "xmark" )
                 .foregroundColor(.red)
     //            .symbolEffect(.pulse, value: true)
-                .font(Font.system(size: 15))
+                .font(Font.system(size: 12))
+        case .none:
+            EmptyView()
         }
-        
-        
     }
 }
+
+
 
 struct UploadSuccessSFSymbols : View {
     var body: some  View {
@@ -89,6 +82,6 @@ struct UploadFailureSFSymbols : View {
 }
 
 
-#Preview {
-    UploadStatusView(status: .failure, progress: 0)
-}
+//#Preview {
+//    UploadStatusView(status: .failure, progress: 0)
+//}
