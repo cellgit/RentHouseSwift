@@ -27,6 +27,8 @@
 		CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67B2B65106400124E92 /* RequestBuilder.swift */; };
 		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
+		CE56BC6D2BA2E6DD009168CC /* GridTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */; };
+		CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */; };
 		CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE8005642B91748D00E1D683 /* Kingfisher */; };
 		CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */; };
 		CEBA4DB62B8EE387006F078A /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAC2B8EE387006F078A /* House.swift */; };
@@ -89,6 +91,10 @@
 		CECB730A2BA27EE1006A523A /* MagicProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73092BA27EE1006A523A /* MagicProgressView.swift */; };
 		CECB730C2BA27FD6006A523A /* DefaultSectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB730B2BA27FD6006A523A /* DefaultSectorView.swift */; };
 		CECB730F2BA28C2A006A523A /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = CECB730E2BA28C2A006A523A /* ActivityIndicatorView */; };
+		CECB73112BA2A575006A523A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73102BA2A575006A523A /* AppDelegate.swift */; };
+		CECB73152BA2A83A006A523A /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73142BA2A83A006A523A /* UIResponder+Current.swift */; };
+		CECB73172BA2A861006A523A /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73162BA2A861006A523A /* KeyboardHeightPublisher.swift */; };
+		CECB73192BA2A890006A523A /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB73182BA2A890006A523A /* KeyboardAdaptive.swift */; };
 		CEE9141F2B9D598800ADDB62 /* HeicFormatConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */; };
 		CEF6B6562B661D16006CE0F1 /* HouseUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */; };
 		CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6B65C2B663127006CE0F1 /* UploadView.swift */; };
@@ -138,6 +144,8 @@
 		CE42F67B2B65106400124E92 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoder.swift; sourceTree = "<group>"; };
 		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
+		CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTagsView.swift; sourceTree = "<group>"; };
+		CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutGridView.swift; sourceTree = "<group>"; };
 		CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CEBA4DAC2B8EE387006F078A /* House.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 		CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseDetailView.swift; sourceTree = "<group>"; };
@@ -195,6 +203,10 @@
 		CECB73072BA27DF6006A523A /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		CECB73092BA27EE1006A523A /* MagicProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicProgressView.swift; sourceTree = "<group>"; };
 		CECB730B2BA27FD6006A523A /* DefaultSectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSectorView.swift; sourceTree = "<group>"; };
+		CECB73102BA2A575006A523A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CECB73142BA2A83A006A523A /* UIResponder+Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
+		CECB73162BA2A861006A523A /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
+		CECB73182BA2A890006A523A /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeicFormatConvert.swift; sourceTree = "<group>"; };
 		CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseUploadViewModel.swift; sourceTree = "<group>"; };
 		CEF6B65C2B663127006CE0F1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
@@ -319,6 +331,7 @@
 			children = (
 				CEBA4DC52B8F0283006F078A /* Info.plist */,
 				CE42F6082B64A23200124E92 /* RentHouseApp.swift */,
+				CECB73102BA2A575006A523A /* AppDelegate.swift */,
 				CE42F60A2B64A23200124E92 /* Persistence.swift */,
 				CE42F60F2B64A23200124E92 /* ContentView.swift */,
 				CEBA4DBD2B8EE429006F078A /* TabBarView.swift */,
@@ -506,6 +519,7 @@
 		CEBEFA372B9360EC009A6DB0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				CECB73132BA2A803006A523A /* Keyboard */,
 				CECB72FF2BA0AD56006A523A /* Progress */,
 				CECB72DE2B9F08AE006A523A /* SwiftUILayouts */,
 				CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */,
@@ -605,6 +619,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CECB73132BA2A803006A523A /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				CECB73182BA2A890006A523A /* KeyboardAdaptive.swift */,
+				CECB73142BA2A83A006A523A /* UIResponder+Current.swift */,
+				CECB73162BA2A861006A523A /* KeyboardHeightPublisher.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
 		CEE9141D2B9D596400ADDB62 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,6 +683,8 @@
 				CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */,
 				CEBEFA482B9572DB009A6DB0 /* RowViewStyle1.swift */,
 				CEBEFA792B996F28009A6DB0 /* ContentView2.swift */,
+				CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */,
+				CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -835,6 +861,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB73192BA2A890006A523A /* KeyboardAdaptive.swift in Sources */,
 				CECB72E52B9F08AE006A523A /* EqualHStack.swift in Sources */,
 				CEBEFA802B99BCE8009A6DB0 /* CacheConfig.swift in Sources */,
 				CEBEFA3F2B948097009A6DB0 /* UserDefaultsKey.swift in Sources */,
@@ -846,9 +873,11 @@
 				CEBEFA642B96C8BC009A6DB0 /* PhotoPicker.swift in Sources */,
 				CE34ED0E2B917DE300C0789F /* HouseService.swift in Sources */,
 				CEBEFA822B9A0F83009A6DB0 /* ImageConfig.swift in Sources */,
+				CECB73112BA2A575006A523A /* AppDelegate.swift in Sources */,
 				CEBEFA572B958680009A6DB0 /* MockSearchService.swift in Sources */,
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CECB73052BA159DD006A523A /* UploadStatusView.swift in Sources */,
+				CECB73172BA2A861006A523A /* KeyboardHeightPublisher.swift in Sources */,
 				CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */,
 				CEBEFA5E2B95AFE1009A6DB0 /* View+extension.swift in Sources */,
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
@@ -864,6 +893,7 @@
 				CECB72E42B9F08AE006A523A /* EqualVStack.swift in Sources */,
 				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
+				CECB73152BA2A83A006A523A /* UIResponder+Current.swift in Sources */,
 				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,
 				CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */,
 				CECB73032BA13FD2006A523A /* ProgressViewOverlay.swift in Sources */,
@@ -883,6 +913,7 @@
 				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
 				CEBEFA412B948A6D009A6DB0 /* District.swift in Sources */,
+				CE56BC6D2BA2E6DD009168CC /* GridTagsView.swift in Sources */,
 				CEBEFA782B996A8F009A6DB0 /* MyHousesView.swift in Sources */,
 				CEBEFA662B96E62B009A6DB0 /* PhotoGridView.swift in Sources */,
 				CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */,
@@ -900,6 +931,7 @@
 				CECB730C2BA27FD6006A523A /* DefaultSectorView.swift in Sources */,
 				CECB72EF2B9F3CDE006A523A /* Binding+extension.swift in Sources */,
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
+				CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */,
 				CEBEFA602B9602B3009A6DB0 /* KeyboardResponder.swift in Sources */,
 				CEBEFA3C2B947FA1009A6DB0 /* UserDefaultsManager.swift in Sources */,
 				CEBEFA512B95858B009A6DB0 /* SearchApi.swift in Sources */,
@@ -1083,7 +1115,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1125,7 +1157,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;

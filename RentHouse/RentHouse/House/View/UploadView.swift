@@ -11,6 +11,8 @@ import Combine
 
 struct UploadView: View {
     
+    @State private var keyboardHeight: CGFloat = 0
+    
     @ObservedObject var uploadStateManager: UploadStateManager
     
     private var onDismiss: () -> Void
@@ -77,18 +79,25 @@ struct UploadView: View {
     
     @StateObject private var toastManager = ToastManager()
     
+    @StateObject var gridTagsViewModelOfStatus = StringItemViewModel(items: ["可租", "预租", "已租", "已下架"])
+    
+    @StateObject var gridTagsViewModelOfRoomType = StringItemViewModel(items: ["一室", "两室", "三室", "四室及以上"])
+    /// 朝向
+    @StateObject var gridTagsViewModelOfOrientation = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
     
     
-    private func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
+    @StateObject var gridTagsViewModelOfOrientationFlowLayout = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
+    
+    let columns3: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
+    let columns4: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
     
     var body: some View {
         
         NavigationView {
             VStack {
                 
-                List {
+                ScrollView {
 //                    ImagePickerCoordinatorView
                     ImageBrowserView(images: $images)
                     
@@ -161,7 +170,38 @@ struct UploadView: View {
                     }
                     RowViewStyleWithInput(title: "租金", text: $price, placeholder: "如期望5000元,请输入: 5000", keyboardType: .decimalPad)
                         .focused($isTextFieldFocused)
+                    
+                    
+//                    GridTagsView(title: "租赁状态", items: ["可租", "预出租", "已出租", "已下架"])
+                    
+//                    GridTagsView(title: "房型", viewModel: gridTagsViewModelOfRoomType, columns: columns3)
+//                        .id("房型")
+//                        .padding(.vertical, 16)
+//                    
+//                    GridTagsView(title: "状态", viewModel: gridTagsViewModelOfStatus, columns: columns3)
+//                        .id("状态")
+//                        .padding(.vertical, 16)
+//                    
+//                    GridTagsView(title: "方向", viewModel: gridTagsViewModelOfOrientation, columns: columns4)
+//                        .id("状态")
+//                        .padding(.vertical, 16)
+                    
+                    
+                    FlowLayoutGridView(title: "房型", viewModel: gridTagsViewModelOfRoomType)
+                        .id("房型")
+                        .padding(.vertical, 16)
+                    
+                    FlowLayoutGridView(title: "状态", viewModel: gridTagsViewModelOfStatus)
+                        .id("状态")
+                        .padding(.vertical, 16)
+                    
+                    
+                    FlowLayoutGridView(title: "朝向", viewModel: gridTagsViewModelOfOrientationFlowLayout)
+                    
+                    
+                    
                 }
+                .padding(8)
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
                         Spacer()
@@ -170,6 +210,7 @@ struct UploadView: View {
                         }
                     }
                 }
+                
                 
                 VStack {
                     Spacer()

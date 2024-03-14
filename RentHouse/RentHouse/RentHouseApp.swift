@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct RentHouseApp: App {
     
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     // 监听系统的界面样式变化
     @Environment(\.colorScheme) var colorScheme
     

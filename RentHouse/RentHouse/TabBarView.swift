@@ -25,6 +25,12 @@ struct TabBarView: View {
         ZStack(alignment: .topTrailing) {
             TabView {
                 
+                UploadView(uploadStateManager: UploadStateManager(progressHandler: progressHandler), onDismiss: {})
+                    .tabItem {
+                        Image(systemName: "plus.square.fill.on.square.fill")
+                        Text("上传")
+                    }
+                
                 MyHousesView(progressHandler: progressHandler)
                     .tabItem {
                         Image(systemName: "plus.square.fill.on.square.fill")

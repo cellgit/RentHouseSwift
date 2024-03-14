@@ -10,6 +10,10 @@ import Kingfisher
 //import WaterfallGrid
 
 struct MyHousesView: View {
+    
+    @Namespace var namespace
+    
+    
     @ObservedObject var locationService = LocationService()
     @ObservedObject var cityDataManager = CityDataManager.shared
     @StateObject var viewModel = HomeViewModel(service: HomeService())
@@ -53,11 +57,13 @@ struct MyHousesView: View {
                     }
                     if isChangeListMode {
                         contentListView
+                            .matchedGeometryEffect(id: "list", in: namespace)
                             .transition(.asymmetric(insertion: .opacity.combined(with: .identity), removal: .opacity.combined(with: .identity)))
                     }
                     else {
                         List {
                             GridListView(viewModel: viewModel)
+                                .matchedGeometryEffect(id: "list", in: namespace)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                         }
