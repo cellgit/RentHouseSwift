@@ -88,6 +88,17 @@ struct UploadView: View {
     
     @StateObject var gridTagsViewModelOfOrientationFlowLayout = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
     
+    @StateObject var gridTagsViewModelOfPaymentMethod = StringItemViewModel(items: ["季付", "月付", "半年付", "年付"])
+    
+    @StateObject var gridTagsViewModelOfDecoration = StringItemViewModel(items: ["简装", "精装修", "豪华装修", "毛坯"])
+    
+    @StateObject var multiTagsViewModelOfFacilities = MultiStringItemViewModel(items: ["桌子", "椅子", "床", "空调", "热水器", "冰箱"])
+    
+    @StateObject var multiTagsViewModelOfTags = MultiStringItemViewModel(items: ["精装修", "近地铁", "带阳台"])
+    
+    
+    
+    
     let columns3: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     let columns4: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
@@ -172,7 +183,6 @@ struct UploadView: View {
                         .focused($isTextFieldFocused)
                     
                     
-//                    GridTagsView(title: "租赁状态", items: ["可租", "预出租", "已出租", "已下架"])
                     
 //                    GridTagsView(title: "房型", viewModel: gridTagsViewModelOfRoomType, columns: columns3)
 //                        .id("房型")
@@ -187,17 +197,25 @@ struct UploadView: View {
 //                        .padding(.vertical, 16)
                     
                     
-                    FlowLayoutGridView(title: "房型", viewModel: gridTagsViewModelOfRoomType)
-                        .id("房型")
-                        .padding(.vertical, 16)
-                    
-                    FlowLayoutGridView(title: "状态", viewModel: gridTagsViewModelOfStatus)
-                        .id("状态")
-                        .padding(.vertical, 16)
-                    
-                    
-                    FlowLayoutGridView(title: "朝向", viewModel: gridTagsViewModelOfOrientationFlowLayout)
-                    
+                    VStack(alignment: .center, spacing: 8) {
+                        FlowLayoutGridView(title: "房型", viewModel: gridTagsViewModelOfRoomType)
+                            .id("房型")
+//                            .padding(.vertical, 16)
+                        FlowLayoutGridView(title: "状态", viewModel: gridTagsViewModelOfStatus)
+                            .id("状态")
+//                            .padding(.vertical, 16)
+                        FlowLayoutGridView(title: "朝向", viewModel: gridTagsViewModelOfOrientationFlowLayout)
+                        
+                        FlowLayoutGridView(title: "付款方式", viewModel: gridTagsViewModelOfPaymentMethod)
+                        
+                        FlowLayoutGridView(title: "装修状况", viewModel: gridTagsViewModelOfDecoration)
+                        
+                        MultiFlowLayoutGridView(title: "设备配置", viewModel: multiTagsViewModelOfFacilities)
+                        
+                        MultiFlowLayoutGridView(title: "房源标签", viewModel: multiTagsViewModelOfTags)
+                        
+                    }
+                    .padding(.vertical, 8)
                     
                     
                 }
