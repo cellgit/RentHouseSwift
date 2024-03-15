@@ -46,9 +46,11 @@ struct CommunitySearchView: View {
                             // 执行关闭视图的操作
                             onDismiss()
                         }) {
-                            Image(systemName: "chevron.backward")
-                                .imageScale(.large)
-                            Text("返回")
+//                            Image(systemName: "chevron.backward")
+//                                .imageScale(.large)
+//                            Text("返回")
+                            
+                            Text("取消")
                         }
                     }
                 }

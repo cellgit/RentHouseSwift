@@ -8,8 +8,21 @@
 import Foundation
 import SwiftUI
 import Combine
+import BottomSheet
+import PopupView
+
+struct ActionSheetsState {
+    var showingFirst = false
+    var showingSecond = false
+}
+
+struct InputSheetsState {
+    var showingFirst = false
+}
 
 struct UploadView: View {
+    
+    @Namespace var namespace
     
     @State private var keyboardHeight: CGFloat = 0
     
@@ -68,6 +81,8 @@ struct UploadView: View {
     @State private var isShowingSearchCityView = false
     @State private var isShowingActionSheetOfRoomType = false
     
+    @State private var isShowingActionSheetOfDate = false
+    
     @FocusState private var isTextFieldFocused: Bool
     
     @State private var selectedImages: [UIImage] = []
@@ -79,184 +94,187 @@ struct UploadView: View {
     
     @StateObject private var toastManager = ToastManager()
     
-    @StateObject var gridTagsViewModelOfStatus = StringItemViewModel(items: ["可租", "预租", "已租", "已下架"])
+    @StateObject var gridTagsViewModelOfStatus = StringItemViewModel(items: ["可租", "已租", "预租", "已下架"])
     
     @StateObject var gridTagsViewModelOfRoomType = StringItemViewModel(items: ["一室", "两室", "三室", "四室及以上"])
     /// 朝向
     @StateObject var gridTagsViewModelOfOrientation = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
     
-    
     @StateObject var gridTagsViewModelOfOrientationFlowLayout = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
     
-    @StateObject var gridTagsViewModelOfPaymentMethod = StringItemViewModel(items: ["季付", "月付", "半年付", "年付"])
+    @StateObject var gridTagsViewModelOfDecoration = StringItemViewModel(items: ["简装", "精装", "豪华装修", "毛坯"])
     
-    @StateObject var gridTagsViewModelOfDecoration = StringItemViewModel(items: ["简装", "精装修", "豪华装修", "毛坯"])
+    @StateObject var multiTagsViewModelOfPaymentMethod = MultiStringItemViewModel(items: ["季付", "月付", "半年付", "年付"])
     
-    @StateObject var multiTagsViewModelOfFacilities = MultiStringItemViewModel(items: ["桌子", "椅子", "床", "空调", "热水器", "冰箱"])
+    @StateObject var multiTagsViewModelOfFacilities = MultiStringItemViewModel(items: ["桌子", "椅子", "床", "空调", "冰箱", "热水器", "暖气", "燃气", "燃气灶"])
     
     @StateObject var multiTagsViewModelOfTags = MultiStringItemViewModel(items: ["精装修", "近地铁", "带阳台"])
     
-    
-    
+    // 可租日期
+    @StateObject private var dateViewModel = DateSelectionViewModel()
     
     let columns3: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     let columns4: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
     
+    @State var bottomSheetPosition: BottomSheetPosition = .hidden
+    
+    @State var actionSheets = ActionSheetsState()
+    
     var body: some View {
-        
-        NavigationView {
-            VStack {
-                
-                ScrollView {
-//                    ImagePickerCoordinatorView
-                    ImageBrowserView(images: $images)
-                    
-                    RowViewStyle1(title: "城市", text: Binding<String>(
-                        get: { self.city ?? self.infoViewModel.city ?? "" },
-                        set: { self.city = $0 }
-                    ), placeholder: "选择房源所在的城市") {
-                        self.isShowingSearchCityView = true
-                    }
-                    .fullScreenCover(isPresented: $isShowingSearchCityView, content: {
-                        CitySearchView { district in
-                            self.isShowingSearchCityView = false
-                            city = district.name
-                            citycode = district.citycode
-                        } onDismiss: {
-                            self.isShowingSearchCityView = false
-                        }
-                    })
-                    
-                    RowViewStyle1(title: "小区", text: Binding<String>(
-                        get: { self.community ?? self.infoViewModel.community ?? "" },
-                        set: { self.community = $0 }
-                    ), placeholder: "请输入小区名称") {
-                        self.isShowingSearchCommunityView = true
-                    }
-                    .fullScreenCover(isPresented: $isShowingSearchCommunityView, content: {
-                        CommunitySearchView(latitude: lat ?? (infoViewModel.lat ?? 40.052978), longitude: lon ?? (infoViewModel.lon ?? 116.306121), city: city ?? infoViewModel.city ?? "")
-                        { item in
-                            self.isShowingSearchCommunityView = false
-                            community = item.name ?? ""
-                            let placemark = item.placemark
-                            lat = placemark.coordinate.latitude
-                            lon = placemark.coordinate.longitude
-                            province = placemark.administrativeArea // 省份
-                            city = placemark.locality // 市
-                            district = placemark.subLocality // 区县
-                            
-                            let subLocality = placemark.subLocality // 区县
-                            let subThoroughfare = placemark.subThoroughfare // 街道
-                            let administrativeArea = placemark.administrativeArea // 省份
-                            let subAdministrativeArea = placemark.subAdministrativeArea
-                            
-                            //                            debugPrint("subThoroughfare ==== \(subThoroughfare), \(subLocality), \(administrativeArea), = \(subAdministrativeArea)")
-                            
-                        } onDismiss: {
-                            self.isShowingSearchCommunityView = false
-                        }
-                    })
-                    
-                    RowViewStyle1(title: "方式", text: $rentalMethod, placeholder: "请输入小区名称") {
-                        isShowingActionSheetOfRoomType = true // 点击时显示ActionSheet
-                    }
-                    .actionSheet(isPresented: $isShowingActionSheetOfRoomType) { // ActionSheet的定义
-                        ActionSheet(title: Text("选择租赁方式"), message: nil, buttons: [
-                            .default(Text("整租")) { rentalMethod = "整租" },
-                            .default(Text("合租")) { rentalMethod = "合租" },
-                            .cancel()
-                        ])
-                    }
-                    
-                    RowViewStyleWithInput(title: "楼号", text: $building, placeholder: "请输入楼号,如1号楼输入: 1", keyboardType: .numberPad)
-                        .focused($isTextFieldFocused)
-                    RowViewStyleWithInput(title: "单元", text: $unit, placeholder: "请输入单元号,如2单元输入: 2", keyboardType: .numberPad)
-                        .focused($isTextFieldFocused)
-                    RowViewStyleWithInput(title: "房号", text: $houseNumber, placeholder: "请输入房号,如301单元输入: 301")
-                        .focused($isTextFieldFocused)
-                    if self.rentalMethod == "合租" {
-                        RowViewStyleWithInput(title: "房间", text: $roomNumber, placeholder: "(选填)房间编码,如A房间: A")
-                            .focused($isTextFieldFocused)
-                    }
-                    RowViewStyleWithInput(title: "租金", text: $price, placeholder: "如期望5000元,请输入: 5000", keyboardType: .decimalPad)
-                        .focused($isTextFieldFocused)
-                    
-                    
-                    
-//                    GridTagsView(title: "房型", viewModel: gridTagsViewModelOfRoomType, columns: columns3)
-//                        .id("房型")
-//                        .padding(.vertical, 16)
-//                    
-//                    GridTagsView(title: "状态", viewModel: gridTagsViewModelOfStatus, columns: columns3)
-//                        .id("状态")
-//                        .padding(.vertical, 16)
-//                    
-//                    GridTagsView(title: "方向", viewModel: gridTagsViewModelOfOrientation, columns: columns4)
-//                        .id("状态")
-//                        .padding(.vertical, 16)
-                    
-                    
-                    VStack(alignment: .center, spacing: 8) {
-                        FlowLayoutGridView(title: "房型", viewModel: gridTagsViewModelOfRoomType)
-                            .id("房型")
-//                            .padding(.vertical, 16)
-                        FlowLayoutGridView(title: "状态", viewModel: gridTagsViewModelOfStatus)
-                            .id("状态")
-//                            .padding(.vertical, 16)
-                        FlowLayoutGridView(title: "朝向", viewModel: gridTagsViewModelOfOrientationFlowLayout)
-                        
-                        FlowLayoutGridView(title: "付款方式", viewModel: gridTagsViewModelOfPaymentMethod)
-                        
-                        FlowLayoutGridView(title: "装修状况", viewModel: gridTagsViewModelOfDecoration)
-                        
-                        MultiFlowLayoutGridView(title: "设备配置", viewModel: multiTagsViewModelOfFacilities)
-                        
-                        MultiFlowLayoutGridView(title: "房源标签", viewModel: multiTagsViewModelOfTags)
-                        
-                    }
-                    .padding(.vertical, 8)
-                    
-                    
-                }
-                .padding(8)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("完成") {
-                            isTextFieldFocused = false
-                        }
-                    }
-                }
-                
-                
+        ZStack {
+            NavigationView {
                 VStack {
-                    Spacer()
-                    FooterView {
-                        onSubmit()
+                    
+                    ScrollView {
+                        //                    ImagePickerCoordinatorView
+                        ImageBrowserView(images: $images)
+                        
+                        RowViewStyle1(title: "城市", text: Binding<String>(
+                            get: { self.city ?? self.infoViewModel.city ?? "" },
+                            set: { self.city = $0 }
+                        ), placeholder: "选择房源所在的城市") {
+                            self.isShowingSearchCityView = true
+                        }
+//                        .fullScreenCover(isPresented: $isShowingSearchCityView, content: {
+                        .sheet(isPresented: $isShowingSearchCityView, content: {
+                            CitySearchView { district in
+                                self.isShowingSearchCityView = false
+                                city = district.name
+                                citycode = district.citycode
+                            } onDismiss: {
+                                self.isShowingSearchCityView = false
+                            }
+                        })
+                        
+                        RowViewStyle1(title: "小区", text: Binding<String>(
+                            get: { self.community ?? self.infoViewModel.community ?? "" },
+                            set: { self.community = $0 }
+                        ), placeholder: "请输入小区名称") {
+                            self.isShowingSearchCommunityView = true
+                        }
+//                        .fullScreenCover(isPresented: $isShowingSearchCommunityView, content: {
+                        .sheet(isPresented: $isShowingSearchCommunityView, content: {
+                            CommunitySearchView(latitude: lat ?? (infoViewModel.lat ?? 40.052978), longitude: lon ?? (infoViewModel.lon ?? 116.306121), city: city ?? infoViewModel.city ?? "")
+                            { item in
+                                self.isShowingSearchCommunityView = false
+                                community = item.name ?? ""
+                                let placemark = item.placemark
+                                lat = placemark.coordinate.latitude
+                                lon = placemark.coordinate.longitude
+                                province = placemark.administrativeArea // 省份
+                                city = placemark.locality // 市
+                                district = placemark.subLocality // 区县
+                                
+                                let subLocality = placemark.subLocality // 区县
+                                let subThoroughfare = placemark.subThoroughfare // 街道
+                                let administrativeArea = placemark.administrativeArea // 省份
+                                let subAdministrativeArea = placemark.subAdministrativeArea
+                                
+                                //                            debugPrint("subThoroughfare ==== \(subThoroughfare), \(subLocality), \(administrativeArea), = \(subAdministrativeArea)")
+                                
+                            } onDismiss: {
+                                self.isShowingSearchCommunityView = false
+                            }
+                        })
+                        
+                        RowViewStyle1(title: "方式", text: $rentalMethod, placeholder: "请选择租赁方式") {
+                            isShowingActionSheetOfRoomType = true // 点击时显示ActionSheet
+                        }
+                        .actionSheet(isPresented: $isShowingActionSheetOfRoomType) { // ActionSheet的定义
+                            ActionSheet(title: Text("选择租赁方式"), message: nil, buttons: [
+                                .default(Text("整租")) { rentalMethod = "整租" },
+                                .default(Text("合租")) { rentalMethod = "合租" },
+                                .cancel()
+                            ])
+                        }
+                        
+                        RowViewStyleWithInput(title: "楼号", text: $building, placeholder: "请输入楼号,如1号楼输入: 1", keyboardType: .numberPad)
+                            .focused($isTextFieldFocused)
+                        RowViewStyleWithInput(title: "单元", text: $unit, placeholder: "请输入单元号,如2单元输入: 2", keyboardType: .numberPad)
+                            .focused($isTextFieldFocused)
+                        RowViewStyleWithInput(title: "房号", text: $houseNumber, placeholder: "请输入房号,如301单元输入: 301")
+                            .focused($isTextFieldFocused)
+                        if self.rentalMethod == "合租" {
+                            RowViewStyleWithInput(title: "房间", text: $roomNumber, placeholder: "(选填)房间编码,如A房间: A")
+                                .focused($isTextFieldFocused)
+                        }
+                        RowViewStyleWithInput(title: "租金", text: $price, placeholder: "如期望5000元,请输入: 5000", keyboardType: .decimalPad)
+                            .focused($isTextFieldFocused)
+                        
+                        VStack(alignment: .center, spacing: 8) {
+                            FlowLayoutGridView(title: "房型", viewModel: gridTagsViewModelOfRoomType)
+                                .id("房型")
+                            //                            .padding(.vertical, 16)
+                            FlowLayoutGridView(title: "状态", viewModel: gridTagsViewModelOfStatus)
+                                .id("状态")
+                            if gridTagsViewModelOfStatus.selectedItem == "预租" {
+                                withAnimation(.snappy) {
+                                    VStack {
+                                        CustomDatePickerView(viewModel: dateViewModel)
+                                            .background(Color.bg_unselected)
+//                                            .background(Color(.secondarySystemBackground))
+                                            .cornerRadius(16)
+                                    }
+                                    .padding(.horizontal, 16)
+                                    .padding([.bottom], 24)
+                                    .matchedGeometryEffect(id: "calendar", in: namespace)
+                                }
+                            }
+                            
+                            FlowLayoutGridView(title: "朝向", viewModel: gridTagsViewModelOfOrientationFlowLayout)
+                            
+                            FlowLayoutGridView(title: "装修状况", viewModel: gridTagsViewModelOfDecoration)
+                            
+                            MultiFlowLayoutGridView(title: "付款方式", viewModel: multiTagsViewModelOfPaymentMethod)
+                            
+                            MultiFlowLayoutGridView(title: "设备配置", viewModel: multiTagsViewModelOfFacilities)
+                            
+                            MultiFlowLayoutGridView(title: "房源标签", viewModel: multiTagsViewModelOfTags)
+                            
+                        }
+                        .padding(.vertical, 8)
+                        
                     }
-                    .padding()
+                    .padding(8)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("完成") {
+                                isTextFieldFocused = false
+                            }
+                        }
+                    }
+                    
+                    
+                    VStack {
+                        Spacer()
+                        FooterView {
+                            onSubmit()
+                        }
+                        .padding()
+                    }
+                    .frame(height: 80, alignment: .center)
+                    
                 }
-                .frame(height: 80, alignment: .center)
+//                .padding(16)
+                .navigationBarTitle(Text("发布房源"))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            onDismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.gray)
+                        })
+                        
+                    }
+                })
                 
             }
-            .navigationBarTitle(Text("发布房源"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        onDismiss()
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.gray)
-                    })
-                    
-                }
-            })
+            
         }
-//        .toast(isPresented: $toastManager.isShowing) {
-//            ToastView(message: toastManager.message, type: toastManager.type)
-//        }
     }
     
     func onSubmit() {
@@ -265,6 +283,22 @@ struct UploadView: View {
         
         let rentalMethodInt = rentalMethod == "整租" ? 1 : 2
         let priceDouble = Double(price) ?? 0
+        // 租赁状态: 默认1
+        let statusValue = HouseStatus(rawValue: gridTagsViewModelOfStatus.selectedItem ?? "可租")?.value() ?? 1
+        // 房型: 默认为空字符
+        let romTypeValue = RoomType(rawValue: gridTagsViewModelOfRoomType.selectedItem ?? "")?.value() ?? ""
+        
+        let roomOrientationValue = RoomOrientation(rawValue: gridTagsViewModelOfOrientation.selectedItem ?? "")?.value() ?? ""
+        /// 付款方式
+        let paymentMethods = PaymentMethodStruct().getPaymentMethods(multiTagsViewModelOfPaymentMethod.selectedItems)
+        
+        /// 装修状况: 默认简装
+        let decorationValue = HouseDecoration(rawValue: gridTagsViewModelOfDecoration.selectedItem ?? "简装")?.value() ?? "1"
+        let facilitiesList = Array(multiTagsViewModelOfFacilities.selectedItems)
+        
+        let tagList = Array(multiTagsViewModelOfTags.selectedItems)
+        
+        
         let router = HouseApi.uploadHouse(images: images,
                                           price: priceDouble,
                                           rentalMethod: rentalMethodInt,
@@ -280,19 +314,19 @@ struct UploadView: View {
                                           houseNumber: houseNumber,
                                           roomNumber: roomNumber,
                                           contact: contact,
-                                          status: status,
-                                          roomType: roomType,
+                                          status: statusValue,
+                                          roomType: romTypeValue,
                                           floor: floor,
                                           totalFloors: totalFloors,
                                           area: area,
-                                          orientation: orientation,
+                                          orientation: roomOrientationValue,
                                           availableDate: availableDate,
                                           leaseTerm: leaseTerm,
-                                          paymentMethod: paymentMethod,
-                                          decoration: decoration,
+                                          paymentMethod: paymentMethods,
+                                          decoration: decorationValue,
                                           desc: desc,
-                                          facilities: facilities,
-                                          tags: tags,
+                                          facilities: facilitiesList,
+                                          tags: tagList,
                                           petPolicy: petPolicy,
                                           moveInRequirements: moveInRequirements,
                                           additionalFees: additionalFees)

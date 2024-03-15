@@ -77,10 +77,10 @@ struct ImageBrowserView: View {
         if images.count < maxImageCount {
             Button(action: { showingImagePicker = true }) {
                 Image(systemName: "plus").imageScale(.large)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(.placeholderText))
                     .frame(width: 100, height: 100)
                     .foregroundColor(.gray)
-                    .background(.gray).opacity(0.08)
+                    .background(Color.bg_unselected)//.opacity(0.08)
                     .cornerRadius(9) // 回复注释，确保一致性
             }
             .interactiveDismissDisabled()

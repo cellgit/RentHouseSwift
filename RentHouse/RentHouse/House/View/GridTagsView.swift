@@ -49,12 +49,12 @@ struct GridTagsView: View {
                         Text(item)
                             .padding() // 增加填充，让按钮更大，更易点击
                             .frame(maxWidth: .infinity) // 让按钮宽度扩展至最大
-                            .background(Color(.secondarySystemFill))
+                            .background(Color.bg_unselected)
                             .foregroundColor(.gray)
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(viewModel.selectedItem == item ? Color.blue : Color.clear, lineWidth: viewModel.selectedItem == item ? 2 : 0)
+                                    .stroke(viewModel.selectedItem == item ? Color.blue_selected : Color.clear, lineWidth: viewModel.selectedItem == item ? 2 : 0)
                             )
                             .animation(.easeInOut, value: viewModel.selectedItem)
                             

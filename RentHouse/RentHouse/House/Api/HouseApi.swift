@@ -60,7 +60,7 @@ enum HouseApi: ApiRouter {
         // 租期
         leaseTerm: String,
         // 付款方式：1押一付一、2押一付三、3押一付六、4押一付十二
-        paymentMethod: String,
+        paymentMethod: [String],
         // 装修情况 (decoration)：1精装修、2简装修、3豪华装修、4毛坯
         decoration: String,
         // 描述

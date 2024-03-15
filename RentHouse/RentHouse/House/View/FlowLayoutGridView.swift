@@ -91,12 +91,12 @@ struct WrapFlowLayout: View {
     private func item(for text: String) -> some View {
         Text(text)
             .padding()
-            .background(Color(.secondarySystemFill))
+            .background(Color.bg_unselected)
             .foregroundColor(.gray)
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(selectedItem == text ? Color.blue : Color.clear, lineWidth: selectedItem == text ? 2 : 0)
+                    .stroke(selectedItem == text ? Color.blue_selected : Color.clear, lineWidth: selectedItem == text ? 2 : 0)
             )
     }
 

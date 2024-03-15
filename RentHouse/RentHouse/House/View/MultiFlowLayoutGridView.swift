@@ -36,9 +36,11 @@ struct MultiFlowLayoutGridView: View {
                 .bold()
                 .padding(.horizontal, 16)
 
-            MultiWrapFlowLayout(items: viewModel.items, selectedItems: viewModel.selectedItems, spacing: 8) { item in
+            MultiWrapFlowLayout(items: viewModel.items, selectedItems: viewModel.selectedItems, spacing: 4) { item in
                 viewModel.toggleSelection(for: item) // 更新为多选逻辑
             }
+//            .padding(.horizontal, 0)
+//            .padding(.vertical, 0)
             .padding(16)
         }
     }
@@ -100,14 +102,16 @@ struct MultiWrapFlowLayout: View {
 
     private func item(for text: String) -> some View {
         Text(text)
-            .padding()
-            .background(Color(.secondarySystemFill))
+//            .padding()
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(Color.bg_unselected)
             .foregroundColor(.gray)
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     // 修改这里来反映多选状态
-                    .stroke(selectedItems.contains(text) ? Color.blue : Color.clear, lineWidth: selectedItems.contains(text) ? 2 : 0)
+                    .stroke(selectedItems.contains(text) ? Color.blue_selected : Color.clear, lineWidth: selectedItems.contains(text) ? 2 : 0)
             )
     }
     
