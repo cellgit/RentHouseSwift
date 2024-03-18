@@ -59,7 +59,7 @@ struct House: Decodable, Identifiable {
     var houseNumber: String?
     var roomNumber: String?
     var status: Int?
-    var paymentMethod: Int?
+    var paymentMethod: [String]?
     var center: Center?
     var location: Location?
     var roomType: String?

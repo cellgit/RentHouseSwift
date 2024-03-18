@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import UIKit
+import AVFoundation
 
 
 enum HouseApi: ApiRouter {
@@ -15,6 +16,8 @@ enum HouseApi: ApiRouter {
     case uploadHouse(
         // 房源图片
         images: [UIImage],
+        // 视频URL(从相册取出的视频URL)
+        videos: [URL],
         // 价格
         price: Double,
         // 租赁方式: 1整租、2合租
@@ -122,6 +125,7 @@ enum HouseApi: ApiRouter {
     func configureMultipartFormData(_ formData: MultipartFormData) {
         guard case let .uploadHouse(
             images,
+            videos,
             price,
             rentalMethod,
             lon,
@@ -154,20 +158,43 @@ enum HouseApi: ApiRouter {
             additionalFees
         ) = self else { return }
         
-//        images.forEach { image in
-////            let imageData1 = image.jpegData(compressionQuality: 1)
-////            debugPrint("Not Optimized Image Size: \(String(describing: imageData1?.count))")
-//            if let imageData = image.compress(to: 0.1) {
-//                debugPrint("Optimized Image Size: \(imageData.count)")
-//                formData.append(imageData, withName: "images", fileName: "house.jpg", mimeType: "image/jpeg")
-//            }
-//        }
         
-        
+        /// 图片data
         images.forEach { image in
             if let imageData = image.toHEIF(compressionQuality: 0.3) {
                 debugPrint("Optimized Image Size: \(imageData.count)")
                 formData.append(imageData, withName: "images", fileName: "house.heic", mimeType: "image/heic")
+            }
+        }
+        
+        /// 图片的封面图data
+        if !images.isEmpty, let image = images.first {
+            [image].forEach { image in
+                if let imageData = image.toHEIF(compressionQuality: 0.9) {
+                    debugPrint("Optimized Photos Cover Image Size: \(imageData.count)")
+                    formData.append(imageData, withName: "coverImage", fileName: "house_cover.heic", mimeType: "image/heic")
+                }
+            }
+        }
+        
+        /// 视频封面图data
+        if !videos.isEmpty, let url = videos.first {
+            let image = loadThumbnail(from: url)
+            [image].forEach { image in
+                if let imageData = image.toHEIF(compressionQuality: 0.9) {
+                    debugPrint("Optimized Video Cover Image Size: \(imageData.count)")
+                    formData.append(imageData, withName: "coverVideoImage", fileName: "video_house_cover.heic", mimeType: "image/heic")
+                }
+            }
+        }
+        
+        /// 视频data
+        videos.forEach { url in
+            if let videoData = try? Data(contentsOf: url) {
+                debugPrint("Video Size: \(videoData.count)")
+                formData.append(videoData, withName: "videos", fileName: "video.mp4", mimeType: "video/mp4")
+            } else {
+                debugPrint("未获取到video data")
             }
         }
         
@@ -231,4 +258,46 @@ enum HouseApi: ApiRouter {
         }
     }
     
+    
+    
 }
+
+
+func deleteFile(at url: URL) {
+    do {
+        try FileManager.default.removeItem(at: url)
+        print("Successfully deleted file at \(url)")
+    } catch {
+        print("Could not delete file at \(url): \(error)")
+    }
+}
+
+
+func temporaryFileURL(fileName: String) -> URL {
+    let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+    return temporaryDirectoryURL.appendingPathComponent(fileName)
+}
+
+
+/// 获取第一帧缩略图
+private func loadThumbnail(from url: URL) -> UIImage {
+    var thumbnail: UIImage = UIImage()
+    let asset = AVAsset(url: url)
+    let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+    assetImgGenerate.appliesPreferredTrackTransform = true
+    let time = CMTimeMakeWithSeconds(Float64(1), preferredTimescale: 600)
+    do {
+        let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+        thumbnail = UIImage(cgImage: img)
+    } catch {
+        print("Error generating thumbnail: \(error.localizedDescription)")
+    }
+    return thumbnail
+}
+
+
+
+//// 示例使用
+//let outputHEVCURL = temporaryFileURL(fileName: "tempHEVCVideo.mp4")
+//let finalOutputURL = temporaryFileURL(fileName: "finalCompressedVideo.mp4")
+

@@ -84,6 +84,33 @@ struct MultipartFormDataEncoder: ParameterEncoder {
         urlRequest.httpBody = createBody(with: parameters, boundary: boundary)
     }
     
+//    private func createBody(with parameters: Parameters, boundary: String) -> Data {
+//        var body = Data()
+//        
+//        for (key, value) in parameters {
+//            if let imageData = value as? Data, key.lowercased().contains("image") {
+//                body.append("--\(boundary)\r\n")
+//                body.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"image.jpg\"\r\n")
+//                body.append("Content-Type: image/jpeg\r\n\r\n")
+//                body.append(imageData)
+//                body.append("\r\n")
+//            } else if let videoData = value as? Data, key.lowercased().contains("video") {
+//                body.append("--\(boundary)\r\n")
+//                body.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"video.mp4\"\r\n")
+//                body.append("Content-Type: video/mp4\r\n\r\n")
+//                body.append(videoData)
+//                body.append("\r\n")
+//            } else {
+//                body.append("--\(boundary)\r\n")
+//                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+//                body.append("\(value)\r\n")
+//            }
+//        }
+//        
+//        body.append("--\(boundary)--\r\n")
+//        return body
+//    }
+    
     private func createBody(with parameters: Parameters, boundary: String) -> Data {
         var body = Data()
         

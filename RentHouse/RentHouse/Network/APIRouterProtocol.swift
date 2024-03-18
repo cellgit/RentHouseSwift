@@ -19,7 +19,7 @@ protocol ApiRouter: URLRequestConvertible {
 
 extension ApiRouter {
     var baseURL: URL {
-        URL(string: "http://47.116.24.54:3001/api/v1")!
+        URL(string: "http://47.116.24.54:3002/api/v1")!
     }
     
     func asURLRequest() throws -> URLRequest {

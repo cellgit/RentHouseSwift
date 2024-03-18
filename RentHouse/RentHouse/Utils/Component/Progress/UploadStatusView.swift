@@ -38,7 +38,17 @@ struct UploadStatusView: View {
         switch status {
         case .preparing:
             Image (systemName: "arrow.up" )
-                .foregroundColor(.green)
+//                .phaseAnimator([false, true], content: { content, phase in
+//                    content
+//                        .foregroundColor(phase ? .green : .primary)
+//                }, animation: { phase in
+//                        .easeInOut(duration: 1.0)
+//                })
+                .phaseAnimator([false, true]) { content, phase in
+                    content
+                        .foregroundColor(phase ? .green : .blue)
+                        .scaleEffect(phase ? 1 : 0.92)
+                }
     //            .symbolEffect(.pulse, value: true)
                 .font(Font.system(size: 12))
         case .uploading:

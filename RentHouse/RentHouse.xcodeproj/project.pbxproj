@@ -28,6 +28,9 @@
 		CE42F67E2B6510D300124E92 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */; };
 		CE42F6802B65134200124E92 /* APIRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */; };
 		CE4F49F02BA4998D002CE2C7 /* UploadViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49EF2BA4998D002CE2C7 /* UploadViewEnum.swift */; };
+		CE4F49F22BA69A1E002CE2C7 /* VideoPickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F12BA69A1E002CE2C7 /* VideoPickerRepresentable.swift */; };
+		CE4F49F42BA69C0F002CE2C7 /* VideoBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F32BA69C0F002CE2C7 /* VideoBrowserView.swift */; };
+		CE4F49F62BA6AB4F002CE2C7 /* HevcFormatConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F52BA6AB4F002CE2C7 /* HevcFormatConvert.swift */; };
 		CE56BC6D2BA2E6DD009168CC /* GridTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */; };
 		CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */; };
 		CE56BC712BA32D56009168CC /* MultiFlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC702BA32D56009168CC /* MultiFlowLayoutGridView.swift */; };
@@ -151,6 +154,9 @@
 		CE42F67D2B6510D300124E92 /* ParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoder.swift; sourceTree = "<group>"; };
 		CE42F67F2B65134200124E92 /* APIRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouterProtocol.swift; sourceTree = "<group>"; };
 		CE4F49EF2BA4998D002CE2C7 /* UploadViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewEnum.swift; sourceTree = "<group>"; };
+		CE4F49F12BA69A1E002CE2C7 /* VideoPickerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPickerRepresentable.swift; sourceTree = "<group>"; };
+		CE4F49F32BA69C0F002CE2C7 /* VideoBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoBrowserView.swift; sourceTree = "<group>"; };
+		CE4F49F52BA6AB4F002CE2C7 /* HevcFormatConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HevcFormatConvert.swift; sourceTree = "<group>"; };
 		CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTagsView.swift; sourceTree = "<group>"; };
 		CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutGridView.swift; sourceTree = "<group>"; };
 		CE56BC702BA32D56009168CC /* MultiFlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFlowLayoutGridView.swift; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 				CEBEFA5F2B9602B2009A6DB0 /* KeyboardResponder.swift */,
 				CEBEFA632B96C8BC009A6DB0 /* PhotoPicker.swift */,
 				CEBEFA652B96E62B009A6DB0 /* PhotoGridView.swift */,
+				CE4F49F32BA69C0F002CE2C7 /* VideoBrowserView.swift */,
 				CEBEFA6E2B974E5C009A6DB0 /* ToastManager.swift */,
 			);
 			path = Component;
@@ -597,6 +604,7 @@
 			children = (
 				CEBEFA6C2B970696009A6DB0 /* SKPhotoBrowserRepresentable.swift */,
 				CEBEFA722B9855AD009A6DB0 /* ImagePickerRepresentable.swift */,
+				CE4F49F12BA69A1E002CE2C7 /* VideoPickerRepresentable.swift */,
 			);
 			path = Representable;
 			sourceTree = "<group>";
@@ -655,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE9141E2B9D598800ADDB62 /* HeicFormatConvert.swift */,
+				CE4F49F52BA6AB4F002CE2C7 /* HevcFormatConvert.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -938,8 +947,10 @@
 				CEF6B6652B664553006CE0F1 /* User.swift in Sources */,
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
 				CECB73012BA13F7E006A523A /* ProgressHandler.swift in Sources */,
+				CE4F49F22BA69A1E002CE2C7 /* VideoPickerRepresentable.swift in Sources */,
 				CEBEFA7A2B996F28009A6DB0 /* ContentView2.swift in Sources */,
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
+				CE4F49F42BA69C0F002CE2C7 /* VideoBrowserView.swift in Sources */,
 				CEBEFA552B958666009A6DB0 /* SearchService.swift in Sources */,
 				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
@@ -960,6 +971,7 @@
 				CEE9141F2B9D598800ADDB62 /* HeicFormatConvert.swift in Sources */,
 				CECB730A2BA27EE1006A523A /* MagicProgressView.swift in Sources */,
 				CECB730C2BA27FD6006A523A /* DefaultSectorView.swift in Sources */,
+				CE4F49F62BA6AB4F002CE2C7 /* HevcFormatConvert.swift in Sources */,
 				CECB72EF2B9F3CDE006A523A /* Binding+extension.swift in Sources */,
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
 				CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */,
@@ -1147,7 +1159,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -1189,7 +1201,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;

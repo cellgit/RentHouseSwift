@@ -67,7 +67,7 @@ struct UploadView: View {
     @State private var orientation: String = "1"
     @State private var availableDate: String = "2024-03-22"
     @State private var leaseTerm: String = "1年"
-    @State private var paymentMethod: String = ""
+    @State private var paymentMethod: Int = 2//""
     @State private var decoration: String = ""
     @State private var desc: String = ""
     @State private var facilities: [String] = ["桌子", "椅子", "床", "空调", "热水器","冰箱"]
@@ -121,14 +121,18 @@ struct UploadView: View {
     
     @State var actionSheets = ActionSheetsState()
     
+    @State var videoURLs: [URL] = []
+    
     var body: some View {
         ZStack {
             NavigationView {
                 VStack {
                     
                     ScrollView {
-                        //                    ImagePickerCoordinatorView
+                        
                         ImageBrowserView(images: $images)
+                        
+                        VideoBrowserView(videoURLs: $videoURLs)
                         
                         RowViewStyle1(title: "城市", text: Binding<String>(
                             get: { self.city ?? self.infoViewModel.city ?? "" },
@@ -250,7 +254,12 @@ struct UploadView: View {
                     VStack {
                         Spacer()
                         FooterView {
+                            
                             onSubmit()
+                            
+//                            Task {
+//                                await onSubmit()
+//                            }
                         }
                         .padding()
                     }
@@ -299,42 +308,124 @@ struct UploadView: View {
         let tagList = Array(multiTagsViewModelOfTags.selectedItems)
         
         
-        let router = HouseApi.uploadHouse(images: images,
-                                          price: priceDouble,
-                                          rentalMethod: rentalMethodInt,
-                                          lon: lon ?? infoViewModel.lon ?? 116,
-                                          lat: lat ?? infoViewModel.lat ?? 40,
-                                          province: province ?? "",
-                                          city: city ?? (infoViewModel.city ?? ""),
-                                          district: district ?? "",
-                                          citycode: citycode ?? (infoViewModel.citycode ?? ""),
-                                          community: community ?? (infoViewModel.community ?? ""),
-                                          building: building,
-                                          unit: unit,
-                                          houseNumber: houseNumber,
-                                          roomNumber: roomNumber,
-                                          contact: contact,
-                                          status: statusValue,
-                                          roomType: romTypeValue,
-                                          floor: floor,
-                                          totalFloors: totalFloors,
-                                          area: area,
-                                          orientation: roomOrientationValue,
-                                          availableDate: availableDate,
-                                          leaseTerm: leaseTerm,
-                                          paymentMethod: paymentMethods,
-                                          decoration: decorationValue,
-                                          desc: desc,
-                                          facilities: facilitiesList,
-                                          tags: tagList,
-                                          petPolicy: petPolicy,
-                                          moveInRequirements: moveInRequirements,
-                                          additionalFees: additionalFees)
         
-        uploadStateManager.startUpload(router: router)
+        var selectedDateString: String = ""
+        if statusValue == 3 { // 预租则选择的日期
+            selectedDateString = "\(dateViewModel.selectedDate.timeIntervalSince1970)"
+            debugPrint("selectedDate === \(selectedDateString) ===today== \(Date().timeIntervalSince1970)")
+        }
+        else if statusValue == 1 { // 可租,即今日
+            selectedDateString = "\(Date().timeIntervalSince1970)"
+        }
+        else { // 已租和下架则没有日期
+            selectedDateString = ""
+        }
+        
+//        let router = HouseApi.uploadHouse(images: images,
+//                                          videos: videoURLs,
+//                                          price: priceDouble,
+//                                          rentalMethod: rentalMethodInt,
+//                                          lon: lon ?? infoViewModel.lon ?? 116,
+//                                          lat: lat ?? infoViewModel.lat ?? 40,
+//                                          province: province ?? "",
+//                                          city: city ?? (infoViewModel.city ?? ""),
+//                                          district: district ?? "",
+//                                          citycode: citycode ?? (infoViewModel.citycode ?? ""),
+//                                          community: community ?? (infoViewModel.community ?? ""),
+//                                          building: building,
+//                                          unit: unit,
+//                                          houseNumber: houseNumber,
+//                                          roomNumber: roomNumber,
+//                                          contact: contact,
+//                                          status: statusValue,
+//                                          roomType: romTypeValue,
+//                                          floor: floor,
+//                                          totalFloors: totalFloors,
+//                                          area: area,
+//                                          orientation: roomOrientationValue,
+//                                          availableDate: selectedDateString, //availableDate
+//                                          leaseTerm: leaseTerm,
+//                                          paymentMethod: paymentMethods,
+//                                          //                                          paymentMethod: paymentMethod,
+//                                          decoration: decorationValue,
+//                                          desc: desc,
+//                                          facilities: facilitiesList,
+//                                          tags: tagList,
+//                                          petPolicy: petPolicy,
+//                                          moveInRequirements: moveInRequirements,
+//                                          additionalFees: additionalFees)
+//        
+//        uploadStateManager.startUpload(router: router)
+        
+        uploadStateManager.upload(images: images,
+                                  videos: videoURLs,
+                                  price: priceDouble,
+                                  rentalMethod: rentalMethodInt,
+                                  lon: lon ?? infoViewModel.lon ?? 116,
+                                  lat: lat ?? infoViewModel.lat ?? 40,
+                                  province: province ?? "",
+                                  city: city ?? (infoViewModel.city ?? ""),
+                                  district: district ?? "",
+                                  citycode: citycode ?? (infoViewModel.citycode ?? ""),
+                                  community: community ?? (infoViewModel.community ?? ""),
+                                  building: building,
+                                  unit: unit,
+                                  houseNumber: houseNumber,
+                                  roomNumber: roomNumber,
+                                  contact: contact,
+                                  status: statusValue,
+                                  roomType: romTypeValue,
+                                  floor: floor,
+                                  totalFloors: totalFloors,
+                                  area: area,
+                                  orientation: roomOrientationValue,
+                                  availableDate: selectedDateString, //availableDate
+                                  leaseTerm: leaseTerm,
+                                  paymentMethod: paymentMethods,
+                                  //                                          paymentMethod: paymentMethod,
+                                  decoration: decorationValue,
+                                  desc: desc,
+                                  facilities: facilitiesList,
+                                  tags: tagList,
+                                  petPolicy: petPolicy,
+                                  moveInRequirements: moveInRequirements,
+                                  additionalFees: additionalFees)
+        
         
         onDismiss()
+        
     }
+    
+    
+//    func getVideoUrls(videos: [URL]) async -> [URL] {
+//        var urls: [URL] = []
+//        videos.forEach { url in
+//            Task {
+//                
+//                let id = Date().timeIntervalSince1970
+//                let outputHEVCURL = temporaryFileURL(fileName: "\(id)tempHEVCVideo.mp4")
+//                let finalOutputURL = temporaryFileURL(fileName: "\(id)finalCompressedVideo.mp4")
+//                
+//                let result = await url.convertAndCompressVideo(inputURL: url, outputHEVCURL: outputHEVCURL, finalOutputURL: finalOutputURL, resolution: .res1080p)
+//                
+//                defer {
+//                    // 无论成功还是失败，完成后都删除临时文件
+//                    deleteFile(at: outputHEVCURL)
+//                    deleteFile(at: finalOutputURL)
+//                }
+//                
+//                switch result {
+//                case .success(let url):
+//                    print("Video processed successfully: \(url)")
+//                    urls.append(url)
+//                case .failure(let error):
+//                    print("Error processing video: \(error.localizedDescription)")
+//                }
+//            }
+//            
+//        }
+//        return urls
+//    }
     
 }
 
