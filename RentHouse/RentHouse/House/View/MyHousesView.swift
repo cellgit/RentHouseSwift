@@ -13,6 +13,8 @@ struct MyHousesView: View {
     
     @Namespace var namespace
     
+    @EnvironmentObject var tabBarState: TabBarStateManager
+    
     
     @ObservedObject var locationService = LocationService()
     @ObservedObject var cityDataManager = CityDataManager.shared
@@ -50,54 +52,62 @@ struct MyHousesView: View {
     
     var body: some View {
         NavigationView {
-                VStack {
-                    // 在视图中使用
-                    if uploadStateManager.isUploading {
-//                        ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
-                    }
-                    if isChangeListMode {
-                        contentListView
-                            .matchedGeometryEffect(id: "list", in: namespace)
-                            .transition(.asymmetric(insertion: .opacity.combined(with: .identity), removal: .opacity.combined(with: .identity)))
-                    }
-                    else {
-                        List {
-                            GridListView(viewModel: viewModel)
-                                .matchedGeometryEffect(id: "list", in: namespace)
-                                .listRowBackground(Color.clear)
-                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        }
+            VStack {
+                // 在视图中使用
+                if uploadStateManager.isUploading {
+                    //                        ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
+                }
+                if isChangeListMode {
+                    contentListView
+                        .matchedGeometryEffect(id: "list", in: namespace)
                         .transition(.asymmetric(insertion: .opacity.combined(with: .identity), removal: .opacity.combined(with: .identity)))
-//                        .padding(.horizontal, 8)
-                        .background(Color(.secondarySystemBackground))
-                    }
                 }
-                .animation(.easeInOut(duration: 0.3), value: isChangeListMode)
-                .navigationBarTitle(Text("搜索"))
-                .navigationBarTitleDisplayMode(.large)
-                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
-                .onChange(of: searchText) { _ in
-                    // 当搜索框被激活时，更新状态以触发动画
-                    withAnimation {
-                        isSearchActive = !searchText.isEmpty
+                else {
+                    List {
+                        GridListView(viewModel: viewModel)
+                            .matchedGeometryEffect(id: "list", in: namespace)
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
+                    .transition(.asymmetric(insertion: .opacity.combined(with: .identity), removal: .opacity.combined(with: .identity)))
+                    //                        .padding(.horizontal, 8)
+                    .background(Color(.secondarySystemBackground))
                 }
-                .navigationBarItems(leading: locationButton)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        HStack(alignment: .center, spacing: 0, content: {
-                            ProgressViewOverlay()
-                            uploadButton//.padding(0)
-                            changeListModeButton//.padding(0)
-                        })
-                        
-                    }
+            }
+            .animation(.easeInOut(duration: 0.3), value: isChangeListMode)
+            .navigationBarTitle(Text("搜索"))
+            .navigationBarTitleDisplayMode(.large)
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
+            .onChange(of: searchText) { _ in
+                // 当搜索框被激活时，更新状态以触发动画
+                withAnimation {
+                    isSearchActive = !searchText.isEmpty
                 }
+            }
+            .navigationBarItems(leading: locationButton)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(alignment: .center, spacing: 0, content: {
+                        ProgressViewOverlay()
+                        uploadButton//.padding(0)
+                        changeListModeButton//.padding(0)
+                    })
+                    
+                }
+            }
+            .onAppear {
+                withAnimation {
+                    tabBarState.visible = .visible
+                }
+            }
+//            .onDisappear {
+//                tabBarState.visible = .hidden
+//            }
         }
-        .tabItem {
-            Image(systemName: "magnifyingglass")
-            Text("搜索")
-        }
+//        .tabItem {
+//            Image(systemName: "magnifyingglass")
+//            Text("搜索")
+//        }
         
     }
     
@@ -165,6 +175,7 @@ struct MyHousesView: View {
                     ForEach(houses, id: \.id) { house in
                         NavigationLink(destination: HouseDetailView(house: house)) {
                             HouseCell(house: house)
+                                
                         }
                     }
 //                    .padding(.horizontal, -4)
@@ -201,9 +212,24 @@ struct GridListView: View {
             if let houses = viewModel.houses, !houses.isEmpty {
                 AnyLayout(VerticalWaterfallLayout(columns: columns)) {
                     ForEach(houses, id: \.id) { house in
+                        
+//                        NavigationStack {
+//                            NavigationLink("Push") {
+//                                
+//                                Text("View 2!")
+//                                    .toolbar(.hidden, for: .tabBar)
+//                            }
+//                        }
+                        
                         NavigationLink(destination: HouseDetailView(house: house)) {
                             UploadHouseCell(house: house)
                         }
+                        
+//                        .toolbar(.hidden, for: .tabBar)
+                        
+//                        NavigationLink(destination: HouseDetailView(house: house)) {
+//                            UploadHouseCell(house: house)
+//                        }
                     }
                 }
             }

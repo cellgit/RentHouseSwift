@@ -31,6 +31,7 @@
 		CE4F49F22BA69A1E002CE2C7 /* VideoPickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F12BA69A1E002CE2C7 /* VideoPickerRepresentable.swift */; };
 		CE4F49F42BA69C0F002CE2C7 /* VideoBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F32BA69C0F002CE2C7 /* VideoBrowserView.swift */; };
 		CE4F49F62BA6AB4F002CE2C7 /* HevcFormatConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F52BA6AB4F002CE2C7 /* HevcFormatConvert.swift */; };
+		CE4F49F82BA874B9002CE2C7 /* HouseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F49F72BA874B9002CE2C7 /* HouseDetailView.swift */; };
 		CE56BC6D2BA2E6DD009168CC /* GridTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */; };
 		CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */; };
 		CE56BC712BA32D56009168CC /* MultiFlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC702BA32D56009168CC /* MultiFlowLayoutGridView.swift */; };
@@ -41,7 +42,7 @@
 		CE8005652B91748D00E1D683 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE8005642B91748D00E1D683 /* Kingfisher */; };
 		CEBA4DB52B8EE387006F078A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */; };
 		CEBA4DB62B8EE387006F078A /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAC2B8EE387006F078A /* House.swift */; };
-		CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */; };
+		CEBA4DB72B8EE387006F078A /* MapHouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAE2B8EE387006F078A /* MapHouseView.swift */; };
 		CEBA4DB82B8EE387006F078A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DAF2B8EE387006F078A /* HomeView.swift */; };
 		CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DB12B8EE387006F078A /* MockHomeService.swift */; };
 		CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */; };
@@ -157,6 +158,7 @@
 		CE4F49F12BA69A1E002CE2C7 /* VideoPickerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPickerRepresentable.swift; sourceTree = "<group>"; };
 		CE4F49F32BA69C0F002CE2C7 /* VideoBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoBrowserView.swift; sourceTree = "<group>"; };
 		CE4F49F52BA6AB4F002CE2C7 /* HevcFormatConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HevcFormatConvert.swift; sourceTree = "<group>"; };
+		CE4F49F72BA874B9002CE2C7 /* HouseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseDetailView.swift; sourceTree = "<group>"; };
 		CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTagsView.swift; sourceTree = "<group>"; };
 		CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutGridView.swift; sourceTree = "<group>"; };
 		CE56BC702BA32D56009168CC /* MultiFlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFlowLayoutGridView.swift; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 		CE56BC7E2BA43A11009168CC /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CEBA4DAC2B8EE387006F078A /* House.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
-		CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseDetailView.swift; sourceTree = "<group>"; };
+		CEBA4DAE2B8EE387006F078A /* MapHouseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHouseView.swift; sourceTree = "<group>"; };
 		CEBA4DAF2B8EE387006F078A /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEBA4DB12B8EE387006F078A /* MockHomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHomeService.swift; sourceTree = "<group>"; };
 		CEBA4DB22B8EE387006F078A /* HomeServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeServiceProtocol.swift; sourceTree = "<group>"; };
@@ -457,7 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				CEBA4DAF2B8EE387006F078A /* HomeView.swift */,
-				CEBA4DAE2B8EE387006F078A /* HouseDetailView.swift */,
+				CEBA4DAE2B8EE387006F078A /* MapHouseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -711,6 +713,7 @@
 			children = (
 				CEBEFA7D2B9993CE009A6DB0 /* UploadStateManager.swift */,
 				CEF6B65C2B663127006CE0F1 /* UploadView.swift */,
+				CE4F49F72BA874B9002CE2C7 /* HouseDetailView.swift */,
 				CE4F49EF2BA4998D002CE2C7 /* UploadViewEnum.swift */,
 				CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */,
 				CEBEFA482B9572DB009A6DB0 /* RowViewStyle1.swift */,
@@ -932,9 +935,10 @@
 				CECB72E42B9F08AE006A523A /* EqualVStack.swift in Sources */,
 				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
+				CE4F49F82BA874B9002CE2C7 /* HouseDetailView.swift in Sources */,
 				CECB73152BA2A83A006A523A /* UIResponder+Current.swift in Sources */,
 				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,
-				CEBA4DB72B8EE387006F078A /* HouseDetailView.swift in Sources */,
+				CEBA4DB72B8EE387006F078A /* MapHouseView.swift in Sources */,
 				CECB73032BA13FD2006A523A /* ProgressViewOverlay.swift in Sources */,
 				CEBEFA4B2B95751A009A6DB0 /* HouseInfoViewModel.swift in Sources */,
 				CECB72E82B9F08AE006A523A /* FlowLayout.swift in Sources */,

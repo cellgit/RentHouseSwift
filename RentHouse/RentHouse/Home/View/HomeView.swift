@@ -10,6 +10,8 @@ import Kingfisher
 
 struct HomeView: View {
     
+    @EnvironmentObject var tabBarState: TabBarStateManager
+    
 //    @ObservedObject var locationService = LocationService()
     @ObservedObject var cityDataManager = CityDataManager.shared
     @StateObject var viewModel = HomeViewModel(service: HomeService())
@@ -20,6 +22,14 @@ struct HomeView: View {
             VStack {
                 contentListView
             }
+            .onAppear {
+                withAnimation {
+                    tabBarState.visible = .visible
+                }
+            }
+//            .onDisappear {
+//                tabBarState.visible = .hidden
+//            }
             .navigationBarTitle("搜索", displayMode: .large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

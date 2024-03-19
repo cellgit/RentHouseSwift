@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 struct ProfileView: View {
+    @EnvironmentObject var tabBarState: TabBarStateManager
+    
     @State private var searchResults = [MKMapItem]()
     @State private var searchText = ""
     
@@ -27,6 +29,14 @@ struct ProfileView: View {
                 }
             }
         }
+        .onAppear {
+            withAnimation {
+                tabBarState.visible = .visible
+            }
+        }
+//        .onDisappear {
+//            tabBarState.visible = .hidden
+//        }
     }
     
     func performSearch() {

@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
-struct HouseDetailView: View {
+struct MapHouseView: View {
     var house: House // 添加这行来声明一个House类型的变量
 //
 //    var body: some View {
