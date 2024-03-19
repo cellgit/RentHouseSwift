@@ -23,7 +23,10 @@ struct ImageModel: Decodable {
 }
 
 
-struct ImageGroupModel: Decodable {
+struct ImageGroupModel: Decodable, Identifiable {
+    
+    var id: UUID? = UUID() // 自动生成的UUID
+    
     // 原图URL
     var original: ImageModel?
     // 中图URL
@@ -37,6 +40,12 @@ struct ImageGroupModel: Decodable {
 }
 
 
+struct VideoModel: Decodable {
+    var originalVideo: ImageModel?
+    var originalCoverImage: ImageModel?
+}
+
+
 extension House: Equatable {
     static func == (lhs: House, rhs: House) -> Bool {
         return lhs.id == rhs.id // 假设比较id属性即可判断两个House实例是否相等
@@ -44,9 +53,15 @@ extension House: Equatable {
 }
 // MARK: - House
 struct House: Decodable, Identifiable {
-//    var images: [String]?
-    
+    /// 图片
     var images: [ImageGroupModel]?
+    /// 视频
+    var videos: [VideoModel]?
+    /// 图片封面图
+    var coverImage: ImageGroupModel?
+    /// 视频封面图
+    var coverVideoImage: ImageGroupModel?
+    
     var price: Int?
     var rentalMethod: Int?
     var community: String?

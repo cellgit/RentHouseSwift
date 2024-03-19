@@ -312,7 +312,7 @@ struct UploadView: View {
         var selectedDateString: String = ""
         if statusValue == 3 { // 预租则选择的日期
             selectedDateString = "\(dateViewModel.selectedDate.timeIntervalSince1970)"
-            debugPrint("selectedDate === \(selectedDateString) ===today== \(Date().timeIntervalSince1970)")
+//            debugPrint("selectedDate === \(selectedDateString) ===today== \(Date().timeIntervalSince1970)")
         }
         else if statusValue == 1 { // 可租,即今日
             selectedDateString = "\(Date().timeIntervalSince1970)"

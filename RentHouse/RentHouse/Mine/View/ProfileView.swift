@@ -51,8 +51,8 @@ struct ProfileView: View {
                     item.name
                 }
                 
-                debugPrint("phoneNumber: \(mapItems.first?.phoneNumber)")
-                debugPrint("mapItems: \(mapItems.first?.description.decodedUnicode)")
+//                debugPrint("phoneNumber: \(mapItems.first?.phoneNumber)")
+//                debugPrint("mapItems: \(mapItems.first?.description.decodedUnicode)")
             case .failure(let error):
                 print("搜索失败: \(error.localizedDescription)")
             }

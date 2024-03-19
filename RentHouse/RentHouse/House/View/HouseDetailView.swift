@@ -9,36 +9,82 @@ import SwiftUI
 
 struct HouseDetailView: View {
     
-    let house: House
-    
     @EnvironmentObject var tabBarState: TabBarStateManager
     
+    @ObservedObject var viewModel: HouseDetailViewModel
+    
+    let model: House
+    
+    
+    @State private var showVideo: Bool = true // 控制显示视频还是图片
+    
+    
+    init(model: House) {
+        self.model = model
+        viewModel = HouseDetailViewModel(model: model)
+        
+    }
+    
+    
     var body: some View {
-        
-        NavigationLink {
-            ProfileView()
-        } label: {
-            Text("Push")
-        }
-
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .onAppear {
-                withAnimation {
-                    tabBarState.visible = .hidden
+        GeometryReader { geometry in
+            VStack {
+                
+                if let videoUrlStr = model.videos?.first?.originalVideo?.url, let videoUrl = URL(string: videoUrlStr), let images = model.images {
+                    if showVideo {
+                        VideoPlayerView(videoURL: videoUrl)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .transition(.opacity)
+                    } else {
+                        ImageViewer(images: viewModel.images)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .transition(.opacity)
+                    }
+                }
+                else if let videoUrlStr = model.videos?.first?.originalVideo?.url, let videoUrl = URL(string: videoUrlStr) {
+                    VideoPlayerView(videoURL: videoUrl)
+                }
+                else if let images = model.images {
+                    ImageViewer(images: viewModel.images)
+                }
+                else {
+                    EmptyView()
                 }
                 
-//                tabBarState.visible = .hidden
-            }
-//            .onDisappear {
-//                withAnimation {
-//                    tabBarState.visible = .visible
+//                Button(action: {
+//                    self.showVideo.toggle()
+//                }) {
+//                    Text(showVideo ? "切换到图片" : "切换到视频")
 //                }
-//            }
+            }
+        }
+        .toolbar {
+            Button(action: {
+                withAnimation {
+                    self.showVideo.toggle()
+                }
+            }) {
+                Text(showVideo ? "切换到图片" : "切换到视频")
+            }
+        }
+        
+        .onAppear {
+            withAnimation {
+                tabBarState.visible = .hidden
+            }
+        }
+        
+        
+        
+//        NavigationLink {
+//            ProfileView()
+//        } label: {
+//            Text("Push")
+//        }
     }
         
 }
 
 #Preview {
-    HouseDetailView(house: House())
+    HouseDetailView(model: House())
 }

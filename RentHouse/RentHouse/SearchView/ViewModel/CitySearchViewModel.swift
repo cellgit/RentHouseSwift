@@ -56,7 +56,7 @@ class CitySearchViewModel: ObservableObject {
                 self?.isLoading = false
                 self?.cityList = districts
                 
-                debugPrint("self?.cityList ==== \(self?.cityList)")
+//                debugPrint("self?.cityList ==== \(self?.cityList)")
             })
             .store(in: &self.cancellables)
     }

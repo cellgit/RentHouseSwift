@@ -9,13 +9,16 @@ import Foundation
 import SwiftUI
 import SKPhotoBrowser
 
-class SKPhotoBrowserHostingController: UIViewController {
+class SKPhotoBrowserHostingController: UIViewController, SKPhotoBrowserDelegate {
     var photos: [SKPhoto]
     var initialIndex: Int
+    
+    var onDismiss: (() -> Void)? // 添加一个回调闭包，用于通知浏览器关闭
 
-    init(photos: [SKPhoto], initialIndex: Int) {
+    init(photos: [SKPhoto], initialIndex: Int, onDismiss: (() -> Void)? = nil) {
         self.photos = photos
         self.initialIndex = initialIndex
+        self.onDismiss = onDismiss
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,7 +29,13 @@ class SKPhotoBrowserHostingController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let browser = SKPhotoBrowser(photos: photos, initialPageIndex: initialIndex)
+        browser.delegate = self // 设置代理
         present(browser, animated: true, completion: nil)
+    }
+    
+    // SKPhotoBrowserDelegate方法
+    func didDismissAtPageIndex(_ index: Int) {
+        onDismiss?() // 当浏览器关闭时，调用闭包
     }
 }
 
@@ -37,7 +46,9 @@ struct SKPhotoBrowserRepresentable: UIViewControllerRepresentable {
     var initialIndex: Int
 
     func makeUIViewController(context: Context) -> UIViewController {
-        let controller = SKPhotoBrowserHostingController(photos: photos, initialIndex: initialIndex)
+        let controller = SKPhotoBrowserHostingController(photos: photos, initialIndex: initialIndex) {
+            isPresented = false // 当SKPhotoBrowser关闭时，更新isPresented状态
+        }
         return controller
     }
 

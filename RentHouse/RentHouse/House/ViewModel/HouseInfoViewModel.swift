@@ -34,7 +34,7 @@ class HouseInfoViewModel: ObservableObject {
             self.city = name
             self.lon = Double(dict?["center"]?.split(separator: ",").first ?? "116.306121")
             self.lat = Double(dict?["center"]?.split(separator: ",").last ?? "40.052978")
-            debugPrint("center ===== \(dict?["center"]), === \(self.lon), == \(self.lat) ")
+//            debugPrint("center ===== \(dict?["center"]), === \(self.lon), == \(self.lat) ")
         }
         
         citycode = dict?["citycode"]
@@ -49,7 +49,7 @@ class HouseInfoViewModel: ObservableObject {
             self.lon = Double(cityInfo["center"]?.split(separator: ",").first ?? "116.306121")
             self.lat = Double(cityInfo["center"]?.split(separator: ",").last ?? "40.052978")
             
-            debugPrint("center ==2=== \(cityInfo["center"]), === \(self.lon), == \(self.lat) ")
+//            debugPrint("center ==2=== \(cityInfo["center"]), === \(self.lon), == \(self.lat) ")
         }
         
         

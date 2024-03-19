@@ -47,7 +47,7 @@ struct HomeView: View {
 //                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if let houses = viewModel.houses, !houses.isEmpty {
                 ForEach(houses, id: \.id) { house in
-                    NavigationLink(destination: HouseDetailView(house: house)) {
+                    NavigationLink(destination: HouseDetailView(model: house)) {
                         HouseCell(house: house)
                     }
                 }

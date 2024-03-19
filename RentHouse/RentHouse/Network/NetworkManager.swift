@@ -307,7 +307,7 @@ class NetworkManager {
         
         uploadRequest.uploadProgress { progress in
             let speed = progressTracker.calculateUploadSpeed(currentlyUploaded: progress.completedUnitCount)
-            debugPrint("speed ===== \(String(describing: speed))")
+//            debugPrint("speed ===== \(String(describing: speed))")
             if let speed = speed {
                 let uploadProgress = UploadProgress(
                     progress: progress.fractionCompleted,

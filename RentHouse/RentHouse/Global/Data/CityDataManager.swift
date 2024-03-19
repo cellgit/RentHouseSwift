@@ -27,7 +27,7 @@ class CityDataManager: ObservableObject {
             .sink { [weak self] placemark in
                 // 当placemark更新时执行的代码
                 self?.placemarkUpdated(placemark: placemark)
-                debugPrint("thoroughfare ==== \(placemark)")
+//                debugPrint("thoroughfare ==== \(placemark)")
             }
             .store(in: &cancellables)
     }

@@ -1,78 +1,8 @@
-////
-////  ImagePickerRepresentable.swift
-////  RentHouse
-////
-////  Created by liuhongli on 2024/3/6.
-////
 //
-//import Foundation
-//import SwiftUI
-//import BSImagePicker
-//import Photos
+//  ImagePickerRepresentable.swift
+//  RentHouse
 //
-//
-//struct ImagePicker: UIViewControllerRepresentable {
-//    func makeUIViewController(context: Context) -> BSImagePicker.ImagePickerController {
-//        
-//    }
-//    
-//    @Binding var selectedAssets: [PHAsset]
-//    var maxSelections: Int
-//    
-//    func makeUIViewController(context: Context) -> some UIViewController {
-//        let imagePicker = ImagePickerController()
-//        imagePicker.settings.selection.max = maxSelections
-//        imagePicker.settings.theme.selectionStyle = .numbered
-//        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image] // 只选择图片
-//        // 自定义按钮和文本
-//        imagePicker.settings.theme.selectionFillColor = UIColor.blue
-//        imagePicker.settings.theme.selectionStrokeColor = UIColor.yellow
-//        imagePicker.settings.theme.selectionShadowColor = UIColor.red
-//        imagePicker.settings.theme.selectionTextColor = UIColor.white
-//        imagePicker.settings.theme.selectionCharacter = nil // 使用数字而非字符
-//        // 更多自定义设置...
-//        
-//        imagePicker.modalPresentationStyle = .fullScreen
-//        return imagePicker
-//    }
-//    
-//    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-//        // 更新UI控制器（如果需要）
-//    }
-//    
-//    typealias UIViewControllerType = ImagePickerController
-//    
-//    class Coordinator: NSObject, ImagePickerControllerDelegate {
-//        func imagePicker(_ imagePicker: BSImagePicker.ImagePickerController, didReachSelectionLimit count: Int) {
-//            //
-//        }
-//        
-//        var parent: ImagePicker
-//        
-//        init(parent: ImagePicker) {
-//            self.parent = parent
-//        }
-//        
-//        func imagePicker(_ imagePicker: ImagePickerController, didSelectAsset asset: PHAsset) {
-//            parent.selectedAssets.append(asset)
-//        }
-//        
-//        func imagePicker(_ imagePicker: ImagePickerController, didDeselectAsset asset: PHAsset) {
-//            if let index = parent.selectedAssets.firstIndex(of: asset) {
-//                parent.selectedAssets.remove(at: index)
-//            }
-//        }
-//        
-//        func imagePicker(_ imagePicker: ImagePickerController, didFinishWithAssets assets: [PHAsset]) {
-//            parent.selectedAssets = assets
-//            imagePicker.dismiss(animated: true)
-//        }
-//    }
-//    
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(parent: self)
-//    }
-//}
+//  Created by liuhongli on 2024/3/6.
 //
 
 
