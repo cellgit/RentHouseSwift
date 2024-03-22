@@ -73,8 +73,9 @@ struct BottomSheet<Content>: View where Content: View {
             Rectangle()
                 .fill(constants.indicatorBGColor)
 #if os(iOS)
-                .opacity(0.5)
-                .background(.ultraThinMaterial)
+                .opacity(0.01)
+                .background(Color(.tertiarySystemBackground))
+//                .background(.ultraThinMaterial)
 #endif
                 .frame(height: constants.minArea)
             Capsule()
@@ -111,8 +112,9 @@ struct BottomSheet<Content>: View where Content: View {
                 ZStack {
                     constants.contentBGColor
 #if os(iOS)
-                        .opacity(0.5)
-                        .background(.ultraThinMaterial)
+//                        .opacity(0.5)
+                        .opacity(0.01)
+                        .background(Color(.secondarySystemBackground))
 #endif
                         .clipped()
                         .edgesIgnoringSafeArea(.bottom)

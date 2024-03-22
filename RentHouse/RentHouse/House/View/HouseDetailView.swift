@@ -96,7 +96,6 @@ struct HouseDetailView: View {
                         ScrollView(.vertical, showsIndicators: true) {
                             let playerViewModel = VideoPlayerViewModel(videoURL: videoUrl)
                             
-                            
                             VideoPlayerView2(url: videoUrl)
                                 .frame(width: geometry.size.width, height: geometry.size.width / viewModel.videoRatio)
                             
@@ -133,15 +132,16 @@ struct HouseDetailView: View {
                             ZStack (alignment: .top) {
 //                                HomeView()
                                 HouseDetailChildView(viewModel: viewModel)
-                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - UIScreen.main.bounds.width * (9/16) - 88.0 - minArea, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .frame(width: UIScreen.main.bounds.width, height: max(0, UIScreen.main.bounds.height - UIScreen.main.bounds.width * (9/16) - 88.0 - minArea), alignment: .center)
+//                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - UIScreen.main.bounds.width * (9/16) - 88.0 - minArea, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                 Button {
                                     onDismiss()
                                 } label: {
-                                    Image(systemName: "x.circle.fill")
+                                    Image(systemName: "xmark.circle.fill")
                                         .font(.title) // 可以根据需要调整图标大小
-                                        .foregroundColor(.primary) // 可以根据需要调整图标颜色
+                                        .foregroundColor(.secondary) // 可以根据需要调整图标颜色
                                 }
-                                .padding(.leading, (geometry.size.width-80))
+                                .padding(.leading, (geometry.size.width-55))
                                 .padding([.top], -50)
                                 
                                 MediaSwitchView(selectedMediaType: selectedMediaType, showTypes: mediaTypes) { type in

@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import MapKit
+import SwiftUI
 //import SwiftUI
 
 class HouseDetailViewModel: ObservableObject {
@@ -77,6 +79,28 @@ class HouseDetailViewModel: ObservableObject {
     
     @Published var additionalFees: [String] = []
     
+    @Published var region: MKCoordinateRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 40.0522, longitude: 120.2437), // 这里是杭州的坐标，仅作默认
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+    
+//    @Published var region: MapCameraPosition = MapCameraPosition(
+//        center: CLLocationCoordinate2D(latitude: 40.0522, longitude: 120.2437), // 这里是杭州的坐标，仅作默认
+//        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+    
+    @Published var position = MapCameraPosition.region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.0522, longitude: 120.2437), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)))
+    
+    @Published var coordinate = CLLocationCoordinate2D(latitude: 40.0522, longitude: 120.2437)
+    
+    
+    
+    
+    
+//    // 临时定义一个地图区域，实际应用中你可能需要根据实际情况动态设置
+//        @State private var region = MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: 34.0522, longitude: -118.2437), // 这里是洛杉矶的坐标，仅作示例
+//            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+//        )
+    
     
 //    let review = Review(user: "123", rating: 5, comment: "评价说:好房源不要错过哦")
 //    let house = House(price: 2500, rentalMethod: 1, community: "多蓝水岸蓝波苑", building: "4", city: "杭州", district: "钱塘区", citycode: "0571", unit: "1", houseNumber: "301", roomNumber: "A", status: 1, paymentMethod: ["1"], center: Center(lat: 40.0, lon: 120.1), location: nil, roomType: "1", area: 25, floor: 3, totalFloors: 6, decoration: 1, facilities: ["冰箱", "洗衣机", "热水器"], desc: "来吧,租房是你的选择", landlordId: nil, contact: "18298269522", orientation: "1", reviewStatus: "1", tags: ["近地铁", "好房源", "好房东"], leaseTerm: "一年", rating: 5, availableDate: "2024-08", petPolicy: true, moveInRequirements: "一家人", publishDate: "2024-03", reviews: [review], additionalFees: [], createdAt: "2024-03-22", updatedAt: "2024-03-22", id: "123")
@@ -143,7 +167,7 @@ class HouseDetailViewModel: ObservableObject {
         /// 租赁方式
         rentalMethod = rentalMethodText(model.rentalMethod)
         
-        roomType = model.roomType ?? ""
+        roomType = roomTypeText(model.roomType)
         
         if let roomArea = model.area {
             area = "\(roomArea)平米"
@@ -181,6 +205,33 @@ class HouseDetailViewModel: ObservableObject {
             additionalFees = list.compactMap(additionalFeesText)
         }
         
+        region = regionData(lat: model.center?.lat, lon: model.center?.lon)
+        
+        position = positionData(lat: model.center?.lat, lon: model.center?.lon)
+        
+        coordinate = coordinateData(lat: model.center?.lat, lon: model.center?.lon)
+        
+    }
+    
+    func regionData(lat: Double?, lon: Double?) -> MKCoordinateRegion {
+        
+        guard let lat = lat, let lon = lon else { return region }
+        
+        return MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: lat, longitude: lon), // 这里是洛杉矶的坐标，仅作示例
+            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+    }
+    
+    func positionData(lat: Double?, lon: Double?) -> MapCameraPosition {
+        
+        guard let lat = lat, let lon = lon else { return position }
+        
+        return MapCameraPosition.region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)))
+    }
+    
+    func coordinateData(lat: Double?, lon: Double?) -> CLLocationCoordinate2D {
+        guard let lat = lat, let lon = lon else { return coordinate }
+        return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
     
@@ -214,6 +265,22 @@ class HouseDetailViewModel: ObservableObject {
             return "年付"
         default:
             return nil
+        }
+    }
+    
+    
+    func roomTypeText(_ value: String?) -> String {
+        switch value {
+        case "1":
+            return "一室"
+        case "2":
+            return "两室"
+        case "3":
+            return "三室"
+        case "4":
+            return "四室及以上"
+        default:
+            return ""
         }
     }
     

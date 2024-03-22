@@ -32,7 +32,9 @@ struct MediaSwitchView: View {
         VStack {
             Picker("Select Media Type", selection: $selectedMediaType) {
                 ForEach(showTypes, id: \.self) { type in
-                    Text(type.title).tag(type)
+                    Text(type.title)
+                        .foregroundColor(.teal)
+                        .tag(type)
                 }
             }
             .pickerStyle(SegmentedPickerStyle())

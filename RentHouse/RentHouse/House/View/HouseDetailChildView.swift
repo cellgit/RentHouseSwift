@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct HouseDetailChildView: View {
     
@@ -17,69 +18,98 @@ struct HouseDetailChildView: View {
             ScrollView {
                 
                 
-                HStack(alignment: .top, spacing: 10, content: {
+                HStack(alignment: .top, spacing: 16, content: {
                     
-                    VStack(alignment: .leading, spacing: 8, content: {
-                        Text("\(viewModel.address)")
+                    VStack(alignment: .leading, spacing: 16, content: {
                         
-                        Text("租金: \(viewModel.price)")
+                        HStack(alignment: .lastTextBaseline) {
+                            Text("\(viewModel.price)")
+                                .font(.largeTitle)
+                                .foregroundColor(.orange)
+                            Text("元/(\(viewModel.paymentMethod.first ?? "月付"))")
+                                .font(.title2)
+                                .foregroundColor(.orange)
+                        }
+                        
+                        
+                        HStack(alignment: .center, spacing: 16, content: {
+                            ItemGroupView(title: $viewModel.roomType, subtitle: $viewModel.rentalMethod)
+                            
+                            ItemGroupView(title: $viewModel.orientation, subtitle: .constant("朝向"))
+                            
+                            ItemGroupView(title: $viewModel.status, subtitle: .constant("状态"))
+                        })
                         
                         Text("可租日期: \(viewModel.availableDate)")
                         
-                        Text("租赁方式: \(viewModel.rentalMethod)")
                         
-                        Text("朝向: \(viewModel.orientation)")
+                        /* WWDC: 地图API使用
+                         https://developer.apple.com/videos/play/wwdc2023/10043/
+                         */
+                        VStack(alignment: .leading, spacing: 12, content: {
+                            Text(viewModel.address)
+                            
+                            
+//                            Map {
+//                                Annotation("Parking", coordinate: viewModel.coordinate) {
+//                                    Image(systemName: "mappin.and.ellipse.circle.fill")
+//                                }
+//                                .annotationTitles(.hidden)
+//
+//                            }
+//                            .mapStyle(.standard)
+//                            .frame(height: 150) // 设置高度为200，宽度自适应
+//                            .cornerRadius(10) // 可选，为地图添加圆角
+                            
+                            /* 使用MapContentBuilder创建地图
+                             MapCameraBounds:
+                             minimumDistance指的是相机距离地面的最小距离。在此距离内，用户无法进一步放大地图视图。
+                             maximumDistance指的是相机距离地面的最大距离。在此距离外，用户无法进一步缩小地图视图。
+                             */
+                            //$viewModel.position.camera?.centerCoordinate
+                            Map(position: $viewModel.position, bounds: MapCameraBounds(minimumDistance: 10, maximumDistance: 50000)) {
+                                UserAnnotation()
+                                Annotation("房源", coordinate: viewModel.coordinate) {
+                                    // house.and.flag.fill
+                                    // mappin.and.ellipse.circle.fill
+                                    Image(systemName: "house.and.flag.fill")
+                                        .foregroundColor(.blue)
+                                }
+                                .annotationTitles(.visible)
+                            }
+                            .frame(height: 150) // 设置高度为200，宽度自适应
+                            .cornerRadius(10) // 可选，为地图添加圆角
+                            .disabled(false)
+                            
+                        })
+                        .padding(16)
+                        .background(Color(.secondarySystemGroupedBackground))
+                        .cornerRadius(10)
                         
-                        Text("付款方式: \(viewModel.paymentMethod)")
+                        
                         
                         VStack (alignment: .leading){
                             Text("设备: ")
-                            MultiFlowLayoutGridView(title: "", viewModel: MultiStringItemViewModel(items: viewModel.facilities))
+                            MultiLabelFlowLayout(items: viewModel.facilities, spacing: 4)
                         }
+                        .padding(.vertical, 8)
                         
                         VStack (alignment: .leading){
                             Text("房源标签: ")
-                            MultiFlowLayoutGridView(title: "", viewModel: MultiStringItemViewModel(items: viewModel.tags))
+                            MultiLabelFlowLayout(items: viewModel.tags, spacing: 4)
                         }
-                        
-                        
-                        VStack (alignment: .leading){
-                            Text("设备: ")
-                            MultiFlowLayoutGridView(title: "", viewModel: MultiStringItemViewModel(items: viewModel.facilities))
-                        }
-                        
-                        VStack (alignment: .leading){
-                            Text("房源标签: ")
-                            MultiFlowLayoutGridView(title: "", viewModel: MultiStringItemViewModel(items: viewModel.tags))
-                        }
-                        
-                        
-                        VStack (alignment: .leading){
-                            Text("设备: ")
-                            MultiFlowLayoutGridView(title: "", viewModel: MultiStringItemViewModel(items: viewModel.facilities))
-                        }
-                        
-                        VStack (alignment: .leading){
-                            Text("房源标签: ")
-                            MultiFlowLayoutGridView(title: "", viewModel: MultiStringItemViewModel(items: viewModel.tags))
-                        }
+                        .padding(.vertical, 8)
                         
                         
                     })
                     //            .padding(16)
-                    Spacer()
+//                    Spacer()
                     
                 })
                 .padding(16)
             }
             
         })
-        
-        
-        
-        
-        
-        
         
     }
 }
@@ -91,3 +121,9 @@ struct HouseDetailChildView: View {
     
     return HouseDetailChildView(viewModel: HouseDetailViewModel(model: House()))
 }
+
+
+
+
+
+
