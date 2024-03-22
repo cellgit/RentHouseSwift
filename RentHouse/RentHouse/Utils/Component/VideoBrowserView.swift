@@ -86,7 +86,7 @@ struct VideoBrowserView: View {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
         let viewController = UIApplication.shared.getCurrentViewController()
-        viewController?.present(playerViewController, animated: true) {
+        viewController?.present(playerViewController, animated: false) {
             player.play()
         }
     }

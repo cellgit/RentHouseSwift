@@ -77,7 +77,7 @@ struct TabBarView: View {
                     Text("上传房源")
                 }
                 .tag(0)
-                .toolbar(tabBarState.visible, for: .tabBar)
+//                .toolbar(tabBarState.visible, for: .tabBar)
             
             HomeView()
                 .tabItem {
@@ -85,7 +85,7 @@ struct TabBarView: View {
                     Text("首页")
                 }
                 .tag(1)
-                .toolbar(tabBarState.visible, for: .tabBar)
+//                .toolbar(tabBarState.visible, for: .tabBar)
             
             ProfileView()
                 .tabItem {
@@ -93,7 +93,7 @@ struct TabBarView: View {
                     Text("我的")
                 }
                 .tag(2)
-                .toolbar(tabBarState.visible, for: .tabBar)
+//                .toolbar(tabBarState.visible, for: .tabBar)
             
         }
         

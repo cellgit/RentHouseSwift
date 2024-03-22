@@ -39,9 +39,49 @@ import SKPhotoBrowser
  
  */
 
+//class ImageBrowserManager {
+//    
+//    static let shared = ImageBrowserManager()
+//    
+//    private init() {}
+//    
+//    func showPhotoBrowser(images: ImageSource, at index: Int) {
+//        
+//        switch images {
+//        case .uiImages(let images):
+//            let skPhotos = convertImagesToSKPhotos(images: images)
+//            showSKPhotoBrowser(photos: skPhotos, initialIndex: index)
+//        case .urls(let images):
+//            let skPhotos = convertImageUrlsToSKPhotos(images: images)
+//            showSKPhotoBrowser(photos: skPhotos, initialIndex: index)
+//        }
+//    }
+//    
+//    private func convertImagesToSKPhotos(images: [UIImage]) -> [SKPhoto] {
+//        return images.map { SKPhoto.photoWithImage($0) } // 考虑缓存的可能性
+//    }
+//    
+//    private func convertImageUrlsToSKPhotos(images: [String]) -> [SKPhoto] {
+//        return images.map { SKPhoto.photoWithImageURL($0) } // 考虑缓存的可能性
+//    }
+//    
+//    private func showSKPhotoBrowser(photos: [SKPhoto], initialIndex: Int = 0) {
+//        if let viewController = UIApplication.shared.getCurrentViewController() {
+//            PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
+//        }
+//    }
+//    
+//}
+
+
+
+import UIKit
+
 class ImageBrowserManager {
     
     static let shared = ImageBrowserManager()
+    
+    private let photoCache = NSCache<NSString, SKPhoto>()
     
     private init() {}
     
@@ -58,17 +98,41 @@ class ImageBrowserManager {
     }
     
     private func convertImagesToSKPhotos(images: [UIImage]) -> [SKPhoto] {
-        return images.map { SKPhoto.photoWithImage($0) } // 考虑缓存的可能性
-    }
-    
-    private func convertImageUrlsToSKPhotos(images: [String]) -> [SKPhoto] {
-        return images.map { SKPhoto.photoWithImageURL($0) } // 考虑缓存的可能性
-    }
-    
-    private func showSKPhotoBrowser(photos: [SKPhoto], initialIndex: Int = 0) {
-        if let viewController = UIApplication.shared.getCurrentViewController() {
-            PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
+        // 将UIImage转换为SKPhoto对象，考虑使用缓存减少重复转换
+        return images.enumerated().map { (index, image) in
+            let cacheKey = "image-\(index)" as NSString
+            if let cachedPhoto = photoCache.object(forKey: cacheKey) {
+                return cachedPhoto
+            } else {
+                let photo = SKPhoto.photoWithImage(image)
+                photoCache.setObject(photo, forKey: cacheKey)
+                return photo
+            }
         }
     }
     
+    private func convertImageUrlsToSKPhotos(images: [String]) -> [SKPhoto] {
+        // 将图片URL转换为SKPhoto对象，考虑使用缓存减少重复转换
+        return images.enumerated().map { (index, imageUrl) in
+            let cacheKey = "url-\(index)" as NSString
+            if let cachedPhoto = photoCache.object(forKey: cacheKey) {
+                return cachedPhoto
+            } else {
+                let photo = SKPhoto.photoWithImageURL(imageUrl)
+                photoCache.setObject(photo, forKey: cacheKey)
+                return photo
+            }
+        }
+    }
+    
+    private func showSKPhotoBrowser(photos: [SKPhoto], initialIndex: Int = 0) {
+        // 确保UI操作在主线程执行
+        DispatchQueue.main.async {
+            if let viewController = UIApplication.shared.getCurrentViewController() {
+                PhotoBrowserManager.shared.showPhotos(from: viewController, photos: photos, initialIndex: initialIndex)
+            }
+        }
+    }
+    
+    // 你需要实现获取当前ViewController的方法
 }

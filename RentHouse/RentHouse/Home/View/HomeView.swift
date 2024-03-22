@@ -22,13 +22,10 @@ struct HomeView: View {
             VStack {
                 contentListView
             }
-            .onAppear {
-                withAnimation {
-                    tabBarState.visible = .visible
-                }
-            }
-//            .onDisappear {
-//                tabBarState.visible = .hidden
+//            .onAppear {
+//                withAnimation {
+//                    tabBarState.visible = .visible
+//                }
 //            }
             .navigationBarTitle("搜索", displayMode: .large)
             .toolbar {
@@ -47,7 +44,7 @@ struct HomeView: View {
 //                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if let houses = viewModel.houses, !houses.isEmpty {
                 ForEach(houses, id: \.id) { house in
-                    NavigationLink(destination: HouseDetailView(model: house)) {
+                    NavigationLink(destination: HouseDetailView(model: house) {}) {
                         HouseCell(house: house)
                     }
                 }

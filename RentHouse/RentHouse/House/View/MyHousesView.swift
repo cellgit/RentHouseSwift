@@ -24,8 +24,6 @@ struct MyHousesView: View {
     @State private var isPresentedUploadView = false
     @State private var isShowingSearchCityView = false
     
-//    @StateObject var uploadStateManager = UploadStateManager()
-    
     @EnvironmentObject var progressHandler: ProgressHandler
     @StateObject var uploadStateManager: UploadStateManager
     
@@ -37,6 +35,9 @@ struct MyHousesView: View {
     @State private var isSearchActive = false // 用于控制搜索激活状态
     
     @State private var isChangeListMode = false // 用于控制列表模式, false grid, true list
+    
+    
+    
     
     init(progressHandler: ProgressHandler) {
 //        self.progressHandler = progressHandler
@@ -89,25 +90,13 @@ struct MyHousesView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(alignment: .center, spacing: 0, content: {
                         ProgressViewOverlay()
-                        uploadButton//.padding(0)
-                        changeListModeButton//.padding(0)
+                        uploadButton
+                        changeListModeButton
                     })
                     
                 }
             }
-            .onAppear {
-                withAnimation {
-                    tabBarState.visible = .visible
-                }
-            }
-//            .onDisappear {
-//                tabBarState.visible = .hidden
-//            }
         }
-//        .tabItem {
-//            Image(systemName: "magnifyingglass")
-//            Text("搜索")
-//        }
         
     }
     
@@ -173,7 +162,7 @@ struct MyHousesView: View {
 //                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let houses = viewModel.houses, !houses.isEmpty {
                     ForEach(houses, id: \.id) { house in
-                        NavigationLink(destination: HouseDetailView(model: house)) {
+                        NavigationLink(destination: HouseDetailView(model: house) {}) {
                             HouseCell(house: house)
                                 
                         }
@@ -206,36 +195,33 @@ import SwiftUI
 struct GridListView: View {
     @ObservedObject var viewModel: HomeViewModel
     var columns: Int = 2 // 可以根据需要调整列数
-
+    
+    @State var showDetail: Bool = false
+    
+    @State private var selectedHouse: House? // 使用可选的House对象来控制显示详情
+    
     var body: some View {
         ScrollView(.vertical) {
             if let houses = viewModel.houses, !houses.isEmpty {
                 AnyLayout(VerticalWaterfallLayout(columns: columns)) {
-                    ForEach(houses, id: \.id) { house in
-                        
-//                        NavigationStack {
-//                            NavigationLink("Push") {
-//                                
-//                                Text("View 2!")
-//                                    .toolbar(.hidden, for: .tabBar)
-//                            }
-//                        }
-                        
-                        NavigationLink(destination: HouseDetailView(model: house)) {
-                            UploadHouseCell(house: house)
-                        }
-                        
-//                        .toolbar(.hidden, for: .tabBar)
-                        
-//                        NavigationLink(destination: HouseDetailView(house: house)) {
-//                            UploadHouseCell(house: house)
-//                        }
+                    
+                    ForEach(houses) { house in
+                        UploadHouseCell(house: house)
+                            .onTapGesture {
+                                self.selectedHouse = house // 直接将house对象赋值给selectedHouse
+                            }
+                            .fullScreenCover(item: $selectedHouse) { house in
+                                HouseDetailView(model: house) {
+                                    // 这里可以添加关闭fullScreenCover时的操作
+                                    self.selectedHouse = nil
+                                }
+                            }
                     }
+                    
                 }
             }
         }
         .padding(EdgeInsets(top: -10, leading: 0, bottom: 0, trailing: 0))
-//        .animation(.default, value: viewModel.houses)
     }
 }
 

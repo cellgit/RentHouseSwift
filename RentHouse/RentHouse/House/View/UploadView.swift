@@ -98,9 +98,9 @@ struct UploadView: View {
     
     @StateObject var gridTagsViewModelOfRoomType = StringItemViewModel(items: ["一室", "两室", "三室", "四室及以上"])
     /// 朝向
-    @StateObject var gridTagsViewModelOfOrientation = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
+    @StateObject var gridTagsViewModelOfOrientation = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "东北", "西南", "西北",])
     
-    @StateObject var gridTagsViewModelOfOrientationFlowLayout = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "西南", "东北", "西北",])
+    @StateObject var gridTagsViewModelOfOrientationFlowLayout = StringItemViewModel(items: ["南", "北", "东", "西", "东南", "东北", "西南", "西北",])
     
     @StateObject var gridTagsViewModelOfDecoration = StringItemViewModel(items: ["简装", "精装", "豪华装修", "毛坯"])
     

@@ -81,7 +81,9 @@ struct House: Decodable, Identifiable {
     var area: Double?
     var floor: Int?
     var totalFloors: Int?
+    // 装修情况 (decoration)：1精装修、2简装修、3豪华装修、4毛坯房、5自定义内容
     var decoration: Int?
+    // 配套设施 (facilities)：如家具、家电等配套情况
     var facilities: [String?]?
     var desc: String?
     var landlordId: String?
@@ -89,6 +91,7 @@ struct House: Decodable, Identifiable {
     var orientation: String?
     var reviewStatus: String?
     var tags: [String?]?
+    // 租赁期限: 如果需要记录租赁的期限，可以添加一个字段来表示租赁的时长，如几个月或几年
     var leaseTerm: String?
     var rating: Double?
     var availableDate: String?

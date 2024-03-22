@@ -38,6 +38,22 @@
 		CE4F4A032BA94339002CE2C7 /* ImageBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A022BA94339002CE2C7 /* ImageBrowserManager.swift */; };
 		CE4F4A052BA94DB8002CE2C7 /* ImageBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A042BA94DB8002CE2C7 /* ImageBrowser.swift */; };
 		CE4F4A072BA95064002CE2C7 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A062BA95064002CE2C7 /* ImageSource.swift */; };
+		CE4F4A0A2BAAD427002CE2C7 /* VideoPlayerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A092BAAD427002CE2C7 /* VideoPlayerView2.swift */; };
+		CE4F4A0C2BAAD43E002CE2C7 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A0B2BAAD43E002CE2C7 /* VideoPlayerViewModel.swift */; };
+		CE4F4A0F2BAC6FF1002CE2C7 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A0E2BAC6FF1002CE2C7 /* BottomSheet.swift */; };
+		CE4F4A112BAC77FD002CE2C7 /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A102BAC77FD002CE2C7 /* Example.swift */; };
+		CE4F4A132BAC787A002CE2C7 /* FabulaToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A122BAC787A002CE2C7 /* FabulaToggle.swift */; };
+		CE4F4A152BAC7962002CE2C7 /* FabulaSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A142BAC7962002CE2C7 /* FabulaSlider.swift */; };
+		CE4F4A172BAC797B002CE2C7 /* FabulaColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A162BAC797B002CE2C7 /* FabulaColorPicker.swift */; };
+		CE4F4A192BAC79A5002CE2C7 /* FabulaSectionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A182BAC79A5002CE2C7 /* FabulaSectionModifier.swift */; };
+		CE4F4A1B2BAC7A0A002CE2C7 /* Animation+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A1A2BAC7A0A002CE2C7 /* Animation+extension.swift */; };
+		CE4F4A1D2BAC7A2A002CE2C7 /* RightSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A1C2BAC7A2A002CE2C7 /* RightSheet.swift */; };
+		CE4F4A1F2BAC7A94002CE2C7 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A1E2BAC7A94002CE2C7 /* DummyView.swift */; };
+		CE4F4A232BAC7B21002CE2C7 /* FabulaSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A222BAC7B21002CE2C7 /* FabulaSheet.swift */; };
+		CE4F4A252BAC7B63002CE2C7 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A242BAC7B63002CE2C7 /* RoundedCorners.swift */; };
+		CE4F4A272BAD14DD002CE2C7 /* VideoChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A262BAD14DD002CE2C7 /* VideoChildView.swift */; };
+		CE4F4A292BAD3272002CE2C7 /* HouseDetailChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A282BAD3272002CE2C7 /* HouseDetailChildView.swift */; };
+		CE4F4A2B2BAD329D002CE2C7 /* MediaSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4A2A2BAD329D002CE2C7 /* MediaSwitchView.swift */; };
 		CE56BC6D2BA2E6DD009168CC /* GridTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */; };
 		CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */; };
 		CE56BC712BA32D56009168CC /* MultiFlowLayoutGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC702BA32D56009168CC /* MultiFlowLayoutGridView.swift */; };
@@ -170,6 +186,22 @@
 		CE4F4A022BA94339002CE2C7 /* ImageBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBrowserManager.swift; sourceTree = "<group>"; };
 		CE4F4A042BA94DB8002CE2C7 /* ImageBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBrowser.swift; sourceTree = "<group>"; };
 		CE4F4A062BA95064002CE2C7 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
+		CE4F4A092BAAD427002CE2C7 /* VideoPlayerView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView2.swift; sourceTree = "<group>"; };
+		CE4F4A0B2BAAD43E002CE2C7 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
+		CE4F4A0E2BAC6FF1002CE2C7 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		CE4F4A102BAC77FD002CE2C7 /* Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
+		CE4F4A122BAC787A002CE2C7 /* FabulaToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabulaToggle.swift; sourceTree = "<group>"; };
+		CE4F4A142BAC7962002CE2C7 /* FabulaSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabulaSlider.swift; sourceTree = "<group>"; };
+		CE4F4A162BAC797B002CE2C7 /* FabulaColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabulaColorPicker.swift; sourceTree = "<group>"; };
+		CE4F4A182BAC79A5002CE2C7 /* FabulaSectionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabulaSectionModifier.swift; sourceTree = "<group>"; };
+		CE4F4A1A2BAC7A0A002CE2C7 /* Animation+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+extension.swift"; sourceTree = "<group>"; };
+		CE4F4A1C2BAC7A2A002CE2C7 /* RightSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSheet.swift; sourceTree = "<group>"; };
+		CE4F4A1E2BAC7A94002CE2C7 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
+		CE4F4A222BAC7B21002CE2C7 /* FabulaSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabulaSheet.swift; sourceTree = "<group>"; };
+		CE4F4A242BAC7B63002CE2C7 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		CE4F4A262BAD14DD002CE2C7 /* VideoChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChildView.swift; sourceTree = "<group>"; };
+		CE4F4A282BAD3272002CE2C7 /* HouseDetailChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseDetailChildView.swift; sourceTree = "<group>"; };
+		CE4F4A2A2BAD329D002CE2C7 /* MediaSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSwitchView.swift; sourceTree = "<group>"; };
 		CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTagsView.swift; sourceTree = "<group>"; };
 		CE56BC6E2BA2FAF3009168CC /* FlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutGridView.swift; sourceTree = "<group>"; };
 		CE56BC702BA32D56009168CC /* MultiFlowLayoutGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFlowLayoutGridView.swift; sourceTree = "<group>"; };
@@ -434,7 +466,10 @@
 		CE4F49F92BA92593002CE2C7 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				CE4F4A262BAD14DD002CE2C7 /* VideoChildView.swift */,
 				CE4F49FA2BA9259A002CE2C7 /* VideoPlayerView.swift */,
+				CE4F4A092BAAD427002CE2C7 /* VideoPlayerView2.swift */,
+				CE4F4A0B2BAAD43E002CE2C7 /* VideoPlayerViewModel.swift */,
 				CE4F49FC2BA92920002CE2C7 /* ImageViewer.swift */,
 			);
 			path = VideoPlayer;
@@ -448,6 +483,24 @@
 				CE4F4A022BA94339002CE2C7 /* ImageBrowserManager.swift */,
 			);
 			path = ImageBrowser;
+			sourceTree = "<group>";
+		};
+		CE4F4A0D2BAC6FE5002CE2C7 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				CE4F4A102BAC77FD002CE2C7 /* Example.swift */,
+				CE4F4A0E2BAC6FF1002CE2C7 /* BottomSheet.swift */,
+				CE4F4A1C2BAC7A2A002CE2C7 /* RightSheet.swift */,
+				CE4F4A222BAC7B21002CE2C7 /* FabulaSheet.swift */,
+				CE4F4A242BAC7B63002CE2C7 /* RoundedCorners.swift */,
+				CE4F4A1A2BAC7A0A002CE2C7 /* Animation+extension.swift */,
+				CE4F4A122BAC787A002CE2C7 /* FabulaToggle.swift */,
+				CE4F4A142BAC7962002CE2C7 /* FabulaSlider.swift */,
+				CE4F4A162BAC797B002CE2C7 /* FabulaColorPicker.swift */,
+				CE4F4A182BAC79A5002CE2C7 /* FabulaSectionModifier.swift */,
+				CE4F4A1E2BAC7A94002CE2C7 /* DummyView.swift */,
+			);
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 		CE56BC722BA3F241009168CC /* DatePickerView */ = {
@@ -473,7 +526,6 @@
 			isa = PBXGroup;
 			children = (
 				CEBA4DAA2B8EE387006F078A /* HomeViewModel.swift */,
-				CE4F49FE2BA93421002CE2C7 /* HouseDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -578,6 +630,7 @@
 		CEBEFA372B9360EC009A6DB0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				CE4F4A0D2BAC6FE5002CE2C7 /* BottomSheet */,
 				CE4F49F92BA92593002CE2C7 /* VideoPlayer */,
 				CE4F4A082BA95AC9002CE2C7 /* ImageBrowser */,
 				CE56BC722BA3F241009168CC /* DatePickerView */,
@@ -725,6 +778,7 @@
 		CEF6B6572B661D28006CE0F1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CE4F49FE2BA93421002CE2C7 /* HouseDetailViewModel.swift */,
 				CEF6B6552B661D16006CE0F1 /* HouseUploadViewModel.swift */,
 				CEBEFA4A2B95751A009A6DB0 /* HouseInfoViewModel.swift */,
 			);
@@ -745,6 +799,8 @@
 				CEBEFA7D2B9993CE009A6DB0 /* UploadStateManager.swift */,
 				CEF6B65C2B663127006CE0F1 /* UploadView.swift */,
 				CE4F49F72BA874B9002CE2C7 /* HouseDetailView.swift */,
+				CE4F4A282BAD3272002CE2C7 /* HouseDetailChildView.swift */,
+				CE4F4A2A2BAD329D002CE2C7 /* MediaSwitchView.swift */,
 				CE4F49EF2BA4998D002CE2C7 /* UploadViewEnum.swift */,
 				CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */,
 				CEBEFA482B9572DB009A6DB0 /* RowViewStyle1.swift */,
@@ -935,6 +991,7 @@
 				CECB72E52B9F08AE006A523A /* EqualHStack.swift in Sources */,
 				CEBEFA802B99BCE8009A6DB0 /* CacheConfig.swift in Sources */,
 				CE4F49FD2BA92920002CE2C7 /* ImageViewer.swift in Sources */,
+				CE4F4A112BAC77FD002CE2C7 /* Example.swift in Sources */,
 				CEBEFA3F2B948097009A6DB0 /* UserDefaultsKey.swift in Sources */,
 				CEBEFA342B932F56009A6DB0 /* MapSearchManager.swift in Sources */,
 				CEBEFA7E2B9993CE009A6DB0 /* UploadStateManager.swift in Sources */,
@@ -944,6 +1001,7 @@
 				CEBEFA642B96C8BC009A6DB0 /* PhotoPicker.swift in Sources */,
 				CE34ED0E2B917DE300C0789F /* HouseService.swift in Sources */,
 				CE4F49FF2BA93421002CE2C7 /* HouseDetailViewModel.swift in Sources */,
+				CE4F4A0A2BAAD427002CE2C7 /* VideoPlayerView2.swift in Sources */,
 				CE56BC782BA3F2A2009168CC /* Date+extension.swift in Sources */,
 				CEBEFA822B9A0F83009A6DB0 /* ImageConfig.swift in Sources */,
 				CECB73112BA2A575006A523A /* AppDelegate.swift in Sources */,
@@ -951,7 +1009,9 @@
 				CE42F6092B64A23200124E92 /* RentHouseApp.swift in Sources */,
 				CECB73052BA159DD006A523A /* UploadStatusView.swift in Sources */,
 				CECB73172BA2A861006A523A /* KeyboardHeightPublisher.swift in Sources */,
+				CE4F4A0C2BAAD43E002CE2C7 /* VideoPlayerViewModel.swift in Sources */,
 				CE4F4A032BA94339002CE2C7 /* ImageBrowserManager.swift in Sources */,
+				CE4F4A172BAC797B002CE2C7 /* FabulaColorPicker.swift in Sources */,
 				CE34ED0C2B917DD800C0789F /* HouseServiceProtocol.swift in Sources */,
 				CE56BC742BA3F248009168CC /* DatePickerView.swift in Sources */,
 				CEBEFA5E2B95AFE1009A6DB0 /* View+extension.swift in Sources */,
@@ -959,6 +1019,7 @@
 				CE42F60B2B64A23200124E92 /* Persistence.swift in Sources */,
 				CEBEFA452B94B971009A6DB0 /* CityDataManager.swift in Sources */,
 				CEBA4DB62B8EE387006F078A /* House.swift in Sources */,
+				CE4F4A1D2BAC7A2A002CE2C7 /* RightSheet.swift in Sources */,
 				CEBEFA302B930EE3009A6DB0 /* LocationManager.swift in Sources */,
 				CE42F67C2B65106400124E92 /* RequestBuilder.swift in Sources */,
 				CEF6B65D2B663127006CE0F1 /* UploadView.swift in Sources */,
@@ -966,7 +1027,9 @@
 				CEBA4DC42B8EE4D4006F078A /* ProfileView.swift in Sources */,
 				CE42F67A2B65104C00124E92 /* AuthAPI.swift in Sources */,
 				CEBEFA4F2B9584BC009A6DB0 /* CitySearchView.swift in Sources */,
+				CE4F4A2B2BAD329D002CE2C7 /* MediaSwitchView.swift in Sources */,
 				CEBEFA622B96B3C1009A6DB0 /* Color+extension.swift in Sources */,
+				CE4F4A132BAC787A002CE2C7 /* FabulaToggle.swift in Sources */,
 				CECB72E42B9F08AE006A523A /* EqualVStack.swift in Sources */,
 				CEF6B6622B663B23006CE0F1 /* LoginViewModel.swift in Sources */,
 				CE42F6782B65103000124E92 /* HouseRouter.swift in Sources */,
@@ -975,9 +1038,11 @@
 				CEBA4DBE2B8EE429006F078A /* TabBarView.swift in Sources */,
 				CEBA4DB72B8EE387006F078A /* MapHouseView.swift in Sources */,
 				CECB73032BA13FD2006A523A /* ProgressViewOverlay.swift in Sources */,
+				CE4F4A0F2BAC6FF1002CE2C7 /* BottomSheet.swift in Sources */,
 				CEBEFA4B2B95751A009A6DB0 /* HouseInfoViewModel.swift in Sources */,
 				CECB72E82B9F08AE006A523A /* FlowLayout.swift in Sources */,
 				CECB72E62B9F08AE006A523A /* CompressingHStack.swift in Sources */,
+				CE4F4A192BAC79A5002CE2C7 /* FabulaSectionModifier.swift in Sources */,
 				CEBEFA492B9572DB009A6DB0 /* RowViewStyle1.swift in Sources */,
 				CEBEFA732B9855AD009A6DB0 /* ImagePickerRepresentable.swift in Sources */,
 				CE56BC7F2BA43A11009168CC /* BottomSheetView.swift in Sources */,
@@ -987,11 +1052,15 @@
 				CE42F6742B64F89000124E92 /* NetworkManager.swift in Sources */,
 				CECB73012BA13F7E006A523A /* ProgressHandler.swift in Sources */,
 				CE4F49F22BA69A1E002CE2C7 /* VideoPickerRepresentable.swift in Sources */,
+				CE4F4A152BAC7962002CE2C7 /* FabulaSlider.swift in Sources */,
 				CEBEFA7A2B996F28009A6DB0 /* ContentView2.swift in Sources */,
 				CEBA4DB92B8EE387006F078A /* MockHomeService.swift in Sources */,
+				CE4F4A272BAD14DD002CE2C7 /* VideoChildView.swift in Sources */,
 				CE4F49F42BA69C0F002CE2C7 /* VideoBrowserView.swift in Sources */,
+				CE4F4A1F2BAC7A94002CE2C7 /* DummyView.swift in Sources */,
 				CEBEFA552B958666009A6DB0 /* SearchService.swift in Sources */,
 				CEBEFA362B933B10009A6DB0 /* String+extension.swift in Sources */,
+				CE4F4A1B2BAC7A0A002CE2C7 /* Animation+extension.swift in Sources */,
 				CE34ED0A2B917DC000C0789F /* HouseApi.swift in Sources */,
 				CEBEFA412B948A6D009A6DB0 /* District.swift in Sources */,
 				CE56BC6D2BA2E6DD009168CC /* GridTagsView.swift in Sources */,
@@ -1008,9 +1077,12 @@
 				CEBA4DBB2B8EE387006F078A /* HomeService.swift in Sources */,
 				CEBEFA712B9837FB009A6DB0 /* Test.swift in Sources */,
 				CEE9141F2B9D598800ADDB62 /* HeicFormatConvert.swift in Sources */,
+				CE4F4A232BAC7B21002CE2C7 /* FabulaSheet.swift in Sources */,
 				CECB730A2BA27EE1006A523A /* MagicProgressView.swift in Sources */,
 				CECB730C2BA27FD6006A523A /* DefaultSectorView.swift in Sources */,
+				CE4F4A252BAC7B63002CE2C7 /* RoundedCorners.swift in Sources */,
 				CE4F49F62BA6AB4F002CE2C7 /* HevcFormatConvert.swift in Sources */,
+				CE4F4A292BAD3272002CE2C7 /* HouseDetailChildView.swift in Sources */,
 				CECB72EF2B9F3CDE006A523A /* Binding+extension.swift in Sources */,
 				CEBA4DBA2B8EE387006F078A /* HomeServiceProtocol.swift in Sources */,
 				CE56BC6F2BA2FAF3009168CC /* FlowLayoutGridView.swift in Sources */,

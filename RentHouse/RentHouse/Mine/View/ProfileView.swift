@@ -29,13 +29,10 @@ struct ProfileView: View {
                 }
             }
         }
-        .onAppear {
-            withAnimation {
-                tabBarState.visible = .visible
-            }
-        }
-//        .onDisappear {
-//            tabBarState.visible = .hidden
+//        .onAppear {
+//            withAnimation {
+//                tabBarState.visible = .visible
+//            }
 //        }
     }
     

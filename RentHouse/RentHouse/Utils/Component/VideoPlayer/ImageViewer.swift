@@ -14,56 +14,34 @@ struct ImageViewer: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
-            VStack(spacing: 0) {
+            
+            VStack(alignment: .center ,spacing: 0) {
                 ForEach(images.indices, id: \.self) { index in
                     KFImage(URL(string: images[index]))
+                        .placeholder { // 使用占位符
+                            GeometryReader { screen in
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .opacity(0.3)
+                                    .padding([.leading, .trailing], screen.size.width/3)
+                                    .padding(.vertical, screen.size.height/3)
+                            }
+                        }
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 0.5)
                         .onTapGesture {
+                            // 确保这个调用不会阻塞主线程
                             ImageBrowserManager.shared.showPhotoBrowser(images: ImageSource.urls(images), at: index)
                         }
                 }
             }
         }
-        
     }
+    
 }
-
-
-//struct ImageViewer: View {
-//    
-//    let images: [String] // 图片名字存储在数组中
-//    
-//    @State private var scale: CGFloat = 1.0
-//    
-//    @State private var isShowImageBrowser: Bool = false
-//    
-//    @State private var selectedIndex: Int = 0
-//    
-//    var body: some View {
-//        ScrollView(.vertical, showsIndicators: true) {
-//            VStack(spacing: 0) {
-//                ForEach(images.indices, id: \.self) { index in
-//                    KFImage(URL(string: images[index]))
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(maxWidth: .infinity)
-//                        .padding(.vertical, 0.5)
-//                        .onTapGesture {
-////                            ImageBrowserManager.shared.showPhotoBrowser(images: ImageSource.urls(images), at: index)
-//                            isShowImageBrowser = true
-//                            selectedIndex = index
-//                        }
-//                }
-//                
-//                ImageBrowser(isPresented: $isShowImageBrowser, images: ImageSource.urls(images), index: selectedIndex)
-//            }
-//        }
-//        
-//    }
-//}
 
 #Preview {
     
