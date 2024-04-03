@@ -72,8 +72,20 @@ struct HouseDetailChildView: View {
                                 Annotation("房源", coordinate: viewModel.coordinate) {
                                     // house.and.flag.fill
                                     // mappin.and.ellipse.circle.fill
-                                    Image(systemName: "house.and.flag.fill")
-                                        .foregroundColor(.blue)
+//                                    Image(systemName: "house.and.flag.fill")
+//                                        .foregroundColor(.blue)
+                                    
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .fill(.background)
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.secondary, lineWidth: 3)
+                                            .foregroundColor(.blue)
+                                        Image(systemName: "house.and.flag.fill")
+                                            .padding(5)
+                                            .foregroundColor(.blue)
+                                    }
+                                    
                                 }
                                 .annotationTitles(.visible)
                             }
