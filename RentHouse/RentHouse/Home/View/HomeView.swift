@@ -9,10 +9,6 @@ import SwiftUI
 import Kingfisher
 
 struct HomeView: View {
-    
-    @EnvironmentObject var tabBarState: TabBarStateManager
-    
-//    @ObservedObject var locationService = LocationService()
     @ObservedObject var cityDataManager = CityDataManager.shared
     @StateObject var viewModel = HomeViewModel(service: HomeService())
     @State private var searchText = ""

@@ -800,6 +800,7 @@
 		CEF6B65B2B663111006CE0F1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */,
 				CEBEFA7D2B9993CE009A6DB0 /* UploadStateManager.swift */,
 				CEF6B65C2B663127006CE0F1 /* UploadView.swift */,
 				CE4F49F72BA874B9002CE2C7 /* HouseDetailView.swift */,
@@ -807,7 +808,6 @@
 				CEAF8FA32BADAF7200F1CC1A /* ItemGroupView.swift */,
 				CE4F4A2A2BAD329D002CE2C7 /* MediaSwitchView.swift */,
 				CE4F49EF2BA4998D002CE2C7 /* UploadViewEnum.swift */,
-				CEBEFA772B996A8F009A6DB0 /* MyHousesView.swift */,
 				CEBEFA482B9572DB009A6DB0 /* RowViewStyle1.swift */,
 				CEBEFA792B996F28009A6DB0 /* ContentView2.swift */,
 				CE56BC6C2BA2E6DD009168CC /* GridTagsView.swift */,

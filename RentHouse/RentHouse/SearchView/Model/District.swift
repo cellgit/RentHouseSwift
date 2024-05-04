@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 
 // 省市区模型
 struct District: Decodable {

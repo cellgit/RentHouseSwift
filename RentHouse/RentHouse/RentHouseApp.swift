@@ -28,8 +28,6 @@ struct RentHouseApp: App {
             TabBarView()
                 .background(Color(.systemBackground))
                 .environmentObject(progressHandler)
-                .environmentObject(TabBarStateManager())
-//                .accentColor(colorScheme == .dark ? .primary : .kleinBlue)
         }
     }
 }

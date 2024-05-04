@@ -7,14 +7,10 @@
 
 import SwiftUI
 import Kingfisher
-//import WaterfallGrid
 
 struct MyHousesView: View {
     
     @Namespace var namespace
-    
-    @EnvironmentObject var tabBarState: TabBarStateManager
-    
     
     @ObservedObject var locationService = LocationService()
     @ObservedObject var cityDataManager = CityDataManager.shared
@@ -27,7 +23,7 @@ struct MyHousesView: View {
     @EnvironmentObject var progressHandler: ProgressHandler
     @StateObject var uploadStateManager: UploadStateManager
     
-    @StateObject private var toastManager = ToastManager()
+//    @StateObject private var toastManager = ToastManager()
     
     // 将必要的UserDefaults数据提前加载到状态变量中
     @State private var selectedCityName: String?
@@ -54,10 +50,6 @@ struct MyHousesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // 在视图中使用
-                if uploadStateManager.isUploading {
-                    //                        ProgressView("上传中...", value: uploadStateManager.uploadProgress, total: 1.0)
-                }
                 if isChangeListMode {
                     contentListView
                         .matchedGeometryEffect(id: "list", in: namespace)
@@ -79,7 +71,7 @@ struct MyHousesView: View {
             .navigationBarTitle(Text("搜索"))
             .navigationBarTitleDisplayMode(.large)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "小区/商圈/地铁站/地标")
-            .onChange(of: searchText) { _ in
+            .onChange(of: searchText) { oldValue, newValue in
                 // 当搜索框被激活时，更新状态以触发动画
                 withAnimation {
                     isSearchActive = !searchText.isEmpty

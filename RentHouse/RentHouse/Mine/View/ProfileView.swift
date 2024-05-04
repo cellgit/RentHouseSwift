@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 
 struct ProfileView: View {
-    @EnvironmentObject var tabBarState: TabBarStateManager
     
     @State private var searchResults = [MKMapItem]()
     @State private var searchText = ""
